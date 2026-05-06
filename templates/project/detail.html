@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} - Project{% endblock %}
+
+{% block content %}
+<section class="section project-detail">
+    <div class="container">
+        <!-- Back Link -->
+        <a href="{% url 'core:portfolio' %}#projects" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+
+        <!-- Project Header -->
+        <div class="project-detail-header">
+            {% if project.image %}
+            <div class="project-detail-image">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+            </div>
+            {% endif %}
+
+            <div class="project-detail-info">
+                <h1 class="project-detail-title">{{ project.title }}</h1>
+                <p class="project-detail-description">{{ project.short_description }}</p>
+
+                <div class="project-detail-links">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                    {% endif %}
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Description -->
+        <div class="project-detail-content">
+            <div class="project-description">
+                {{ project.description|linebreaks }}
+            </div>
+
+            <!-- Technologies & Skills -->
+            {% if project.skills.exists or project.custom_technologies %}
+            <div class="project-technologies">
+                <h2>Technologies & Skills</h2>
+                <div class="tech-tags">
+                    <!-- Skills with icons -->
+                    {% for skill in project.skills.all %}
+                    {% if skill.url %}
+                    <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag">
+                        {% if skill.use_font_awesome and skill.icon_class %}
+                        <i class="{{ skill.icon_class }}"></i>
+                        {% elif skill.custom_icon %}
+                        <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">
+                        {% endif %}
+                        {{ skill.name }}
+                    </a>
+                    {% else %}
+                    <span class="tech-tag">
+                        {% if skill.use_font_awesome and skill.icon_class %}
+                        <i class="{{ skill.icon_class }}"></i>
+                        {% elif skill.custom_icon %}
+                        <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">
+                        {% endif %}
+                        {{ skill.name }}
+                    </span>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- Custom technologies -->
+                    {% for tech in project.custom_tech_list %}
+                    <span class="tech-tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

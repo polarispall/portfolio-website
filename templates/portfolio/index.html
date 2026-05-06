@@ -1,0 +1,472 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% if profile %}{{ profile.name }} - {{ profile.title }}{% else %}Portfolio{% endif %}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="hero-bg">
+        <div class="hero-gradient"></div>
+        <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <p class="hero-greeting animate-fade-in">Hello, I'm</p>
+            <h1 class="hero-name animate-fade-in-up">
+                {% if profile %}{{ profile.name }}{% else %}Your Name{% endif %}
+            </h1>
+            <h2 class="hero-title animate-fade-in-up delay-1">
+                {% if profile %}{{ profile.title }}{% else %}Software Developer{% endif %}
+            </h2>
+            {% if profile.subtitle %}
+            <p class="hero-subtitle animate-fade-in-up delay-2">{{ profile.subtitle }}</p>
+            {% endif %}
+            <div class="hero-cta animate-fade-in-up delay-3">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
+            <div class="hero-social animate-fade-in-up delay-4">
+                {% for link in social_links %}
+                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="{{ link.platform }}">
+                    {% if link.icon_class %}
+                    <i class="{{ link.icon_class }}"></i>
+                    {% elif link.custom_icon %}
+                    <img src="{{ link.custom_icon.url }}" alt="{{ link.platform }}" class="social-icon-img">
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% if profile.profile_image %}
+        <div class="hero-image animate-fade-in delay-2">
+            <div class="image-wrapper">
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+    </a>
+</section>
+
+<!-- About Section -->
+<section class="section about" id="about">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-number">01.</span>
+            About Me
+        </h2>
+        <div class="about-content">
+            <div class="about-text">
+                {% if profile %}
+                <p>{{ profile.bio|linebreaks }}</p>
+                {% else %}
+                <p>Add your bio through the admin panel.</p>
+                {% endif %}
+                {% if profile.resume %}
+                <a href="{{ profile.resume.url }}" class="btn btn-primary" download>
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+                {% endif %}
+            </div>
+            <div class="about-info">
+                {% if profile.email %}
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{ profile.email }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% if profile.location %}
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <span class="info-label">Location</span>
+                        <span class="info-value">{{ profile.location }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% if profile.phone %}
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">{{ profile.phone }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="section skills" id="skills">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-number">02.</span>
+            Skills & Technologies
+        </h2>
+        <div class="skills-grid">
+            {% for category in skill_categories %}
+            <div class="skill-category">
+                <h3 class="category-title">
+                    {% if category.icon %}<i class="{{ category.icon }}"></i>{% endif %}
+                    {{ category.name }}
+                </h3>
+                <div class="skill-tags">
+                    {% for skill in category.skills.all %}
+                    {% if skill.is_active %}
+                    {% if skill.use_font_awesome and skill.icon_class %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
+                        </a>
+                        {% else %}
+                        <span class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
+                        </span>
+                        {% endif %}
+                    {% elif skill.custom_icon %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="skill-icon-img">{{ skill.name }}
+                        </a>
+                        {% else %}
+                        <span class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="skill-icon-img">{{ skill.name }}
+                        </span>
+                        {% endif %}
+                    {% else %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="skill-tag" style="--glow-color: {{ skill.glow_color }}">{{ skill.name }}</a>
+                        {% else %}
+                        <span class="skill-tag" style="--glow-color: {{ skill.glow_color }}">{{ skill.name }}</span>
+                        {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-message">Add skill categories and skills through the admin panel.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section class="section experience" id="experience">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-number">03.</span>
+            Experience
+        </h2>
+        <div class="timeline">
+            {% for exp in experiences %}
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <div class="timeline-info">
+                            <h3 class="timeline-title">{{ exp.position }}</h3>
+                            <p class="timeline-company">
+                                {% if exp.company_url %}
+                                <a href="{{ exp.company_url }}" target="_blank" rel="noopener noreferrer">{{ exp.company }}</a>
+                                {% else %}
+                                {{ exp.company }}
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="timeline-date">
+                            <i class="far fa-calendar"></i>
+                            {{ exp.start_date|date:"M Y" }} -
+                            {% if exp.is_current %}Present{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                        </div>
+                    </div>
+                    {% if exp.work_type_visible %}
+                    <p class="timeline-work-type">
+                        <i class="fas fa-map-marker-alt"></i> {{ exp.get_work_type_display }}
+                    </p>
+                    {% endif %}
+                    <div class="timeline-description">
+                        {{ exp.description|linebreaks }}
+                    </div>
+                    {% if exp.skills.exists or exp.custom_technologies %}
+                    <div class="timeline-tech">
+                        {% for skill in exp.skills.all %}
+                        {% if skill.use_font_awesome and skill.icon_class %}
+                            {% if skill.url %}
+                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link">
+                                <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
+                            </a>
+                            {% else %}
+                            <span class="tech-tag">
+                                <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
+                            </span>
+                            {% endif %}
+                        {% elif skill.custom_icon %}
+                            {% if skill.url %}
+                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link">
+                                <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">{{ skill.name }}
+                            </a>
+                            {% else %}
+                            <span class="tech-tag">
+                                <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">{{ skill.name }}
+                            </span>
+                            {% endif %}
+                        {% else %}
+                            {% if skill.url %}
+                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link">{{ skill.name }}</a>
+                            {% else %}
+                            <span class="tech-tag">{{ skill.name }}</span>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        {% for tech in exp.custom_tech_list %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-message">Add your experience through the admin panel.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="section education" id="education">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-number">04.</span>
+            Education
+        </h2>
+        <div class="education-grid">
+            {% for edu in education %}
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="education-content">
+                    <h3 class="education-degree">{{ edu.degree }}</h3>
+                    {% if edu.field_of_study %}
+                    <p class="education-field">{{ edu.field_of_study }}</p>
+                    {% endif %}
+                    <p class="education-institution">
+                        {% if edu.institution_url %}
+                        <a href="{{ edu.institution_url }}" target="_blank" rel="noopener noreferrer">{{ edu.institution }}</a>
+                        {% else %}
+                        {{ edu.institution }}
+                        {% endif %}
+                    </p>
+                    <p class="education-date">
+                        {{ edu.start_date|date:"Y" }} -
+                        {% if edu.is_current %}Present{% else %}{{ edu.end_date|date:"Y" }}{% endif %}
+                    </p>
+                    {% if edu.gpa %}
+                    <p class="education-gpa">GPA: {{ edu.gpa }}</p>
+                    {% endif %}
+                    {% if edu.description %}
+                    <p class="education-description">{{ edu.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-message">Add your education through the admin panel.</p>
+            {% endfor %}
+        </div>
+
+        {% if certificates %}
+        <h3 class="subsection-title">Certifications</h3>
+        <div class="certificates-grid">
+            {% for cert in certificates %}
+            <div class="certificate-card">
+                <div class="certificate-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="certificate-content">
+                    <h4 class="certificate-name">{{ cert.name }}</h4>
+                    <p class="certificate-issuer">{{ cert.issuer }}</p>
+                    <p class="certificate-date">{{ cert.issue_date|date:"M Y" }}</p>
+                    {% if cert.credential_url %}
+                    <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="certificate-link">
+                        View Credential <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="section projects" id="projects">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-number">05.</span>
+            Featured Projects
+        </h2>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <article class="project-card">
+                <a href="{% url 'core:project_detail' project.slug %}" class="project-card-link">
+                    <div class="project-image">
+                        {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy">
+                        {% else %}
+                        <div class="project-placeholder">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                </a>
+                <div class="project-content">
+                    <a href="{% url 'core:project_detail' project.slug %}">
+                        <h3 class="project-title">{{ project.title }}</h3>
+                    </a>
+                    <p class="project-description">{{ project.short_description }}</p>
+                    <div class="project-tech">
+                        {% for skill in project.skills.all %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag">
+                            {% if skill.use_font_awesome and skill.icon_class %}
+                            <i class="{{ skill.icon_class }}"></i>
+                            {% elif skill.custom_icon %}
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">
+                            {% endif %}
+                            {{ skill.name }}
+                        </a>
+                        {% else %}
+                        <span class="tech-tag">
+                            {% if skill.use_font_awesome and skill.icon_class %}
+                            <i class="{{ skill.icon_class }}"></i>
+                            {% elif skill.custom_icon %}
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">
+                            {% endif %}
+                            {{ skill.name }}
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                        {% for tech in project.custom_tech_list %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-links">
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                        {% endif %}
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i> Live
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'core:project_detail' project.slug %}">
+                            <i class="fas fa-arrow-right"></i> Details
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <p class="empty-message">Add your projects through the admin panel.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Schedule Section -->
+<section class="section schedule" id="schedule">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-number">05.</span>
+            Book Time With Me
+        </h2>
+        <div class="schedule-content">
+            <p class="schedule-description">Use Calendly to find a time that works best for you. Simply select a time slot that fits your schedule and I'll confirm your meeting.</p>
+
+            <div class="calendly-preview">
+                <div class="calendly-preview-header">
+                    <h3>Schedule a meeting</h3>
+                    <p>Find a time that works for both of us</p>
+                </div>
+                <div class="calendly-preview-body">
+                    <div class="meeting-option">
+                        <div class="meeting-icon"></div>
+                        <div class="meeting-info">
+                            <p class="meeting-name">30 Minute Meeting</p>
+                            <p class="meeting-desc">Discuss ideas and get to know each other</p>
+                        </div>
+                        <a href="https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6" onclick="Calendly.showPopupWidget('https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6');return false" class="meeting-book">
+                            Book <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Calendly popup widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+</section>
+
+<!-- Contact Section -->
+<section class="section contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="title-number">06.</span>
+            Get In Touch
+        </h2>
+        <div class="contact-content">
+            <div class="contact-text">
+                <p>I'm currently open to new opportunities and would love to hear from you. Whether you have a question, a project idea, or just want to say hello, feel free to reach out!</p>
+            </div>
+            <div class="contact-methods">
+                {% if profile.email %}
+                <a href="mailto:{{ profile.email }}" class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">{{ profile.email }}</span>
+                    </div>
+                </a>
+                {% endif %}
+                {% for link in social_links %}
+                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="contact-method">
+                    <div class="contact-icon">
+                        {% if link.icon_class %}
+                        <i class="{{ link.icon_class }}"></i>
+                        {% elif link.custom_icon %}
+                        <img src="{{ link.custom_icon.url }}" alt="{{ link.platform }}" class="social-icon-img">
+                        {% endif %}
+                    </div>
+                    <div class="contact-info">
+                        <span class="contact-label">{{ link.platform }}</span>
+                        <span class="contact-value">Connect with me</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            {% if profile.email %}
+            <a href="mailto:{{ profile.email }}" class="btn btn-primary btn-large">
+                <i class="fas fa-paper-plane"></i>
+                Say Hello
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
