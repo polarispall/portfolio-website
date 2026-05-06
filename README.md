@@ -12,6 +12,14 @@ This repository contains the source code for my personal portfolio website, used
 
 ---
 
+## Modularity
+
+The website is designed around a modular Django architecture where content, projects, and site sections are driven through Django models and managed entirely through the Django admin interface.
+
+This structure allows the portfolio to be updated, expanded, and reorganized without directly modifying frontend templates or application logic, making the site easier to maintain and scale over time.
+
+---
+
 ## Tech Stack
 
 ### Backend & Databases
@@ -39,11 +47,24 @@ This repository contains the source code for my personal portfolio website, used
 
 ---
 
-## Modularity
+## Currently Hosted
 
-The website is designed around a modular Django architecture where content, projects, and site sections are driven through Django models and managed entirely through the Django admin interface.
+The portfolio is currently hosted on an AWS EC2 instance running Debian Linux.
 
-This structure allows the portfolio to be updated, expanded, and reorganized without directly modifying frontend templates or application logic, making the site easier to maintain and scale over time.
+The production stack uses Docker and Docker Compose for container orchestration, with Caddy acting as the reverse proxy and automatic HTTPS provider through Let's Encrypt.
+
+Cloudflare DNS and Cloudflared are used for domain routing and DNS management.
+
+### Hosting Stack
+
+![AWS](https://img.shields.io/badge/AWS_EC2-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Debian](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Caddy](https://img.shields.io/badge/Caddy-1F88C0?style=for-the-badge&logo=caddy&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
+
+---
 
 ## License
 
