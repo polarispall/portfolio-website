@@ -1628,3 +1628,273 @@ a.tech-tag:hover {
         text-align: center;
     }
 }
+
+/* ============================================
+   Theme Toggle Button
+   ============================================ */
+.nav-actions {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.theme-toggle:hover {
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    transform: scale(1.05);
+}
+
+.theme-tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    animation: tooltipFade 1.5s ease forwards;
+    z-index: 1001;
+}
+
+.theme-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    right: 12px;
+    border: 6px solid transparent;
+    border-bottom-color: var(--border-light);
+}
+
+.theme-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    right: 13px;
+    border: 5px solid transparent;
+    border-bottom-color: var(--bg-card);
+}
+
+@keyframes tooltipFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    85% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+/* Show appropriate icon based on theme */
+[data-theme="dark"] .theme-icon-dark,
+:root:not([data-theme]) .theme-icon-dark {
+    display: block;
+}
+
+[data-theme="normal"] .theme-icon-normal {
+    display: block;
+}
+
+[data-theme="light"] .theme-icon-light {
+    display: block;
+}
+
+/* Hide other icons */
+[data-theme="dark"] .theme-icon-normal,
+[data-theme="dark"] .theme-icon-light,
+:root:not([data-theme]) .theme-icon-normal,
+:root:not([data-theme]) .theme-icon-light {
+    display: none;
+}
+
+[data-theme="normal"] .theme-icon-dark,
+[data-theme="normal"] .theme-icon-light {
+    display: none;
+}
+
+[data-theme="light"] .theme-icon-dark,
+[data-theme="light"] .theme-icon-normal {
+    display: none;
+}
+
+/* ============================================
+   Normal Theme (Softer Dark - Better Contrast)
+   ============================================ */
+[data-theme="normal"] {
+    --bg-primary: #1a1d23;
+    --bg-secondary: #22262e;
+    --bg-tertiary: #2a2f38;
+    --bg-card: #262b33;
+
+    --text-primary: #f0f2f5;
+    --text-secondary: #b8bcc4;
+    --text-muted: #8a8f98;
+
+    --border-color: rgba(255, 255, 255, 0.12);
+    --border-light: rgba(255, 255, 255, 0.18);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="normal"] .navbar.scrolled {
+    background: rgba(26, 29, 35, 0.95);
+}
+
+/* ============================================
+   Light Theme
+   ============================================ */
+[data-theme="light"] {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --bg-tertiary: #e2e8f0;
+    --bg-card: #ffffff;
+
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+
+    --accent-primary: #6366f1;
+    --accent-secondary: #8b5cf6;
+
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-light: rgba(0, 0, 0, 0.12);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.1);
+}
+
+[data-theme="light"] .navbar.scrolled {
+    background: rgba(248, 250, 252, 0.95);
+}
+
+[data-theme="light"] .hero-gradient {
+    background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+}
+
+[data-theme="light"] .hero-grid {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+[data-theme="light"] .nav-link {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .nav-link.active {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+[data-theme="light"] .hero-name {
+    background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="light"] .skill-tag {
+    background: rgba(99, 102, 241, 0.08);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .skill-tag:hover {
+    background: rgba(99, 102, 241, 0.15);
+}
+
+[data-theme="light"] .tech-tag {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .btn-outline {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .btn-outline:hover {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: white;
+}
+
+[data-theme="light"] .timeline-marker {
+    background: var(--accent-primary);
+    border-color: var(--bg-primary);
+}
+
+[data-theme="light"] .timeline-item::before {
+    background: var(--border-light);
+}
+
+[data-theme="light"] .project-placeholder {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Theme transition for smooth switching */
+body,
+.navbar,
+.nav-link,
+.section,
+.skill-tag,
+.tech-tag,
+.btn,
+.project-card,
+.timeline-content,
+.education-card,
+.contact-method,
+.footer {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

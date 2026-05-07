@@ -1,5 +1,65 @@
 // Portfolio JavaScript
+
+// Theme Toggle - runs immediately to prevent flash
+(function() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themes = ['dark', 'normal', 'light'];
+
+    function getCurrentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'dark';
+    }
+
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }
+
+    function cycleTheme() {
+        const currentTheme = getCurrentTheme();
+        const currentIndex = themes.indexOf(currentTheme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        const nextTheme = themes[nextIndex];
+        setTheme(nextTheme);
+
+        // Show tooltip with theme name
+        showThemeTooltip(nextTheme);
+    }
+
+    function showThemeTooltip(theme) {
+        const themeNames = {
+            'dark': 'Dark Mode',
+            'normal': 'Normal Mode',
+            'light': 'Light Mode'
+        };
+
+        // Remove existing tooltip
+        const existingTooltip = document.querySelector('.theme-tooltip');
+        if (existingTooltip) {
+            existingTooltip.remove();
+        }
+
+        // Create and show tooltip
+        const tooltip = document.createElement('div');
+        tooltip.className = 'theme-tooltip';
+        tooltip.textContent = themeNames[theme];
+        themeToggle.appendChild(tooltip);
+
+        // Remove tooltip after animation
+        setTimeout(() => {
+            tooltip.remove();
+        }, 1500);
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', cycleTheme);
+    }
+
     // Mobile Navigation Toggle
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
