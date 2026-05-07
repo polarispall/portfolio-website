@@ -34,6 +34,12 @@ class Profile(models.Model):
     profile_image = models.ImageField(upload_to='profile/', blank=True)
     resume = models.FileField(upload_to='resume/', blank=True)
 
+    # Calendly CTA visibility
+    show_calendly_cta = models.BooleanField(
+        default=True,
+        help_text="Show the 'Schedule a meeting' card in the hero section"
+    )
+
     # Section ordering - stores list of section configs with order, visibility, and custom names
     section_order = models.JSONField(
         default=list,

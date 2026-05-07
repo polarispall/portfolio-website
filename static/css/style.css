@@ -1155,8 +1155,8 @@ a.tech-tag:hover {
 }
 
 .project-card:hover,
-.project-card.reveal.active:hover {
-    transform: translateY(-8px) scale(1.02) !important;
+.project-card.animated:hover {
+    transform: translateY(-8px) scale(1.02);
     border-color: var(--accent-primary);
     box-shadow: var(--shadow-lg), 0 0 50px rgba(99, 102, 241, 0.3);
 }
@@ -1634,7 +1634,131 @@ a.tech-tag:hover {
     }
 }
 
-/* Scroll animations */
+/* ============================================
+   Scroll Animations System
+   ============================================ */
+
+/* Base state for scroll-triggered animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animated state */
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Special animation for project cards - scale effect */
+.project-card.animate-on-scroll {
+    transform: translateY(40px) scale(0.95);
+}
+
+.project-card.animate-on-scroll.animated {
+    transform: translateY(0) scale(1);
+}
+
+/* Section titles - slide from left */
+.section-title.animate-on-scroll {
+    transform: translateX(-30px);
+}
+
+.section-title.animate-on-scroll.animated {
+    transform: translateX(0);
+}
+
+/* Skill categories - scale up */
+.skill-category.animate-on-scroll {
+    transform: translateY(20px) scale(0.98);
+}
+
+.skill-category.animate-on-scroll.animated {
+    transform: translateY(0) scale(1);
+}
+
+/* Timeline items - slide from side */
+.timeline-item.animate-on-scroll {
+    transform: translateX(-20px);
+}
+
+.timeline-item.animate-on-scroll.animated {
+    transform: translateX(0);
+}
+
+/* Contact methods - fade and scale */
+.contact-method.animate-on-scroll {
+    transform: translateY(20px) scale(0.98);
+}
+
+.contact-method.animate-on-scroll.animated {
+    transform: translateY(0) scale(1);
+}
+
+/* Hero schedule - special entrance */
+.hero-schedule.animate-on-scroll {
+    transform: translateY(40px);
+}
+
+.hero-schedule.animate-on-scroll.animated {
+    transform: translateY(0);
+}
+
+/* Calendly preview in schedule section */
+.calendly-preview.animate-on-scroll {
+    transform: translateY(30px) scale(0.98);
+}
+
+.calendly-preview.animate-on-scroll.animated {
+    transform: translateY(0) scale(1);
+}
+
+/* Benefit cards - staggered entrance */
+.benefit-card.animate-on-scroll {
+    transform: translateY(20px);
+}
+
+.benefit-card.animate-on-scroll.animated {
+    transform: translateY(0);
+}
+
+/* About section elements */
+.about-text.animate-on-scroll {
+    transform: translateX(-30px);
+}
+
+.about-text.animate-on-scroll.animated {
+    transform: translateX(0);
+}
+
+.about-image.animate-on-scroll {
+    transform: translateX(30px) scale(0.95);
+}
+
+.about-image.animate-on-scroll.animated {
+    transform: translateX(0) scale(1);
+}
+
+.about-stats.animate-on-scroll {
+    transform: translateY(20px);
+}
+
+.about-stats.animate-on-scroll.animated {
+    transform: translateY(0);
+}
+
+/* Education cards */
+.education-card.animate-on-scroll {
+    transform: translateY(30px) scale(0.98);
+}
+
+.education-card.animate-on-scroll.animated {
+    transform: translateY(0) scale(1);
+}
+
+/* Legacy support - keep reveal working */
 .reveal {
     opacity: 0;
     transform: translateY(40px);

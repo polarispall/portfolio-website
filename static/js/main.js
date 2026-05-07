@@ -152,47 +152,95 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Reveal on scroll animation
-    function reveal() {
-        const reveals = document.querySelectorAll('.reveal');
-        const windowHeight = window.innerHeight;
+    // ============================================
+    // Scroll Animation System
+    // ============================================
 
-        reveals.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const revealPoint = 150;
+    // Elements to animate on scroll
+    const animatableSelectors = [
+        '.section-title',
+        '.skill-category',
+        '.timeline-item',
+        '.education-card',
+        '.certificate-card',
+        '.project-card',
+        '.contact-method',
+        '.about-text',
+        '.about-image',
+        '.about-stats',
+        '.calendly-preview',
+        '.hero-schedule',
+        '.schedule-benefits',
+        '.benefit-card'
+    ];
 
-            if (elementTop < windowHeight - revealPoint) {
-                element.classList.add('active');
-            }
+    // Add animation classes with stagger delay
+    function setupAnimations() {
+        animatableSelectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach((el, index) => {
+                if (!el.classList.contains('animate-on-scroll')) {
+                    el.classList.add('animate-on-scroll');
+                    // Add stagger delay based on siblings
+                    const parent = el.parentElement;
+                    const siblings = parent.querySelectorAll(selector);
+                    const siblingIndex = Array.from(siblings).indexOf(el);
+                    el.style.setProperty('--animation-order', siblingIndex);
+                }
+            });
         });
     }
 
-    // Add reveal class to elements
-    const animatedElements = document.querySelectorAll(
-        '.skill-category, .timeline-item, .education-card, .certificate-card, .project-card, .contact-method'
-    );
-    animatedElements.forEach(el => el.classList.add('reveal'));
+    // Intersection Observer for scroll animations
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add animated class with a small delay based on order
+                const order = getComputedStyle(entry.target).getPropertyValue('--animation-order') || 0;
+                const delay = parseInt(order) * 100; // 100ms stagger
 
-    window.addEventListener('scroll', reveal);
-    reveal();
+                setTimeout(() => {
+                    entry.target.classList.add('animated');
+                }, delay);
 
-    // Typing effect for hero subtitle (optional enhancement)
-    function typeWriter(element, text, speed = 50) {
-        let i = 0;
-        element.textContent = '';
-
-        function type() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
+                // Stop observing once animated
+                scrollObserver.unobserve(entry.target);
             }
-        }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+    });
 
-        type();
-    }
+    // Setup and observe elements
+    setupAnimations();
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        scrollObserver.observe(el);
+    });
 
+    // ============================================
+    // Section title animations
+    // ============================================
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.section').forEach(section => {
+        sectionObserver.observe(section);
+    });
+
+    // ============================================
     // Parallax effect for hero background
+    // ============================================
     const heroGradient = document.querySelector('.hero-gradient');
 
     if (heroGradient) {
@@ -202,7 +250,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Skill tags hover effect - show proficiency
+    // ============================================
+    // Skill tags hover effect
+    // ============================================
     const skillTags = document.querySelectorAll('.skill-tag[data-proficiency]');
 
     skillTags.forEach(tag => {
@@ -214,26 +264,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Intersection Observer for section animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.section').forEach(section => {
-        observer.observe(section);
-    });
-
-    // Preloader (optional)
+    // ============================================
+    // Preloader
+    // ============================================
     window.addEventListener('load', function() {
         document.body.classList.add('loaded');
     });

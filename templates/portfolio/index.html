@@ -48,6 +48,7 @@
     </div>
 
     <!-- Schedule Meeting Card - Centered at bottom of hero -->
+    {% if profile.show_calendly_cta %}
     <div class="hero-schedule animate-fade-in-up delay-4">
         <div class="calendly-preview">
             <div class="calendly-preview-header">
@@ -70,6 +71,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
     <a href="#about" class="scroll-indicator" aria-label="Scroll down">
         <div class="mouse">
