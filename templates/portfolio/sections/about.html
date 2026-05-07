@@ -1,0 +1,51 @@
+<section class="section about" id="about">
+    <div class="container">
+        <h2 class="section-title">
+            {% if section.number %}<span class="title-number">{{ section.number }}.</span>{% endif %}
+            {{ section.name }}
+        </h2>
+        <div class="about-content">
+            <div class="about-text">
+                {% if profile %}
+                <p>{{ profile.bio|linebreaks }}</p>
+                {% else %}
+                <p>Add your bio through the admin panel.</p>
+                {% endif %}
+                {% if profile.resume %}
+                <a href="{{ profile.resume.url }}" class="btn btn-primary" download>
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+                {% endif %}
+            </div>
+            <div class="about-info">
+                {% if profile.email %}
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{ profile.email }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% if profile.location %}
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <span class="info-label">Location</span>
+                        <span class="info-value">{{ profile.location }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% if profile.phone %}
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">{{ profile.phone }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

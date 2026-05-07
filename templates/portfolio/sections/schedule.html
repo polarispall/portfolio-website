@@ -1,0 +1,33 @@
+<section class="section schedule" id="schedule">
+    <div class="container">
+        <h2 class="section-title">
+            {% if section.number %}<span class="title-number">{{ section.number }}.</span>{% endif %}
+            {{ section.name }}
+        </h2>
+        <div class="schedule-content">
+            <p class="schedule-description">Use Calendly to find a time that works best for you. Simply select a time slot that fits your schedule and I'll confirm your meeting.</p>
+
+            <div class="calendly-preview">
+                <div class="calendly-preview-header">
+                    <h3>Schedule a meeting</h3>
+                    <p>Find a time that works for both of us</p>
+                </div>
+                <div class="calendly-preview-body">
+                    <div class="meeting-option">
+                        <div class="meeting-icon"></div>
+                        <div class="meeting-info">
+                            <p class="meeting-name">30 Minute Meeting</p>
+                            <p class="meeting-desc">Discuss ideas and get to know each other</p>
+                        </div>
+                        <a href="https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6" onclick="Calendly.showPopupWidget('https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6');return false" class="meeting-book">
+                            Book <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Calendly popup widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+</section>

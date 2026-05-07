@@ -1,6 +1,101 @@
 from django.contrib import admin
 from django import forms
+from django.utils.safestring import mark_safe
 from .models import Profile, SocialLink, SkillCategory, Skill, Experience, Education, Project, Certificate
+import json
+
+
+class SectionOrderWidget(forms.Widget):
+    """Custom widget for drag-and-drop section ordering"""
+
+    template_name = 'admin/widgets/section_order.html'
+
+    class Media:
+        css = {
+            'all': ('admin/css/section_order.css',)
+        }
+        js = (
+            'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js',
+            'admin/js/section_order.js',
+        )
+
+    def render(self, name, value, attrs=None, renderer=None):
+        if value is None or value == '':
+            sections = Profile.DEFAULT_SECTIONS
+        elif isinstance(value, str):
+            try:
+                sections = json.loads(value)
+            except json.JSONDecodeError:
+                sections = Profile.DEFAULT_SECTIONS
+        else:
+            sections = value
+
+        if not sections:
+            sections = Profile.DEFAULT_SECTIONS
+
+        html = f'''
+        <div class="section-order-widget">
+            <input type="hidden" name="{name}" id="id_{name}" value='{json.dumps(sections)}'>
+            <div class="section-order-help">
+                <p>Drag sections to reorder. Toggle visibility with the eye icon. Numbers update automatically.</p>
+            </div>
+            <ul class="section-order-list" id="section-order-list">
+        '''
+
+        for i, section in enumerate(sections):
+            visible = section.get('visible', True)
+            numbered = section.get('numbered', True)
+            section_name = section.get('name', section['id'].title())
+
+            html += f'''
+                <li class="section-item {'visible' if visible else 'hidden'}"
+                    data-id="{section['id']}"
+                    data-visible="{str(visible).lower()}"
+                    data-numbered="{str(numbered).lower()}">
+                    <span class="drag-handle">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <circle cx="4" cy="4" r="1.5"/>
+                            <circle cx="4" cy="8" r="1.5"/>
+                            <circle cx="4" cy="12" r="1.5"/>
+                            <circle cx="10" cy="4" r="1.5"/>
+                            <circle cx="10" cy="8" r="1.5"/>
+                            <circle cx="10" cy="12" r="1.5"/>
+                        </svg>
+                    </span>
+                    <span class="section-number"></span>
+                    <input type="text" class="section-name-input" value="{section_name}" data-original="{section_name}">
+                    <button type="button" class="visibility-toggle" title="Toggle visibility">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </button>
+                </li>
+            '''
+
+        html += '''
+            </ul>
+            <button type="button" class="reset-sections-btn" id="reset-sections">Reset to Default</button>
+        </div>
+        '''
+
+        return mark_safe(html)
+
+    def value_from_datadict(self, data, files, name):
+        return data.get(name)
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        widgets = {
+            'section_order': SectionOrderWidget(),
+        }
 
 
 class SkillForm(forms.ModelForm):
@@ -16,7 +111,25 @@ class SkillForm(forms.ModelForm):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
+    form = ProfileForm
     list_display = ['name', 'title', 'email']
+
+    fieldsets = (
+        ('Basic Info', {
+            'fields': ('name', 'title', 'subtitle', 'bio')
+        }),
+        ('Contact', {
+            'fields': ('email', 'phone', 'location')
+        }),
+        ('Media', {
+            'fields': ('profile_image', 'resume')
+        }),
+        ('Section Order', {
+            'fields': ('section_order',),
+            'description': 'Drag and drop to reorder sections. The numbers next to each section title on your site will update automatically.',
+            'classes': ('wide',),
+        }),
+    )
 
 
 @admin.register(SocialLink)

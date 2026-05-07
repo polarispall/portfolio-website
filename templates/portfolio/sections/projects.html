@@ -1,0 +1,74 @@
+<section class="section projects" id="projects">
+    <div class="container">
+        <h2 class="section-title">
+            {% if section.number %}<span class="title-number">{{ section.number }}.</span>{% endif %}
+            {{ section.name }}
+        </h2>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <article class="project-card">
+                <a href="{% url 'core:project_detail' project.slug %}" class="project-card-link">
+                    <div class="project-image">
+                        {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy">
+                        {% else %}
+                        <div class="project-placeholder">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                </a>
+                <div class="project-content">
+                    <a href="{% url 'core:project_detail' project.slug %}">
+                        <h3 class="project-title">{{ project.title }}</h3>
+                    </a>
+                    <p class="project-description">{{ project.short_description }}</p>
+                    <div class="project-tech">
+                        {% for skill in project.skills.all %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag">
+                            {% if skill.use_font_awesome and skill.icon_class %}
+                            <i class="{{ skill.icon_class }}"></i>
+                            {% elif skill.custom_icon %}
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">
+                            {% endif %}
+                            {{ skill.name }}
+                        </a>
+                        {% else %}
+                        <span class="tech-tag">
+                            {% if skill.use_font_awesome and skill.icon_class %}
+                            <i class="{{ skill.icon_class }}"></i>
+                            {% elif skill.custom_icon %}
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">
+                            {% endif %}
+                            {{ skill.name }}
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                        {% for tech in project.custom_tech_list %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-links">
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                        {% endif %}
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i> Live
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'core:project_detail' project.slug %}">
+                            <i class="fas fa-arrow-right"></i> Details
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <p class="empty-message">Add your projects through the admin panel.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>

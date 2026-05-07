@@ -1,4 +1,5 @@
 from django.db import models
+import copy
 
 
 # Abstract Base Models
@@ -12,6 +13,17 @@ class OrderedModel(models.Model):
 
 
 class Profile(models.Model):
+    # Default section order and configuration
+    DEFAULT_SECTIONS = [
+        {'id': 'about', 'name': 'About Me', 'visible': True, 'numbered': True},
+        {'id': 'skills', 'name': 'Skills & Technologies', 'visible': True, 'numbered': True},
+        {'id': 'experience', 'name': 'Experience', 'visible': True, 'numbered': True},
+        {'id': 'education', 'name': 'Education', 'visible': True, 'numbered': True},
+        {'id': 'projects', 'name': 'Featured Projects', 'visible': True, 'numbered': True},
+        {'id': 'schedule', 'name': 'Book Time With Me', 'visible': True, 'numbered': True},
+        {'id': 'contact', 'name': 'Get In Touch', 'visible': True, 'numbered': True},
+    ]
+
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300, blank=True)
@@ -22,8 +34,42 @@ class Profile(models.Model):
     profile_image = models.ImageField(upload_to='profile/', blank=True)
     resume = models.FileField(upload_to='resume/', blank=True)
 
+    # Section ordering - stores list of section configs with order, visibility, and custom names
+    section_order = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="Section order and visibility configuration (managed via drag-and-drop)"
+    )
+
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        # Initialize section_order with defaults if empty
+        if not self.section_order:
+            self.section_order = copy.deepcopy(self.DEFAULT_SECTIONS)
+        super().save(*args, **kwargs)
+
+    def get_sections(self):
+        """Return visible sections in order with their display numbers"""
+        sections = self.section_order if self.section_order else copy.deepcopy(self.DEFAULT_SECTIONS)
+        result = []
+        number = 1
+        for section in sections:
+            if section.get('visible', True):
+                section_data = copy.deepcopy(section)
+                section_data['number'] = f"{number:02d}" if section.get('numbered', True) else None
+                result.append(section_data)
+                if section.get('numbered', True):
+                    number += 1
+        return result
+
+    def get_section_number(self, section_id):
+        """Get the display number for a specific section"""
+        for section in self.get_sections():
+            if section['id'] == section_id:
+                return section.get('number')
+        return None
 
     class Meta:
         verbose_name_plural = "Profile"

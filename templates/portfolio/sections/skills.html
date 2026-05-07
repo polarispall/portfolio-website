@@ -1,0 +1,53 @@
+<section class="section skills" id="skills">
+    <div class="container">
+        <h2 class="section-title">
+            {% if section.number %}<span class="title-number">{{ section.number }}.</span>{% endif %}
+            {{ section.name }}
+        </h2>
+        <div class="skills-grid">
+            {% for category in skill_categories %}
+            <div class="skill-category">
+                <h3 class="category-title">
+                    {% if category.icon %}<i class="{{ category.icon }}"></i>{% endif %}
+                    {{ category.name }}
+                </h3>
+                <div class="skill-tags">
+                    {% for skill in category.skills.all %}
+                    {% if skill.is_active %}
+                    {% if skill.use_font_awesome and skill.icon_class %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
+                        </a>
+                        {% else %}
+                        <span class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
+                        </span>
+                        {% endif %}
+                    {% elif skill.custom_icon %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="skill-icon-img">{{ skill.name }}
+                        </a>
+                        {% else %}
+                        <span class="skill-tag" style="--glow-color: {{ skill.glow_color }}">
+                            <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="skill-icon-img">{{ skill.name }}
+                        </span>
+                        {% endif %}
+                    {% else %}
+                        {% if skill.url %}
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="skill-tag" style="--glow-color: {{ skill.glow_color }}">{{ skill.name }}</a>
+                        {% else %}
+                        <span class="skill-tag" style="--glow-color: {{ skill.glow_color }}">{{ skill.name }}</span>
+                        {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-message">Add skill categories and skills through the admin panel.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>

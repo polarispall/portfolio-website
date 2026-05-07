@@ -1,0 +1,47 @@
+<section class="section contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">
+            {% if section.number %}<span class="title-number">{{ section.number }}.</span>{% endif %}
+            {{ section.name }}
+        </h2>
+        <div class="contact-content">
+            <div class="contact-text">
+                <p>I'm currently open to new opportunities and would love to hear from you. Whether you have a question, a project idea, or just want to say hello, feel free to reach out!</p>
+            </div>
+            <div class="contact-methods">
+                {% if profile.email %}
+                <a href="mailto:{{ profile.email }}" class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">{{ profile.email }}</span>
+                    </div>
+                </a>
+                {% endif %}
+                {% for link in social_links %}
+                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="contact-method">
+                    <div class="contact-icon">
+                        {% if link.icon_class %}
+                        <i class="{{ link.icon_class }}"></i>
+                        {% elif link.custom_icon %}
+                        <img src="{{ link.custom_icon.url }}" alt="{{ link.platform }}" class="social-icon-img">
+                        {% endif %}
+                    </div>
+                    <div class="contact-info">
+                        <span class="contact-label">{{ link.platform }}</span>
+                        <span class="contact-value">Connect with me</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            {% if profile.email %}
+            <a href="mailto:{{ profile.email }}" class="btn btn-primary btn-large">
+                <i class="fas fa-paper-plane"></i>
+                Say Hello
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
