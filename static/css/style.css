@@ -214,7 +214,7 @@ main > section:last-of-type {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 120px 24px 80px;
+    padding: 120px 24px 200px;
 }
 
 .hero-bg {
@@ -264,6 +264,7 @@ main > section:last-of-type {
     grid-template-columns: 1fr auto;
     gap: 60px;
     align-items: center;
+    margin-bottom: 180px;
 }
 
 .hero-text {
@@ -480,8 +481,59 @@ main > section:last-of-type {
     transform: translateX(4px);
 }
 
+/* Hero Schedule Card */
+.hero-schedule {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 2;
+    width: 100%;
+    max-width: 700px;
+    padding: 0 24px;
+}
+
+.hero-schedule .calendly-preview {
+    padding: 24px 32px;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.06) 100%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+.hero-schedule .calendly-preview-header {
+    margin-bottom: 16px;
+}
+
+.hero-schedule .calendly-preview-header h3 {
+    font-size: 1.1rem;
+}
+
+.hero-schedule .calendly-preview-header p {
+    font-size: 0.85rem;
+}
+
+.hero-schedule .meeting-option {
+    padding: 16px 20px;
+    gap: 16px;
+}
+
+.hero-schedule .meeting-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.hero-schedule .meeting-name {
+    font-size: 0.95rem;
+}
+
+.hero-schedule .meeting-desc {
+    font-size: 0.8rem;
+}
+
 /* Scroll Indicator */
 .scroll-indicator {
+    display: none; /* Hidden - calendly card replaces scroll indicator as bottom CTA */
     position: absolute;
     bottom: 40px;
     left: 50%;
@@ -1632,6 +1684,11 @@ a.tech-tag:hover {
         display: none;
     }
 
+    .hero-schedule {
+        bottom: 80px;
+        max-width: 420px;
+    }
+
     .about-content {
         grid-template-columns: 1fr;
     }
@@ -1758,6 +1815,36 @@ a.tech-tag:hover {
 
     .contact-info {
         text-align: center;
+    }
+
+    .hero-schedule {
+        bottom: 60px;
+        max-width: 100%;
+        padding: 0 16px;
+    }
+
+    .hero-schedule .calendly-preview {
+        padding: 16px 20px;
+    }
+
+    .hero-schedule .calendly-preview-header {
+        margin-bottom: 12px;
+    }
+
+    .hero-schedule .meeting-option {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .hero-schedule .meeting-info {
+        text-align: center;
+    }
+
+    .hero-schedule .meeting-book {
+        width: 100%;
+        justify-content: center;
     }
 }
 

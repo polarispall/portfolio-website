@@ -38,34 +38,39 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="hero-right">
-            {% if profile.profile_image %}
-            <div class="hero-image animate-fade-in delay-2">
-                <div class="image-wrapper">
-                    <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">
-                </div>
+        {% if profile.profile_image %}
+        <div class="hero-image animate-fade-in delay-2">
+            <div class="image-wrapper">
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
+    </div>
 
-            <!-- Book a Call CTA -->
-            <div class="hero-book-cta animate-fade-in-up delay-3">
-                <a href="https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6"
-                   onclick="Calendly.showPopupWidget('https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6');return false;"
-                   class="book-cta-btn">
-                    <div class="book-cta-icon">
-                        <i class="fas fa-calendar-check"></i>
+    <!-- Schedule Meeting Card - Centered at bottom of hero -->
+    <div class="hero-schedule animate-fade-in-up delay-4">
+        <div class="calendly-preview">
+            <div class="calendly-preview-header">
+                <h3>Schedule a meeting</h3>
+                <p>Find a time that works for both of us</p>
+            </div>
+            <div class="calendly-preview-body">
+                <div class="meeting-option">
+                    <div class="meeting-icon"></div>
+                    <div class="meeting-info">
+                        <p class="meeting-name">30 Minute Meeting</p>
+                        <p class="meeting-desc">Discuss ideas and get to know each other</p>
                     </div>
-                    <div class="book-cta-content">
-                        <span class="book-cta-title">Book a Call</span>
-                        <span class="book-cta-subtitle">30 min · Free consultation</span>
-                    </div>
-                    <div class="book-cta-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </a>
+                    <a href="https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6"
+                       onclick="Calendly.showPopupWidget('https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6');return false;"
+                       class="meeting-book">
+                        Book <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+
     <a href="#about" class="scroll-indicator" aria-label="Scroll down">
         <div class="mouse">
             <div class="wheel"></div>
