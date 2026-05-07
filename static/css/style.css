@@ -134,21 +134,23 @@ main > section:last-of-type {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: var(--accent-gradient);
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
     font-weight: 700;
-    font-size: 1.25rem;
-    color: white;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
     text-decoration: none;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: all var(--transition-fast);
 }
 
 .nav-logo:hover {
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
     transform: scale(1.05);
-    box-shadow: var(--shadow-glow);
-    color: white;
 }
 
 .nav-menu {
@@ -2339,42 +2341,94 @@ a.tech-tag:hover {
 }
 
 /* ============================================
-   Light Theme
+   Light Theme - Practical & Readable
    ============================================ */
 [data-theme="light"] {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
-    --bg-tertiary: #e2e8f0;
+    /* Soft gray base like Microsoft - not pure white */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ebebeb;
+    --bg-tertiary: #e0e0e0;
     --bg-card: #ffffff;
 
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
+    /* Dark but not harsh text */
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6b6b6b;
 
-    --accent-primary: #6366f1;
-    --accent-secondary: #8b5cf6;
+    /* Slightly toned down accent */
+    --accent-primary: #0067b8;
+    --accent-secondary: #005a9e;
 
     --border-color: rgba(0, 0, 0, 0.08);
     --border-light: rgba(0, 0, 0, 0.12);
 
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
-    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.1);
+    /* Subtle shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 20px rgba(0, 103, 184, 0.1);
 }
 
-[data-theme="light"] .navbar.scrolled {
-    background: rgba(248, 250, 252, 0.95);
+/* Hero Section - Light */
+[data-theme="light"] .hero {
+    background: #f5f5f5;
 }
 
 [data-theme="light"] .hero-gradient {
-    background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+    background: none;
 }
 
 [data-theme="light"] .hero-grid {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+[data-theme="light"] .hero::after {
+    background: linear-gradient(to bottom, transparent, #f5f5f5);
+}
+
+[data-theme="light"] .hero-greeting {
+    color: var(--accent-primary);
+}
+
+[data-theme="light"] .hero-name {
+    color: var(--text-primary);
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--text-primary);
+    background-clip: unset;
+}
+
+[data-theme="light"] .hero-title {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .hero-subtitle {
+    color: var(--text-muted);
+}
+
+/* Navigation - Light */
+[data-theme="light"] .navbar {
+    background: transparent;
+}
+
+[data-theme="light"] .navbar.scrolled {
+    background: rgba(245, 245, 245, 0.95);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] .nav-logo {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .nav-logo:hover {
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
 }
 
 [data-theme="light"] .nav-link {
@@ -2384,36 +2438,56 @@ a.tech-tag:hover {
 [data-theme="light"] .nav-link:hover,
 [data-theme="light"] .nav-link.active {
     color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="light"] .nav-link.active {
-    background: rgba(99, 102, 241, 0.1);
+[data-theme="light"] .theme-toggle {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    color: var(--text-secondary);
 }
 
-[data-theme="light"] .hero-name {
-    background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+[data-theme="light"] .theme-toggle:hover {
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
 }
 
-[data-theme="light"] .skill-tag {
-    background: rgba(99, 102, 241, 0.08);
-    color: var(--text-primary);
+[data-theme="light"] .hamburger,
+[data-theme="light"] .hamburger::before,
+[data-theme="light"] .hamburger::after {
+    background: var(--text-primary);
 }
 
-[data-theme="light"] .skill-tag:hover {
-    background: rgba(99, 102, 241, 0.15);
+/* Social Links - Light */
+[data-theme="light"] .social-link {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
 }
 
-[data-theme="light"] .tech-tag {
-    background: rgba(99, 102, 241, 0.1);
-    color: var(--text-primary);
+[data-theme="light"] .social-link:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+/* Buttons - Light */
+[data-theme="light"] .btn-primary {
+    background: var(--accent-primary);
+    color: white;
+    box-shadow: none;
+}
+
+[data-theme="light"] .btn-primary:hover {
+    background: var(--accent-secondary);
+    box-shadow: 0 2px 8px rgba(0, 103, 184, 0.3);
 }
 
 [data-theme="light"] .btn-outline {
-    border-color: var(--text-secondary);
+    border: 1px solid var(--text-primary);
     color: var(--text-primary);
+    background: transparent;
 }
 
 [data-theme="light"] .btn-outline:hover {
@@ -2422,23 +2496,282 @@ a.tech-tag:hover {
     color: white;
 }
 
-[data-theme="light"] .timeline-marker {
-    background: var(--accent-primary);
-    border-color: var(--bg-primary);
+/* Section Backgrounds - Light - Simple and clean */
+[data-theme="light"] .section {
+    background: var(--bg-primary);
 }
 
-[data-theme="light"] .timeline-item::before {
+[data-theme="light"] main > section:nth-of-type(2) {
+    background: var(--bg-primary);
+}
+
+[data-theme="light"] main > section:last-of-type {
+    background: var(--bg-primary);
+}
+
+/* Section Titles - Light */
+[data-theme="light"] .section-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .section-title::after {
     background: var(--border-light);
 }
 
-[data-theme="light"] .project-placeholder {
+[data-theme="light"] .title-number {
+    color: var(--accent-primary);
+}
+
+/* Cards - Light - White cards on gray background like Microsoft */
+[data-theme="light"] .skill-category,
+[data-theme="light"] .education-card,
+[data-theme="light"] .project-card,
+[data-theme="light"] .contact-method,
+[data-theme="light"] .timeline-content,
+[data-theme="light"] .info-item {
+    background: var(--bg-card);
+    border: 1px solid transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+}
+
+[data-theme="light"] .skill-category:hover,
+[data-theme="light"] .education-card:hover,
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .contact-method:hover,
+[data-theme="light"] .timeline-content:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-color: transparent;
+}
+
+/* Skills - Light */
+[data-theme="light"] .category-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .skill-tag {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .skill-tag:hover {
     background: var(--bg-tertiary);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+[data-theme="light"] .skill-tag i {
+    filter: none;
+    opacity: 0.9;
+}
+
+/* Timeline - Light */
+[data-theme="light"] .timeline::before {
+    background: var(--accent-primary);
+}
+
+[data-theme="light"] .timeline-marker {
+    background: var(--accent-primary);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--accent-primary);
+}
+
+[data-theme="light"] .timeline-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .timeline-company {
+    color: var(--accent-primary);
+}
+
+[data-theme="light"] .timeline-date,
+[data-theme="light"] .timeline-work-type {
     color: var(--text-muted);
 }
 
+[data-theme="light"] .timeline-description {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .tech-tag {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+/* Education - Light */
+[data-theme="light"] .education-degree {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .education-field,
+[data-theme="light"] .education-description {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .education-institution {
+    color: var(--accent-primary);
+}
+
+[data-theme="light"] .education-date,
+[data-theme="light"] .education-gpa {
+    color: var(--text-muted);
+}
+
+/* Projects - Light */
+[data-theme="light"] .project-image {
+    background: var(--bg-secondary);
+}
+
+[data-theme="light"] .project-placeholder {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .project-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .project-description {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .project-links a {
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .project-links a:hover {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+/* Schedule Section - Light */
+[data-theme="light"] .calendly-preview {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .calendly-preview-header h3 {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .calendly-preview-header p {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .meeting-option {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .meeting-option:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-primary);
+}
+
+[data-theme="light"] .meeting-name {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .meeting-desc {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .benefit-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .benefit-card:hover {
+    background: var(--bg-card);
+    border-color: var(--accent-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .benefit-card h4 {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .benefit-card p {
+    color: var(--text-secondary);
+}
+
+/* Contact - Light */
+[data-theme="light"] .contact-text {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .contact-label {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .contact-value {
+    color: var(--text-primary);
+}
+
+/* About - Light */
+[data-theme="light"] .about-text {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .info-label {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .info-value {
+    color: var(--text-primary);
+}
+
+/* Footer - Light */
 [data-theme="light"] .footer {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .footer-content p {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .footer-links a {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .footer-links a:hover {
+    color: var(--accent-primary);
+}
+
+/* Hero Schedule Card - Light */
+[data-theme="light"] .hero-schedule .calendly-preview {
+    background: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile Nav - Light */
+[data-theme="light"] .nav-menu {
+    background: var(--bg-card);
+    border-left: 1px solid var(--border-color);
+}
+
+/* Floating CTA - Light */
+[data-theme="light"] .floating-cta-btn {
+    background: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(0, 103, 184, 0.3);
+}
+
+[data-theme="light"] .floating-cta-btn:hover {
+    background: var(--accent-secondary);
+    box-shadow: 0 6px 20px rgba(0, 103, 184, 0.4);
+}
+
+/* Empty State - Light */
+[data-theme="light"] .empty-message {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
 }
 
 /* Theme transition for smooth switching */
