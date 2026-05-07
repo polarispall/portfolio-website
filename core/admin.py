@@ -124,6 +124,10 @@ class ProfileAdmin(admin.ModelAdmin):
         ('Media', {
             'fields': ('profile_image', 'resume')
         }),
+        ('Display Options', {
+            'fields': ('show_calendly_cta',),
+            'description': 'Control visibility of various page elements'
+        }),
         ('Section Order', {
             'fields': ('section_order',),
             'description': 'Drag and drop to reorder sections. The numbers next to each section title on your site will update automatically.',

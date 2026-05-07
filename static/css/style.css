@@ -584,9 +584,24 @@ main > section:last-of-type {
     font-weight: 600;
     border-radius: 12px;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn:hover::before {
+    opacity: 1;
 }
 
 .btn-primary {
@@ -596,9 +611,14 @@ main > section:last-of-type {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 30px rgba(99, 102, 241, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 35px rgba(99, 102, 241, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
     color: white;
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
 }
 
 .btn-outline {
@@ -610,7 +630,13 @@ main > section:last-of-type {
 .btn-outline:hover {
     border-color: var(--accent-primary);
     color: var(--accent-primary);
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2), 0 0 15px rgba(99, 102, 241, 0.1);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.btn-outline:active {
+    transform: translateY(-1px) scale(0.98);
 }
 
 .btn-large {
@@ -720,13 +746,13 @@ main > section:last-of-type {
     background: var(--bg-card);
     border-radius: 20px;
     border: 1px solid var(--border-color);
-    transition: all var(--transition-normal);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .skill-category:hover {
     border-color: var(--accent-primary);
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow), 0 8px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-6px);
 }
 
 .category-title {
@@ -848,12 +874,13 @@ main > section:last-of-type {
     background: var(--bg-card);
     border-radius: 16px;
     border: 1px solid var(--border-color);
-    transition: all var(--transition-normal);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .timeline-content:hover {
-    border-color: var(--border-light);
-    transform: translateX(8px);
+    border-color: var(--accent-primary);
+    transform: translateX(8px) translateY(-4px);
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(99, 102, 241, 0.15);
 }
 
 .timeline-header {
@@ -997,13 +1024,13 @@ a.tech-tag:hover {
     background: var(--bg-card);
     border-radius: 16px;
     border: 1px solid var(--border-color);
-    transition: all var(--transition-normal);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .education-card:hover {
     border-color: var(--accent-primary);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--shadow-glow), 0 8px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-6px);
 }
 
 .education-icon {
@@ -1146,7 +1173,7 @@ a.tech-tag:hover {
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid var(--border-color);
-    transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card-link {
@@ -1154,11 +1181,15 @@ a.tech-tag:hover {
     display: block;
 }
 
-.project-card:hover,
-.project-card.animated:hover {
-    transform: translateY(-8px) scale(1.02);
+.project-card:hover {
     border-color: var(--accent-primary);
-    box-shadow: var(--shadow-lg), 0 0 50px rgba(99, 102, 241, 0.3);
+    box-shadow: var(--shadow-lg), 0 0 50px rgba(99, 102, 241, 0.25);
+    transform: translateY(-8px) scale(1.02);
+}
+
+.project-card:hover .project-placeholder {
+    color: var(--accent-primary);
+    opacity: 0.5;
 }
 
 .project-image {
@@ -1423,22 +1454,35 @@ a.tech-tag:hover {
 .meeting-book {
     padding: 12px 24px;
     background: var(--accent-primary);
-    color: white;
+    color: white !important;
     border: none;
     border-radius: 8px;
     font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .meeting-book:hover {
     background: var(--accent-secondary);
-    transform: translateY(-2px);
+    color: white !important;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
+.meeting-book i {
+    color: white !important;
+    transition: transform 0.3s ease;
+}
+
+.meeting-book:hover i {
+    transform: translateX(3px);
 }
 
 .calendly-preview {
@@ -1524,12 +1568,13 @@ a.tech-tag:hover {
     border-radius: 16px;
     border: 1px solid var(--border-color);
     text-decoration: none;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-method:hover {
     border-color: var(--accent-primary);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-glow), 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 .contact-icon {
@@ -1638,136 +1683,145 @@ a.tech-tag:hover {
    Scroll Animations System
    ============================================ */
 
+/* Disable transitions when needed */
+.no-transition,
+.no-transition * {
+    transition: none !important;
+}
+
 /* Base state for scroll-triggered animations */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
                 transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--stagger-delay, 0s);
 }
 
-/* Animated state */
+/* Animated state - element has entered viewport */
 .animate-on-scroll.animated {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
-/* Special animation for project cards - scale effect */
-.project-card.animate-on-scroll {
+/* After animation completes, restore normal transitions for hover effects */
+.animate-on-scroll.animated {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                background-color 0.3s ease;
+    transition-delay: 0s;
+}
+
+/* Project cards */
+.project-card.animate-on-scroll:not(.animated) {
     transform: translateY(40px) scale(0.95);
+    opacity: 0;
 }
 
 .project-card.animate-on-scroll.animated {
-    transform: translateY(0) scale(1);
+    transform: none;
+    opacity: 1;
+}
+
+/* Hover state for animated project cards - needs higher specificity */
+.project-card.animate-on-scroll.animated:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg), 0 0 50px rgba(99, 102, 241, 0.25);
 }
 
 /* Section titles - slide from left */
-.section-title.animate-on-scroll {
+.section-title.animate-on-scroll:not(.animated) {
     transform: translateX(-30px);
+    opacity: 0;
 }
 
-.section-title.animate-on-scroll.animated {
-    transform: translateX(0);
-}
-
-/* Skill categories - scale up */
-.skill-category.animate-on-scroll {
-    transform: translateY(20px) scale(0.98);
-}
-
-.skill-category.animate-on-scroll.animated {
-    transform: translateY(0) scale(1);
-}
-
-/* Timeline items - slide from side */
-.timeline-item.animate-on-scroll {
-    transform: translateX(-20px);
-}
-
-.timeline-item.animate-on-scroll.animated {
-    transform: translateX(0);
-}
-
-/* Contact methods - fade and scale */
-.contact-method.animate-on-scroll {
-    transform: translateY(20px) scale(0.98);
-}
-
-.contact-method.animate-on-scroll.animated {
-    transform: translateY(0) scale(1);
-}
-
-/* Hero schedule - special entrance */
-.hero-schedule.animate-on-scroll {
-    transform: translateY(40px);
-}
-
-.hero-schedule.animate-on-scroll.animated {
-    transform: translateY(0);
-}
-
-/* Calendly preview in schedule section */
-.calendly-preview.animate-on-scroll {
+/* Skill categories */
+.skill-category.animate-on-scroll:not(.animated) {
     transform: translateY(30px) scale(0.98);
+    opacity: 0;
 }
 
-.calendly-preview.animate-on-scroll.animated {
-    transform: translateY(0) scale(1);
+/* Hover state for animated skill categories */
+.skill-category.animate-on-scroll.animated:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow), 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Benefit cards - staggered entrance */
-.benefit-card.animate-on-scroll {
-    transform: translateY(20px);
+/* Timeline items - slide from left */
+.timeline-item.animate-on-scroll:not(.animated) {
+    transform: translateX(-30px);
+    opacity: 0;
 }
 
-.benefit-card.animate-on-scroll.animated {
-    transform: translateY(0);
+/* Hover state for animated timeline content */
+.timeline-item.animate-on-scroll.animated .timeline-content:hover {
+    transform: translateX(8px) translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(99, 102, 241, 0.15);
+}
+
+/* Contact methods */
+.contact-method.animate-on-scroll:not(.animated) {
+    transform: translateY(30px) scale(0.98);
+    opacity: 0;
+}
+
+/* Hover state for animated contact methods */
+.contact-method.animate-on-scroll.animated:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow), 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero schedule */
+.hero-schedule.animate-on-scroll:not(.animated) {
+    transform: translateY(40px);
+    opacity: 0;
+}
+
+/* Calendly preview */
+.calendly-preview.animate-on-scroll:not(.animated) {
+    transform: translateY(30px) scale(0.98);
+    opacity: 0;
+}
+
+/* Benefit cards */
+.benefit-card.animate-on-scroll:not(.animated) {
+    transform: translateY(30px);
+    opacity: 0;
 }
 
 /* About section elements */
-.about-text.animate-on-scroll {
+.about-text.animate-on-scroll:not(.animated) {
     transform: translateX(-30px);
+    opacity: 0;
 }
 
-.about-text.animate-on-scroll.animated {
-    transform: translateX(0);
-}
-
-.about-image.animate-on-scroll {
+.about-image.animate-on-scroll:not(.animated) {
     transform: translateX(30px) scale(0.95);
+    opacity: 0;
 }
 
-.about-image.animate-on-scroll.animated {
-    transform: translateX(0) scale(1);
-}
-
-.about-stats.animate-on-scroll {
-    transform: translateY(20px);
-}
-
-.about-stats.animate-on-scroll.animated {
-    transform: translateY(0);
+.about-stats.animate-on-scroll:not(.animated) {
+    transform: translateY(30px);
+    opacity: 0;
 }
 
 /* Education cards */
-.education-card.animate-on-scroll {
+.education-card.animate-on-scroll:not(.animated) {
     transform: translateY(30px) scale(0.98);
-}
-
-.education-card.animate-on-scroll.animated {
-    transform: translateY(0) scale(1);
-}
-
-/* Legacy support - keep reveal working */
-.reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+/* Hover state for animated education cards */
+.education-card.animate-on-scroll.animated:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow), 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* ============================================
@@ -1786,10 +1840,52 @@ a.tech-tag:hover {
 /* ============================================
    Responsive Design
    ============================================ */
+
+/* Large Desktop / 4K adjustments */
+@media (min-width: 1920px) {
+    :root {
+        --container-width: 1400px;
+    }
+
+    .hero-content {
+        gap: 80px;
+    }
+
+    .hero-image {
+        width: 400px;
+        height: 400px;
+    }
+
+    .hero-schedule {
+        max-width: 800px;
+    }
+}
+
+/* Regular Desktop */
+@media (max-width: 1200px) {
+    .hero-content {
+        gap: 40px;
+    }
+
+    .hero-image {
+        width: 300px;
+        height: 300px;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
 @media (max-width: 1024px) {
+    :root {
+        --section-padding: 100px;
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
+        margin-bottom: 120px;
     }
 
     .hero-text {
@@ -1809,14 +1905,21 @@ a.tech-tag:hover {
     }
 
     .hero-schedule {
-        bottom: 80px;
-        max-width: 420px;
+        bottom: 60px;
+        max-width: 500px;
     }
 
     .about-content {
         grid-template-columns: 1fr;
     }
 
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
@@ -1863,6 +1966,37 @@ a.tech-tag:hover {
         font-size: 1.1rem;
     }
 
+    .hero {
+        padding: 100px 20px 60px;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero-content {
+        margin-bottom: 40px;
+    }
+
+    .hero-name {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .hero-title {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+
+    .hero-schedule {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        max-width: 100%;
+        width: 100%;
+        padding: 0 20px;
+        margin: 0;
+        z-index: 1;
+    }
+
     .timeline {
         padding-left: 30px;
     }
@@ -1882,6 +2016,10 @@ a.tech-tag:hover {
         gap: 8px;
     }
 
+    .timeline-content:hover {
+        transform: translateY(-4px);
+    }
+
     .education-grid {
         grid-template-columns: 1fr;
     }
@@ -1890,15 +2028,43 @@ a.tech-tag:hover {
         grid-template-columns: 1fr;
     }
 
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-methods {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-benefits {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .footer-content {
         flex-direction: column;
         text-align: center;
     }
+
+    .section-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    .section-title::after {
+        max-width: 100px;
+    }
 }
 
 @media (max-width: 480px) {
+    :root {
+        --section-padding: 60px;
+    }
+
     .hero {
-        padding: 100px 16px 60px;
+        padding: 90px 16px 40px;
+    }
+
+    .hero-content {
+        margin-bottom: 40px;
     }
 
     .container {
@@ -1908,24 +2074,40 @@ a.tech-tag:hover {
     .hero-cta {
         flex-direction: column;
         width: 100%;
+        gap: 12px;
     }
 
     .btn {
         width: 100%;
         justify-content: center;
+        padding: 16px 24px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
     }
 
     .skill-category {
-        padding: 24px;
+        padding: 20px;
+    }
+
+    .skill-tags {
+        gap: 8px;
+    }
+
+    .skill-tag {
+        padding: 6px 12px;
+        font-size: 0.85rem;
     }
 
     .timeline-content {
-        padding: 20px;
+        padding: 18px;
     }
 
     .education-card {
         flex-direction: column;
         text-align: center;
+        padding: 20px;
     }
 
     .education-icon {
@@ -1935,6 +2117,7 @@ a.tech-tag:hover {
     .contact-method {
         flex-direction: column;
         text-align: center;
+        padding: 16px;
     }
 
     .contact-info {
@@ -1942,24 +2125,31 @@ a.tech-tag:hover {
     }
 
     .hero-schedule {
-        bottom: 60px;
-        max-width: 100%;
+        margin: 0;
         padding: 0 16px;
     }
 
     .hero-schedule .calendly-preview {
-        padding: 16px 20px;
+        padding: 16px;
+    }
+
+    .hero::after {
+        display: none;
     }
 
     .hero-schedule .calendly-preview-header {
         margin-bottom: 12px;
     }
 
+    .hero-schedule .calendly-preview-header h3 {
+        font-size: 1rem;
+    }
+
     .hero-schedule .meeting-option {
         flex-direction: column;
         text-align: center;
         gap: 12px;
-        padding: 14px 16px;
+        padding: 14px;
     }
 
     .hero-schedule .meeting-info {
@@ -1969,6 +2159,31 @@ a.tech-tag:hover {
     .hero-schedule .meeting-book {
         width: 100%;
         justify-content: center;
+        padding: 14px 20px;
+    }
+
+    .schedule-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .benefit-card {
+        padding: 16px;
+    }
+
+    .project-card {
+        border-radius: 12px;
+    }
+
+    .project-content {
+        padding: 16px;
+    }
+
+    .project-title {
+        font-size: 1.1rem;
+    }
+
+    .calendly-preview {
+        padding: 24px;
     }
 }
 
@@ -2233,13 +2448,48 @@ body,
 .section,
 .skill-tag,
 .tech-tag,
-.btn,
-.project-card,
-.timeline-content,
-.education-card,
-.contact-method,
 .footer {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Interactive elements - full transitions for hover effects + theme color changes */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+}
+
+.timeline-content {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+}
+
+.education-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+}
+
+.contact-method {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+}
+
+.skill-category {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
 }
 
 /* ============================================

@@ -26,8 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const nextIndex = (currentIndex + 1) % themes.length;
         const nextTheme = themes[nextIndex];
         setTheme(nextTheme);
-
-        // Show tooltip with theme name
         showThemeTooltip(nextTheme);
     }
 
@@ -38,19 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
             'light': 'Light Mode'
         };
 
-        // Remove existing tooltip
         const existingTooltip = document.querySelector('.theme-tooltip');
         if (existingTooltip) {
             existingTooltip.remove();
         }
 
-        // Create and show tooltip
         const tooltip = document.createElement('div');
         tooltip.className = 'theme-tooltip';
         tooltip.textContent = themeNames[theme];
         themeToggle.appendChild(tooltip);
 
-        // Remove tooltip after animation
         setTimeout(() => {
             tooltip.remove();
         }, 1500);
@@ -71,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         });
 
-        // Close menu when clicking a link
         const navLinks = navMenu.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -81,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
                 navToggle.classList.remove('active');
@@ -156,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Scroll Animation System
     // ============================================
 
-    // Elements to animate on scroll
     const animatableSelectors = [
         '.section-title',
         '.skill-category',
@@ -174,36 +166,60 @@ document.addEventListener('DOMContentLoaded', function() {
         '.benefit-card'
     ];
 
-    // Add animation classes with stagger delay
+    // Check if element is in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top < window.innerHeight - 50 &&
+            rect.bottom > 0
+        );
+    }
+
+    // Setup animations
     function setupAnimations() {
-        animatableSelectors.forEach(selector => {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach((el, index) => {
-                if (!el.classList.contains('animate-on-scroll')) {
-                    el.classList.add('animate-on-scroll');
-                    // Add stagger delay based on siblings
-                    const parent = el.parentElement;
-                    const siblings = parent.querySelectorAll(selector);
-                    const siblingIndex = Array.from(siblings).indexOf(el);
-                    el.style.setProperty('--animation-order', siblingIndex);
-                }
-            });
+        const allAnimatable = document.querySelectorAll(animatableSelectors.join(', '));
+
+        allAnimatable.forEach((el, globalIndex) => {
+            // Skip if already setup
+            if (el.dataset.animationSetup) return;
+            el.dataset.animationSetup = 'true';
+
+            // Find siblings for stagger calculation
+            const parent = el.parentElement;
+            const selector = animatableSelectors.find(s => el.matches(s));
+            const siblings = parent ? Array.from(parent.querySelectorAll(selector)) : [el];
+            const siblingIndex = siblings.indexOf(el);
+
+            // Check if element is already in viewport on page load
+            if (isInViewport(el)) {
+                // Element is already visible - add classes without animation
+                el.classList.add('animate-on-scroll', 'no-transition', 'animated');
+                // Remove no-transition after a frame to enable future transitions
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        el.classList.remove('no-transition');
+                    });
+                });
+            } else {
+                // Element is not visible - set up for scroll animation
+                el.classList.add('animate-on-scroll');
+                el.style.setProperty('--stagger-delay', `${siblingIndex * 0.1}s`);
+            }
         });
     }
 
     // Intersection Observer for scroll animations
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add animated class with a small delay based on order
-                const order = getComputedStyle(entry.target).getPropertyValue('--animation-order') || 0;
-                const delay = parseInt(order) * 100; // 100ms stagger
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                // Get stagger delay
+                const delay = getComputedStyle(entry.target).getPropertyValue('--stagger-delay') || '0s';
+                const delayMs = parseFloat(delay) * 1000;
 
                 setTimeout(() => {
                     entry.target.classList.add('animated');
-                }, delay);
+                }, delayMs);
 
-                // Stop observing once animated
                 scrollObserver.unobserve(entry.target);
             }
         });
@@ -213,14 +229,16 @@ document.addEventListener('DOMContentLoaded', function() {
         threshold: 0.1
     });
 
-    // Setup and observe elements
+    // Initialize
     setupAnimations();
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+
+    // Observe elements that aren't already animated
+    document.querySelectorAll('.animate-on-scroll:not(.animated)').forEach(el => {
         scrollObserver.observe(el);
     });
 
     // ============================================
-    // Section title animations
+    // Section animations
     // ============================================
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
