@@ -2316,28 +2316,92 @@ a.tech-tag:hover {
 }
 
 /* ============================================
-   Normal Theme (Softer Dark - Better Contrast)
+   Normal Theme (Dim Mode - Comfortable & Warm)
+   Inspired by Linear, Notion dim mode
    ============================================ */
 [data-theme="normal"] {
-    --bg-primary: #1a1d23;
-    --bg-secondary: #22262e;
-    --bg-tertiary: #2a2f38;
-    --bg-card: #262b33;
+    /* Warmer, softer dark backgrounds */
+    --bg-primary: #1c1c1e;
+    --bg-secondary: #2c2c2e;
+    --bg-tertiary: #3a3a3c;
+    --bg-card: #2c2c2e;
 
-    --text-primary: #f0f2f5;
-    --text-secondary: #b8bcc4;
-    --text-muted: #8a8f98;
+    /* Softer, warmer text */
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-muted: #6e6e73;
 
-    --border-color: rgba(255, 255, 255, 0.12);
-    --border-light: rgba(255, 255, 255, 0.18);
+    /* Slightly more visible borders */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.15);
 
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.3);
+    /* Muted accent that's easier on eyes */
+    --accent-primary: #6366f1;
+    --accent-secondary: #818cf8;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
 }
 
 [data-theme="normal"] .navbar.scrolled {
-    background: rgba(26, 29, 35, 0.95);
+    background: rgba(28, 28, 30, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Hero - Normal */
+[data-theme="normal"] .hero {
+    background: linear-gradient(180deg, #1c1c1e 0%, #1c1c1e 100%);
+}
+
+[data-theme="normal"] .hero-gradient {
+    background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(129, 140, 248, 0.05), transparent);
+}
+
+/* Cards - Normal */
+[data-theme="normal"] .skill-category,
+[data-theme="normal"] .education-card,
+[data-theme="normal"] .project-card,
+[data-theme="normal"] .contact-method,
+[data-theme="normal"] .timeline-content,
+[data-theme="normal"] .info-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+/* Social Links - Normal (with visible outline) */
+[data-theme="normal"] .social-link {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    color: var(--text-secondary);
+}
+
+[data-theme="normal"] .social-link:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+/* Nav elements - Normal */
+[data-theme="normal"] .nav-logo,
+[data-theme="normal"] .theme-toggle {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+}
+
+/* Calendly - Normal */
+[data-theme="normal"] .calendly-preview {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="normal"] .meeting-option {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
 }
 
 /* ============================================
@@ -2459,17 +2523,19 @@ a.tech-tag:hover {
     background: var(--text-primary);
 }
 
-/* Social Links - Light */
+/* Social Links - Light (with visible outline) */
 [data-theme="light"] .social-link {
     background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     color: var(--text-secondary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 [data-theme="light"] .social-link:hover {
     background: var(--accent-primary);
     border-color: var(--accent-primary);
     color: white;
+    box-shadow: 0 2px 8px rgba(0, 103, 184, 0.25);
 }
 
 /* Buttons - Light */
