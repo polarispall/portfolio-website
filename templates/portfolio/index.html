@@ -38,13 +38,33 @@
                 {% endfor %}
             </div>
         </div>
-        {% if profile.profile_image %}
-        <div class="hero-image animate-fade-in delay-2">
-            <div class="image-wrapper">
-                <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">
+        <div class="hero-right">
+            {% if profile.profile_image %}
+            <div class="hero-image animate-fade-in delay-2">
+                <div class="image-wrapper">
+                    <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Book a Call CTA -->
+            <div class="hero-book-cta animate-fade-in-up delay-3">
+                <a href="https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6"
+                   onclick="Calendly.showPopupWidget('https://calendly.com/calendly-main?background_color=16213e&text_color=ffffff&primary_color=8b5cf6');return false;"
+                   class="book-cta-btn">
+                    <div class="book-cta-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="book-cta-content">
+                        <span class="book-cta-title">Book a Call</span>
+                        <span class="book-cta-subtitle">30 min · Free consultation</span>
+                    </div>
+                    <div class="book-cta-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
             </div>
         </div>
-        {% endif %}
     </div>
     <a href="#about" class="scroll-indicator" aria-label="Scroll down">
         <div class="mouse">
