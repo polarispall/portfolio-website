@@ -90,6 +90,16 @@ img {
     position: relative;
 }
 
+/* Dynamic first/last section backgrounds */
+/* nth-of-type(2) targets the first content section after hero */
+main > section:nth-of-type(2) {
+    background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-secondary) 30%, var(--bg-secondary) 70%, var(--bg-primary) 100%);
+}
+
+main > section:last-of-type {
+    background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-secondary) 100%);
+}
+
 /* ============================================
    Navigation
    ============================================ */
@@ -230,6 +240,19 @@ img {
         linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+}
+
+/* Fade-out overlay at the bottom of hero to blend into next section */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, var(--bg-primary));
+    z-index: 1;
+    pointer-events: none;
 }
 
 .hero-content {
@@ -1155,7 +1178,7 @@ a.tech-tag:hover {
    Schedule Section
    ============================================ */
 .schedule {
-    background: var(--bg-secondary);
+    /* background handled by dynamic first/last section rules */
 }
 
 .schedule-content {
@@ -1309,7 +1332,7 @@ a.tech-tag:hover {
    Contact Section
    ============================================ */
 .contact {
-    background: var(--bg-secondary);
+    /* background handled by dynamic first/last section rules */
 }
 
 .contact-content {
