@@ -2457,42 +2457,41 @@ a.tech-tag:hover {
 }
 
 [data-theme="light"] .hero-name {
-    color: var(--text-primary);
-    background: none;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: var(--text-primary);
-    background-clip: unset;
+    color: #1a1a1a !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    background-clip: unset !important;
 }
 
 [data-theme="light"] .hero-title {
-    color: var(--text-secondary);
+    color: #4a4a4a !important;
 }
 
 [data-theme="light"] .hero-subtitle {
-    color: var(--text-muted);
+    color: #6b6b6b !important;
 }
 
-/* Navigation - Light */
+/* Navigation - Light (same as dark, just different colors) */
 [data-theme="light"] .navbar {
     background: transparent;
 }
 
 [data-theme="light"] .navbar.scrolled {
     background: rgba(245, 245, 245, 0.95);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(8px);
 }
 
 [data-theme="light"] .nav-logo {
-    background: var(--bg-card);
-    border-color: var(--border-light);
-    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
 }
 
 [data-theme="light"] .nav-logo:hover {
-    background: var(--bg-card);
-    color: var(--accent-primary);
     border-color: var(--accent-primary);
+    color: var(--accent-primary);
 }
 
 [data-theme="light"] .nav-link {
@@ -2506,15 +2505,14 @@ a.tech-tag:hover {
 }
 
 [data-theme="light"] .theme-toggle {
-    background: var(--bg-card);
-    border-color: var(--border-light);
-    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
 }
 
 [data-theme="light"] .theme-toggle:hover {
-    background: var(--bg-card);
-    color: var(--accent-primary);
     border-color: var(--accent-primary);
+    color: var(--accent-primary);
 }
 
 [data-theme="light"] .hamburger,
@@ -2523,19 +2521,17 @@ a.tech-tag:hover {
     background: var(--text-primary);
 }
 
-/* Social Links - Light (with visible outline) */
+/* Social Links - Light (with blue border) */
 [data-theme="light"] .social-link {
     background: var(--bg-card);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: var(--text-secondary);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
 }
 
 [data-theme="light"] .social-link:hover {
     background: var(--accent-primary);
     border-color: var(--accent-primary);
     color: white;
-    box-shadow: 0 2px 8px rgba(0, 103, 184, 0.25);
 }
 
 /* Buttons - Light */
@@ -2588,7 +2584,7 @@ a.tech-tag:hover {
     color: var(--accent-primary);
 }
 
-/* Cards - Light - White cards on gray background like Microsoft */
+/* Cards - Light - White cards with visible borders */
 [data-theme="light"] .skill-category,
 [data-theme="light"] .education-card,
 [data-theme="light"] .project-card,
@@ -2596,8 +2592,8 @@ a.tech-tag:hover {
 [data-theme="light"] .timeline-content,
 [data-theme="light"] .info-item {
     background: var(--bg-card);
-    border: 1px solid transparent;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--border-color);
+    box-shadow: none;
     border-radius: 8px;
 }
 
@@ -2606,8 +2602,8 @@ a.tech-tag:hover {
 [data-theme="light"] .project-card:hover,
 [data-theme="light"] .contact-method:hover,
 [data-theme="light"] .timeline-content:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    border-color: transparent;
+    border-color: var(--accent-primary);
+    box-shadow: none;
 }
 
 /* Skills - Light */
