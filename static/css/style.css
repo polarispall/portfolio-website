@@ -1419,6 +1419,10 @@ a.tech-tag:hover {
     color: var(--text-secondary);
 }
 
+.calendly-preview-body {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .meeting-option {
     display: flex;
     align-items: center;
@@ -1427,7 +1431,7 @@ a.tech-tag:hover {
     background: rgba(99, 102, 241, 0.15);
     border: 2px solid rgba(99, 102, 241, 0.25);
     border-radius: 12px;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .meeting-option:hover {
@@ -1470,7 +1474,7 @@ a.tech-tag:hover {
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
