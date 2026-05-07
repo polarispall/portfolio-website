@@ -2701,13 +2701,12 @@ a.tech-tag:hover {
 
 [data-theme="light"] .project-links a {
     color: var(--text-secondary);
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: transparent;
+    border: none;
 }
 
 [data-theme="light"] .project-links a:hover {
     color: var(--accent-primary);
-    border-color: var(--accent-primary);
 }
 
 /* Schedule Section - Light */
@@ -2812,10 +2811,18 @@ a.tech-tag:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Mobile Nav - Light */
+/* Nav Menu - Light - transparent on desktop */
 [data-theme="light"] .nav-menu {
-    background: var(--bg-card);
-    border-left: 1px solid var(--border-color);
+    background: transparent;
+    border-left: none;
+}
+
+/* Mobile Nav - Light - white background for slide-out menu */
+@media (max-width: 768px) {
+    [data-theme="light"] .nav-menu {
+        background: var(--bg-card);
+        border-left: 1px solid var(--border-color);
+    }
 }
 
 /* Floating CTA - Light */
