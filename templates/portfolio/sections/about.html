@@ -19,31 +19,31 @@
             </div>
             <div class="about-info">
                 {% if profile.email %}
-                <div class="info-item">
+                <a href="mailto:{{ profile.email }}" class="info-item">
                     <i class="fas fa-envelope"></i>
                     <div>
                         <span class="info-label">Email</span>
                         <span class="info-value">{{ profile.email }}</span>
                     </div>
-                </div>
+                </a>
                 {% endif %}
                 {% if profile.location %}
-                <div class="info-item">
+                <a href="https://www.google.com/maps/search/?api=1&query={{ profile.location|urlencode }}" target="_blank" rel="noopener noreferrer" class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
                         <span class="info-label">Location</span>
                         <span class="info-value">{{ profile.location }}</span>
                     </div>
-                </div>
+                </a>
                 {% endif %}
                 {% if profile.phone %}
-                <div class="info-item">
+                <a href="tel:{{ profile.phone }}" class="info-item">
                     <i class="fas fa-phone"></i>
                     <div>
                         <span class="info-label">Phone</span>
                         <span class="info-value">{{ profile.phone }}</span>
                     </div>
-                </div>
+                </a>
                 {% endif %}
             </div>
         </div>
