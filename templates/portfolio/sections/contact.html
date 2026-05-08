@@ -21,6 +21,7 @@
                 </a>
                 {% endif %}
                 {% for link in social_links %}
+                {% if not link.url|slice:":7" == "mailto:" %}
                 <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="contact-method">
                     <div class="contact-icon">
                         {% if link.icon_class %}
@@ -34,6 +35,7 @@
                         <span class="contact-value">Connect with me</span>
                     </div>
                 </a>
+                {% endif %}
                 {% endfor %}
             </div>
             {% if profile.email %}

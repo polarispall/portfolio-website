@@ -1636,8 +1636,9 @@ a.tech-tag:hover {
 }
 
 .contact-methods {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
     margin-bottom: 48px;
 }
@@ -1652,6 +1653,9 @@ a.tech-tag:hover {
     border: 1px solid var(--border-color);
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex: 0 1 auto;
+    min-width: 220px;
+    max-width: 320px;
 }
 
 .contact-method:hover {
@@ -1675,6 +1679,8 @@ a.tech-tag:hover {
 
 .contact-info {
     text-align: left;
+    min-width: 0;
+    flex: 1;
 }
 
 .contact-label {
@@ -1691,6 +1697,9 @@ a.tech-tag:hover {
     font-size: 0.95rem;
     color: var(--text-primary);
     font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* ============================================
@@ -2116,7 +2125,13 @@ a.tech-tag:hover {
     }
 
     .contact-methods {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .contact-method {
+        max-width: none;
+        width: 100%;
     }
 
     .schedule-benefits {
