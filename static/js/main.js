@@ -55,6 +55,32 @@ document.addEventListener('DOMContentLoaded', function() {
         themeToggle.addEventListener('click', cycleTheme);
     }
 
+    // Typewriter Effect
+    const typewriter = document.querySelector('.typewriter');
+    if (typewriter) {
+        const text = typewriter.dataset.text;
+        const textElement = typewriter.querySelector('.typewriter-text');
+        const cursor = typewriter.querySelector('.typewriter-cursor');
+        let charIndex = 0;
+        const typingSpeed = 100;
+
+        function type() {
+            if (charIndex < text.length) {
+                textElement.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingSpeed);
+            } else {
+                // Fade out and remove cursor after typing is done
+                cursor.style.transition = 'opacity 2s ease';
+                cursor.style.opacity = '0';
+                setTimeout(() => cursor.remove(), 2000);
+            }
+        }
+
+        // Start typing after a short delay
+        setTimeout(type, 500);
+    }
+
     // Mobile Navigation Toggle
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');

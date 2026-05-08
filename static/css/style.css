@@ -292,6 +292,45 @@ main > section:last-of-type {
     background-clip: text;
 }
 
+/* Typewriter effect */
+.hero-name.typewriter {
+    display: block;
+    text-align: left !important;
+    min-height: 1.2em;
+}
+
+.typewriter-text {
+    background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="light"] .typewriter-text {
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: #1a1a1a;
+    background-clip: unset;
+}
+
+.typewriter-cursor {
+    display: inline;
+    background: none;
+    -webkit-text-fill-color: var(--accent-primary);
+    animation: blink 1s step-end infinite;
+    font-weight: 100;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+[data-theme="light"] .typewriter-cursor {
+    -webkit-text-fill-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
 .hero-title {
     font-size: clamp(1.25rem, 3vw, 2rem);
     font-weight: 600;

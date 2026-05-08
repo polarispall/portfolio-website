@@ -13,8 +13,8 @@
     <div class="hero-content">
         <div class="hero-text">
             <p class="hero-greeting animate-fade-in">Hello, I'm</p>
-            <h1 class="hero-name animate-fade-in-up">
-                {% if profile %}{{ profile.name }}{% else %}Your Name{% endif %}
+            <h1 class="hero-name typewriter" data-text="{% if profile %}{{ profile.name }}{% else %}Your Name{% endif %}">
+                <span class="typewriter-text"></span><span class="typewriter-cursor">|</span>
             </h1>
             <h2 class="hero-title animate-fade-in-up delay-1">
                 {% if profile %}{{ profile.title }}{% else %}Software Developer{% endif %}
