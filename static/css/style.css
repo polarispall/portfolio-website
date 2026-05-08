@@ -59,6 +59,29 @@ body {
     line-height: 1.7;
     font-size: 16px;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme transition for key elements */
+.navbar,
+.section,
+.hero,
+.hero-gradient,
+.hero-grid,
+.footer,
+.skill-category,
+.skill-tag,
+.timeline-item,
+.education-card,
+.certificate-card,
+.project-card,
+.contact-method,
+.calendly-preview,
+.btn,
+.nav-logo,
+.nav-link,
+.social-link {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -2257,6 +2280,7 @@ a.tech-tag:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     width: 40px;
     height: 40px;
     background: var(--bg-tertiary);
@@ -2331,39 +2355,27 @@ a.tech-tag:hover {
 .theme-icon {
     width: 20px;
     height: 20px;
-    display: none;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.8);
 }
 
 /* Show appropriate icon based on theme */
 [data-theme="dark"] .theme-icon-dark,
 :root:not([data-theme]) .theme-icon-dark {
-    display: block;
+    opacity: 1;
+    transform: scale(1);
 }
 
 [data-theme="normal"] .theme-icon-normal {
-    display: block;
+    opacity: 1;
+    transform: scale(1);
 }
 
 [data-theme="light"] .theme-icon-light {
-    display: block;
-}
-
-/* Hide other icons */
-[data-theme="dark"] .theme-icon-normal,
-[data-theme="dark"] .theme-icon-light,
-:root:not([data-theme]) .theme-icon-normal,
-:root:not([data-theme]) .theme-icon-light {
-    display: none;
-}
-
-[data-theme="normal"] .theme-icon-dark,
-[data-theme="normal"] .theme-icon-light {
-    display: none;
-}
-
-[data-theme="light"] .theme-icon-dark,
-[data-theme="light"] .theme-icon-normal {
-    display: none;
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* ============================================
@@ -2414,14 +2426,18 @@ a.tech-tag:hover {
 }
 
 /* Cards - Normal */
-[data-theme="normal"] .skill-category,
 [data-theme="normal"] .education-card,
 [data-theme="normal"] .project-card,
-[data-theme="normal"] .contact-method,
-[data-theme="normal"] .timeline-content,
-[data-theme="normal"] .info-item {
+[data-theme="normal"] .timeline-content {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
+}
+
+/* Blue outline cards - Normal */
+[data-theme="normal"] .contact-method,
+[data-theme="normal"] .info-item {
+    background: var(--bg-card);
+    border: 1px solid var(--accent-primary);
 }
 
 /* Social Links - Normal (with visible outline) */
@@ -2661,14 +2677,20 @@ a.tech-tag:hover {
 }
 
 /* Cards - Light - White cards with visible borders */
-[data-theme="light"] .skill-category,
 [data-theme="light"] .education-card,
 [data-theme="light"] .project-card,
-[data-theme="light"] .contact-method,
-[data-theme="light"] .timeline-content,
-[data-theme="light"] .info-item {
+[data-theme="light"] .timeline-content {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
+    box-shadow: none;
+    border-radius: 8px;
+}
+
+[data-theme="light"] .contact-method,
+[data-theme="light"] .skill-category,
+[data-theme="light"] .info-item {
+    background: var(--bg-card);
+    border: 1px solid var(--accent-primary);
     box-shadow: none;
     border-radius: 8px;
 }
