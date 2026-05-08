@@ -143,56 +143,73 @@ class Command(BaseCommand):
         # Get categories
         categories = {cat.slug: cat for cat in SkillCategory.objects.all()}
 
-        skills_data = [
-            # Languages - core programming languages that deserve individual recognition
-            {'name': 'Python', 'category': 'languages', 'icon': 'fab fa-python', 'color': '#3776ab', 'url': 'https://python.org', 'order': 1},
+        # Skills with Font Awesome icons
+        fa_skills = [
+            # Languages
+            {'name': 'Python', 'category': 'languages', 'icon': 'fab fa-python', 'color': '#4584b6', 'url': 'https://python.org', 'order': 1},
             {'name': 'JavaScript', 'category': 'languages', 'icon': 'fab fa-js', 'color': '#f7df1e', 'url': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', 'order': 2},
-            {'name': 'TypeScript', 'category': 'languages', 'icon': 'fab fa-js', 'color': '#3178c6', 'url': 'https://typescriptlang.org', 'order': 3},
-            {'name': 'C#', 'category': 'languages', 'icon': 'fas fa-hashtag', 'color': '#239120', 'url': 'https://docs.microsoft.com/en-us/dotnet/csharp/', 'order': 4},
-            {'name': 'Java', 'category': 'languages', 'icon': 'fab fa-java', 'color': '#ed8b00', 'url': 'https://java.com', 'order': 5},
+            {'name': 'Java', 'category': 'languages', 'icon': 'fab fa-java', 'color': '#f89820', 'url': 'https://java.com', 'order': 5},
             {'name': 'Bash', 'category': 'languages', 'icon': 'fas fa-terminal', 'color': '#4eaa25', 'url': 'https://www.gnu.org/software/bash/', 'order': 6},
 
-            # Backend & Frameworks - major frameworks people search for
-            {'name': 'Django', 'category': 'backend', 'icon': 'fab fa-python', 'color': '#092e20', 'url': 'https://djangoproject.com', 'order': 1},
-            {'name': 'Node.js', 'category': 'backend', 'icon': 'fab fa-node-js', 'color': '#339933', 'url': 'https://nodejs.org', 'order': 2},
-            {'name': '.NET', 'category': 'backend', 'icon': 'fab fa-microsoft', 'color': '#512bd4', 'url': 'https://dotnet.microsoft.com', 'order': 3},
-            {'name': 'Gunicorn', 'category': 'backend', 'icon': 'fab fa-python', 'color': '#499848', 'url': 'https://gunicorn.org', 'order': 4},
-
-            # Databases
-            {'name': 'PostgreSQL', 'category': 'databases', 'icon': 'fas fa-database', 'color': '#336791', 'url': 'https://postgresql.org', 'order': 1},
-            {'name': 'MySQL', 'category': 'databases', 'icon': 'fas fa-database', 'color': '#4479a1', 'url': 'https://mysql.com', 'order': 2},
-            {'name': 'SQLite', 'category': 'databases', 'icon': 'fas fa-database', 'color': '#003b57', 'url': 'https://sqlite.org', 'order': 3},
+            # Backend & Frameworks
+            {'name': 'Node.js', 'category': 'backend', 'icon': 'fab fa-node-js', 'color': '#68a063', 'url': 'https://nodejs.org', 'order': 2},
 
             # Frontend
             {'name': 'React', 'category': 'frontend', 'icon': 'fab fa-react', 'color': '#61dafb', 'url': 'https://react.dev', 'order': 1},
-            {'name': 'Tailwind CSS', 'category': 'frontend', 'icon': 'fab fa-css3-alt', 'color': '#06b6d4', 'url': 'https://tailwindcss.com', 'order': 2},
             {'name': 'HTML', 'category': 'frontend', 'icon': 'fab fa-html5', 'color': '#e34f26', 'url': 'https://developer.mozilla.org/en-US/docs/Web/HTML', 'order': 3},
-            {'name': 'CSS', 'category': 'frontend', 'icon': 'fab fa-css3-alt', 'color': '#1572b6', 'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS', 'order': 4},
-            {'name': 'Flutter', 'category': 'frontend', 'icon': 'fas fa-mobile-alt', 'color': '#02569B', 'url': 'https://flutter.dev', 'order': 5},
-            {'name': 'Webflow', 'category': 'frontend', 'icon': 'fas fa-globe', 'color': '#4353FF', 'url': 'https://webflow.com', 'order': 6},
+            {'name': 'CSS', 'category': 'frontend', 'icon': 'fab fa-css3-alt', 'color': '#264de4', 'url': 'https://developer.mozilla.org/en-US/docs/Web/CSS', 'order': 4},
+            {'name': 'Flutter', 'category': 'frontend', 'icon': 'fab fa-flutter', 'color': '#54c5f8', 'url': 'https://flutter.dev', 'order': 5},
 
             # DevOps & Infrastructure
             {'name': 'Docker', 'category': 'devops', 'icon': 'fab fa-docker', 'color': '#2496ed', 'url': 'https://docker.com', 'order': 1},
             {'name': 'AWS', 'category': 'devops', 'icon': 'fab fa-aws', 'color': '#ff9900', 'url': 'https://aws.amazon.com', 'order': 2},
             {'name': 'Nginx', 'category': 'devops', 'icon': 'fas fa-server', 'color': '#009639', 'url': 'https://nginx.org', 'order': 3},
             {'name': 'Linux', 'category': 'devops', 'icon': 'fab fa-linux', 'color': '#fcc624', 'url': 'https://kernel.org', 'order': 4},
-            {'name': 'Caddy', 'category': 'devops', 'icon': 'fas fa-shield-alt', 'color': '#00ADD8', 'url': 'https://caddyserver.com', 'order': 5},
-            {'name': 'Cloudflare', 'category': 'devops', 'icon': 'fab fa-cloudflare', 'color': '#F38020', 'url': 'https://cloudflare.com', 'order': 6},
+            {'name': 'Cloudflare', 'category': 'devops', 'icon': 'fab fa-cloudflare', 'color': '#f38020', 'url': 'https://cloudflare.com', 'order': 6},
 
-            # DevTools - developer-focused tools
+            # DevTools
             {'name': 'Git', 'category': 'devtools', 'icon': 'fab fa-git-alt', 'color': '#f05032', 'url': 'https://git-scm.com', 'order': 1},
-            {'name': 'GitHub', 'category': 'devtools', 'icon': 'fab fa-github', 'color': '#ffffff', 'url': 'https://github.com', 'order': 2},
-            {'name': 'Neovim', 'category': 'devtools', 'icon': 'fas fa-edit', 'color': '#57a143', 'url': 'https://neovim.io', 'order': 3},
-            {'name': 'pytest', 'category': 'devtools', 'icon': 'fas fa-vial', 'color': '#0A9EDC', 'url': 'https://pytest.org', 'order': 4},
-            {'name': 'MCP', 'category': 'devtools', 'icon': 'fas fa-plug', 'color': '#8B5CF6', 'url': 'https://modelcontextprotocol.io', 'order': 5},
+            {'name': 'GitHub', 'category': 'devtools', 'icon': 'fab fa-github', 'color': '#6e5494', 'url': 'https://github.com', 'order': 2},
+            {'name': 'MCP', 'category': 'devtools', 'icon': 'fas fa-plug', 'color': '#d97706', 'url': 'https://modelcontextprotocol.io', 'order': 5},
 
-            # Tools - creative/productivity tools
-            {'name': 'Unity', 'category': 'tools', 'icon': 'fab fa-unity', 'color': '#ffffff', 'url': 'https://unity.com', 'order': 1},
-            {'name': 'Blender', 'category': 'tools', 'icon': 'fas fa-cube', 'color': '#F5792A', 'url': 'https://blender.org', 'order': 2},
-            {'name': 'Zapier', 'category': 'tools', 'icon': 'fas fa-bolt', 'color': '#FF4A00', 'url': 'https://zapier.com', 'order': 3},
+            # Tools
+            {'name': 'Unity', 'category': 'tools', 'icon': 'fab fa-unity', 'color': '#96a7b8', 'url': 'https://unity.com', 'order': 1},
+            {'name': 'Zapier', 'category': 'tools', 'icon': 'fas fa-bolt', 'color': '#ff4a00', 'url': 'https://zapier.com', 'order': 3},
         ]
 
-        for skill_data in skills_data:
+        # Skills with custom SVG icons (from Simple Icons)
+        custom_skills = [
+            # Languages
+            {'name': 'TypeScript', 'category': 'languages', 'icon_file': 'skill_icons/typescript.svg', 'color': '#3178c6', 'url': 'https://typescriptlang.org', 'order': 3},
+            {'name': 'C#', 'category': 'languages', 'icon_file': 'skill_icons/csharp.svg', 'color': '#9b4993', 'url': 'https://docs.microsoft.com/en-us/dotnet/csharp/', 'order': 4},
+
+            # Backend & Frameworks
+            {'name': 'Django', 'category': 'backend', 'icon_file': 'skill_icons/django.svg', 'color': '#44b78b', 'url': 'https://djangoproject.com', 'order': 1},
+            {'name': '.NET', 'category': 'backend', 'icon_file': 'skill_icons/dotnet.svg', 'color': '#512bd4', 'url': 'https://dotnet.microsoft.com', 'order': 3},
+            {'name': 'Gunicorn', 'category': 'backend', 'icon_file': 'skill_icons/gunicorn.svg', 'color': '#499848', 'url': 'https://gunicorn.org', 'order': 4},
+
+            # Databases
+            {'name': 'PostgreSQL', 'category': 'databases', 'icon_file': 'skill_icons/postgresql.svg', 'color': '#4169e1', 'url': 'https://postgresql.org', 'order': 1},
+            {'name': 'MySQL', 'category': 'databases', 'icon_file': 'skill_icons/mysql.svg', 'color': '#00758f', 'url': 'https://mysql.com', 'order': 2},
+            {'name': 'SQLite', 'category': 'databases', 'icon_file': 'skill_icons/sqlite.svg', 'color': '#0ea5e9', 'url': 'https://sqlite.org', 'order': 3},
+
+            # Frontend
+            {'name': 'Tailwind CSS', 'category': 'frontend', 'icon_file': 'skill_icons/tailwindcss.svg', 'color': '#38bdf8', 'url': 'https://tailwindcss.com', 'order': 2},
+            {'name': 'Webflow', 'category': 'frontend', 'icon_file': 'skill_icons/webflow.svg', 'color': '#4353ff', 'url': 'https://webflow.com', 'order': 6},
+
+            # DevOps & Infrastructure
+            {'name': 'Caddy', 'category': 'devops', 'icon_file': 'skill_icons/caddy.svg', 'color': '#22d3ee', 'url': 'https://caddyserver.com', 'order': 5},
+
+            # DevTools
+            {'name': 'Neovim', 'category': 'devtools', 'icon_file': 'skill_icons/neovim.svg', 'color': '#57a143', 'url': 'https://neovim.io', 'order': 3},
+            {'name': 'pytest', 'category': 'devtools', 'icon_file': 'skill_icons/pytest.svg', 'color': '#009fe3', 'url': 'https://pytest.org', 'order': 4},
+
+            # Tools
+            {'name': 'Blender', 'category': 'tools', 'icon_file': 'skill_icons/blender.svg', 'color': '#ea7600', 'url': 'https://blender.org', 'order': 2},
+        ]
+
+        # Create Font Awesome skills
+        for skill_data in fa_skills:
             category = categories.get(skill_data['category'])
             if not category:
                 self.stdout.write(self.style.WARNING(f'  Category not found: {skill_data["category"]}'))
@@ -206,12 +223,36 @@ class Command(BaseCommand):
                     'glow_color': skill_data['color'],
                     'url': skill_data.get('url', ''),
                     'use_font_awesome': True,
+                    'custom_icon': '',
                     'order': skill_data['order'],
                     'is_active': True,
                 }
             )
             action = 'Created' if created else 'Updated'
             self.stdout.write(f'  {action} skill: {skill.name}')
+
+        # Create custom icon skills
+        for skill_data in custom_skills:
+            category = categories.get(skill_data['category'])
+            if not category:
+                self.stdout.write(self.style.WARNING(f'  Category not found: {skill_data["category"]}'))
+                continue
+
+            skill, created = Skill.objects.update_or_create(
+                name=skill_data['name'],
+                category=category,
+                defaults={
+                    'icon_class': '',
+                    'glow_color': skill_data['color'],
+                    'url': skill_data.get('url', ''),
+                    'use_font_awesome': False,
+                    'custom_icon': skill_data['icon_file'],
+                    'order': skill_data['order'],
+                    'is_active': True,
+                }
+            )
+            action = 'Created' if created else 'Updated'
+            self.stdout.write(f'  {action} skill: {skill.name} (custom icon)')
 
     def create_experience(self):
         """Create work experience"""

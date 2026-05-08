@@ -861,6 +861,8 @@ main > section:last-of-type {
     text-decoration: none;
     cursor: pointer;
     --glow-color: #ec4899;
+    /* Clip the offset black SVG icon during hover color trick */
+    overflow: hidden;
 }
 
 .skill-tag:hover {
@@ -877,9 +879,10 @@ main > section:last-of-type {
     height: 1rem;
     display: inline-block;
     vertical-align: middle;
-    filter: grayscale(100%) brightness(0.6);
-    opacity: 1;
-    transition: all var(--transition-fast);
+    /* Dark mode: invert black SVGs to white, then grayscale */
+    filter: brightness(0) invert(1) grayscale(100%) opacity(0.7);
+    /* Only transition filter, not transform (to avoid showing offset black icon) */
+    transition: filter var(--transition-fast);
 }
 
 /* Make all skill icons grayscale */
@@ -889,10 +892,14 @@ main > section:last-of-type {
     transition: all var(--transition-fast);
 }
 
-/* Brighten and glow on hover */
+/* Brighten and glow on hover - colorize SVG using offset shadow trick */
 .skill-tag:hover .skill-icon-img {
-    filter: grayscale(0%) brightness(1.1) drop-shadow(0 0 12px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
-    opacity: 1;
+    filter:
+        brightness(0) saturate(100%)
+        drop-shadow(99px 0 0 var(--glow-color))
+        drop-shadow(0 0 10px var(--glow-color))
+        drop-shadow(0 0 20px var(--glow-color));
+    transform: translateX(-99px);
 }
 
 .skill-tag:hover i {
@@ -1076,8 +1083,8 @@ a.tech-tag:hover {
     height: 0.8rem;
     display: inline-block;
     vertical-align: middle;
-    filter: grayscale(100%) brightness(0.7);
-    opacity: 0.85;
+    /* Dark mode: invert black SVGs to white */
+    filter: brightness(0) invert(1) opacity(0.85);
 }
 
 /* ============================================
@@ -2932,6 +2939,26 @@ a.tech-tag:hover {
 [data-theme="light"] .skill-tag i {
     filter: none;
     opacity: 0.9;
+}
+
+[data-theme="light"] .skill-icon-img {
+    /* Light mode: keep black SVGs dark with grayscale */
+    filter: brightness(0) grayscale(100%) opacity(0.7);
+}
+
+[data-theme="light"] .skill-tag:hover .skill-icon-img {
+    /* Colorize SVG using offset shadow trick */
+    filter:
+        brightness(0) saturate(100%)
+        drop-shadow(99px 0 0 var(--glow-color))
+        drop-shadow(0 0 10px var(--glow-color))
+        drop-shadow(0 0 20px var(--glow-color));
+    transform: translateX(-99px);
+}
+
+[data-theme="light"] .tech-skill-icon {
+    /* Light mode: keep SVGs dark */
+    filter: brightness(0) opacity(0.8);
 }
 
 /* Timeline - Light */
