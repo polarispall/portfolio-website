@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load markdown_extras %}
 
 {% block title %}{{ project.title }} - Project{% endblock %}
 
@@ -40,8 +41,8 @@
 
         <!-- Full Description -->
         <div class="project-detail-content">
-            <div class="project-description">
-                {{ project.description|linebreaks }}
+            <div class="project-description markdown-content">
+                {{ project.description|markdown }}
             </div>
 
             <!-- Technologies & Skills -->
