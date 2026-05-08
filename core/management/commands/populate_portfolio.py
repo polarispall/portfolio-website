@@ -148,6 +148,7 @@ class Command(BaseCommand):
             # Languages
             {'name': 'Python', 'category': 'languages', 'icon': 'fab fa-python', 'color': '#4584b6', 'url': 'https://python.org', 'order': 1},
             {'name': 'JavaScript', 'category': 'languages', 'icon': 'fab fa-js', 'color': '#f7df1e', 'url': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', 'order': 2},
+            {'name': 'C#', 'category': 'languages', 'icon': 'fas fa-hashtag', 'color': '#9b4993', 'url': 'https://docs.microsoft.com/en-us/dotnet/csharp/', 'order': 4},
             {'name': 'Java', 'category': 'languages', 'icon': 'fab fa-java', 'color': '#f89820', 'url': 'https://java.com', 'order': 5},
             {'name': 'Bash', 'category': 'languages', 'icon': 'fas fa-terminal', 'color': '#4eaa25', 'url': 'https://www.gnu.org/software/bash/', 'order': 6},
 
@@ -181,7 +182,6 @@ class Command(BaseCommand):
         custom_skills = [
             # Languages
             {'name': 'TypeScript', 'category': 'languages', 'icon_file': 'skill_icons/typescript.svg', 'color': '#3178c6', 'url': 'https://typescriptlang.org', 'order': 3},
-            {'name': 'C#', 'category': 'languages', 'icon_file': 'skill_icons/csharp.svg', 'color': '#9b4993', 'url': 'https://docs.microsoft.com/en-us/dotnet/csharp/', 'order': 4},
 
             # Backend & Frameworks
             {'name': 'Django', 'category': 'backend', 'icon_file': 'skill_icons/django.svg', 'color': '#44b78b', 'url': 'https://djangoproject.com', 'order': 1},
