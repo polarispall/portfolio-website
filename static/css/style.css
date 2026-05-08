@@ -2377,10 +2377,10 @@ a.tech-tag:hover {
     --bg-tertiary: #3a3a3c;
     --bg-card: #2c2c2e;
 
-    /* Softer, warmer text */
-    --text-primary: #f5f5f7;
-    --text-secondary: #a1a1a6;
-    --text-muted: #6e6e73;
+    /* Brighter, more readable text */
+    --text-primary: #ffffff;
+    --text-secondary: #d0d0d5;
+    --text-muted: #8e8e93;
 
     /* Slightly more visible borders */
     --border-color: rgba(255, 255, 255, 0.1);
@@ -2431,6 +2431,28 @@ a.tech-tag:hover {
     color: var(--text-secondary);
 }
 
+/* Body text - Normal - slightly bolder for readability */
+[data-theme="normal"] .about-text,
+[data-theme="normal"] .timeline-description,
+[data-theme="normal"] .education-description,
+[data-theme="normal"] .project-description,
+[data-theme="normal"] .schedule-description,
+[data-theme="normal"] .contact-text,
+[data-theme="normal"] .hero-subtitle {
+    font-weight: 450;
+}
+
+/* Body text - Light - slightly bolder for readability */
+[data-theme="light"] .about-text,
+[data-theme="light"] .timeline-description,
+[data-theme="light"] .education-description,
+[data-theme="light"] .project-description,
+[data-theme="light"] .schedule-description,
+[data-theme="light"] .contact-text,
+[data-theme="light"] .hero-subtitle {
+    font-weight: 450;
+}
+
 [data-theme="normal"] .social-link:hover {
     background: var(--accent-primary);
     border-color: var(--accent-primary);
@@ -2465,10 +2487,10 @@ a.tech-tag:hover {
     --bg-tertiary: #e0e0e0;
     --bg-card: #ffffff;
 
-    /* Dark but not harsh text */
-    --text-primary: #1a1a1a;
-    --text-secondary: #4a4a4a;
-    --text-muted: #6b6b6b;
+    /* Dark, readable text */
+    --text-primary: #111111;
+    --text-secondary: #2a2a2a;
+    --text-muted: #555555;
 
     /* Slightly toned down accent */
     --accent-primary: #0067b8;
