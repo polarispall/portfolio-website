@@ -2924,9 +2924,9 @@ a.tech-tag:hover {
 }
 
 [data-theme="light"] .skill-tag:hover {
-    background: var(--bg-tertiary);
+    background: #2a2a2e;
     border-color: var(--accent-primary);
-    color: var(--accent-primary);
+    color: #ffffff;
 }
 
 [data-theme="light"] .skill-tag i {
