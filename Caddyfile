@@ -1,5 +1,14 @@
 polarispall.com, www.polarispall.com {
-encode gzip
-reverse_proxy web:8000
+    encode gzip
 
+    # Serve media files directly
+    handle_path /media/* {
+        root * /media
+        file_server
+    }
+
+    # Proxy everything else to the web container
+    handle {
+        reverse_proxy web:8000
+    }
 }
