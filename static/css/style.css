@@ -1079,12 +1079,12 @@ a.tech-tag:hover {
 }
 
 .tech-skill-icon {
-    width: 0.8rem;
-    height: 0.8rem;
+    width: 0.9rem;
+    height: 0.9rem;
     display: inline-block;
     vertical-align: middle;
-    /* Dark mode: invert black SVGs to white */
-    filter: brightness(0) invert(1) opacity(0.85);
+    /* Colorize black SVGs to accent blue (#6366f1) */
+    filter: brightness(0) saturate(100%) invert(37%) sepia(74%) saturate(5765%) hue-rotate(232deg) brightness(101%) contrast(92%);
 }
 
 /* ============================================
@@ -2972,8 +2972,8 @@ a.tech-tag:hover {
 }
 
 [data-theme="light"] .tech-skill-icon {
-    /* Light mode: keep SVGs dark */
-    filter: brightness(0) opacity(0.8);
+    /* Light mode: Microsoft blue #0067b8 */
+    filter: brightness(0) saturate(100%) invert(24%) sepia(95%) saturate(1927%) hue-rotate(191deg) brightness(95%) contrast(101%);
 }
 
 /* Timeline - Light */
