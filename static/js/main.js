@@ -7,6 +7,28 @@
 })();
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Theme Picker Modal
+    const themeModal = document.getElementById('theme-modal');
+    const hasSelectedTheme = localStorage.getItem('hasSelectedTheme');
+
+    // Show modal if user hasn't selected a theme before
+    if (!hasSelectedTheme && themeModal) {
+        setTimeout(() => {
+            themeModal.classList.add('active');
+        }, 500);
+    }
+
+    // Handle theme option clicks
+    const themeOptions = document.querySelectorAll('.theme-option');
+    themeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const selectedTheme = this.dataset.theme;
+            localStorage.setItem('theme', selectedTheme);
+            localStorage.setItem('hasSelectedTheme', 'true');
+            location.reload();
+        });
+    });
+
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themes = ['dark', 'normal', 'light'];
