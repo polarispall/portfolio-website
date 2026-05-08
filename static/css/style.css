@@ -179,12 +179,12 @@ main > section:last-of-type {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     list-style: none;
 }
 
 .nav-link {
-    padding: 10px 18px;
+    padding: 10px 14px;
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-secondary);
@@ -1984,6 +1984,17 @@ a.tech-tag:hover {
         max-width: 100%;
     }
 
+    .hero-name.typewriter {
+        text-align: center !important;
+    }
+
+    .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
     .hero-cta {
         justify-content: center;
     }
@@ -2014,11 +2025,7 @@ a.tech-tag:hover {
     }
 }
 
-@media (max-width: 768px) {
-    :root {
-        --section-padding: 80px;
-    }
-
+@media (max-width: 1100px) {
     .nav-menu {
         position: fixed;
         top: 0;
@@ -2057,6 +2064,12 @@ a.tech-tag:hover {
         padding: 16px;
         font-size: 1.1rem;
     }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 80px;
+    }
 
     .hero {
         padding: 100px 20px 60px;
@@ -2073,17 +2086,8 @@ a.tech-tag:hover {
         font-size: clamp(2rem, 10vw, 3.5rem);
     }
 
-    .hero-name.typewriter {
-        text-align: center !important;
-    }
-
     .hero-title {
         font-size: clamp(1rem, 4vw, 1.5rem);
-    }
-
-    .hero-subtitle {
-        margin-left: auto;
-        margin-right: auto;
     }
 
     .hero-schedule {
@@ -3175,7 +3179,7 @@ a.tech-tag:hover {
 }
 
 /* Mobile Nav - Light - white background for slide-out menu */
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     [data-theme="light"] .nav-menu {
         background: var(--bg-card);
         border-left: 1px solid var(--border-color);
