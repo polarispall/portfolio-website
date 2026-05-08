@@ -117,6 +117,11 @@
     </footer>
 
     <!-- JavaScript -->
+    <script>
+        window.siteConfig = {
+            showNormalTheme: {% if profile.show_normal_theme %}true{% else %}false{% endif %}
+        };
+    </script>
     <script src="{% static 'js/main.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>

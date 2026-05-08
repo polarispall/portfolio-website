@@ -125,7 +125,7 @@ class ProfileAdmin(admin.ModelAdmin):
             'fields': ('profile_image', 'resume')
         }),
         ('Display Options', {
-            'fields': ('show_calendly_cta',),
+            'fields': ('show_calendly_cta', 'show_normal_theme'),
             'description': 'Control visibility of various page elements'
         }),
         ('Section Order', {

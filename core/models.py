@@ -40,6 +40,12 @@ class Profile(models.Model):
         help_text="Show the 'Schedule a meeting' card in the hero section"
     )
 
+    # Theme settings
+    show_normal_theme = models.BooleanField(
+        default=False,
+        help_text="Show 'Normal' mode in the theme toggle (in addition to Dark and Light)"
+    )
+
     # Section ordering - stores list of section configs with order, visibility, and custom names
     section_order = models.JSONField(
         default=list,

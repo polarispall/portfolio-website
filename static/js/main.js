@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
-    const themes = ['dark', 'normal', 'light'];
+    const showNormalTheme = window.siteConfig?.showNormalTheme || false;
+    const themes = showNormalTheme ? ['dark', 'normal', 'light'] : ['dark', 'light'];
 
     function getCurrentTheme() {
         return document.documentElement.getAttribute('data-theme') || 'dark';
