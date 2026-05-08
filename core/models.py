@@ -41,6 +41,10 @@ class Profile(models.Model):
     )
 
     # Theme settings
+    show_theme_picker = models.BooleanField(
+        default=False,
+        help_text="Show theme picker modal on first visit. If disabled, defaults to Light mode."
+    )
     show_normal_theme = models.BooleanField(
         default=False,
         help_text="Show 'Normal' mode in the theme toggle (in addition to Dark and Light)"
@@ -323,6 +327,38 @@ class Project(OrderedModel):
         if self.custom_technologies:
             return [tech.strip() for tech in self.custom_technologies.split(',')]
         return []
+
+
+class ProjectImage(OrderedModel):
+    """Gallery images for projects"""
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='gallery_images'
+    )
+    image = models.ImageField(upload_to='projects/gallery/')
+    caption = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="Optional caption for this image"
+    )
+    alt_text = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="Alt text for accessibility (defaults to caption or project title)"
+    )
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Gallery Image"
+        verbose_name_plural = "Gallery Images"
+
+    def __str__(self):
+        return f"{self.project.title} - Image {self.order + 1}"
+
+    def get_alt_text(self):
+        """Return alt text, falling back to caption or project title"""
+        return self.alt_text or self.caption or f"{self.project.title} screenshot"
 
 
 class Certificate(models.Model):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from django.utils.safestring import mark_safe
-from .models import Profile, SocialLink, SkillCategory, Skill, Experience, Education, Project, Certificate
+from .models import Profile, SocialLink, SkillCategory, Skill, Experience, Education, Project, ProjectImage, Certificate
 import json
 
 
@@ -260,14 +260,22 @@ class EducationAdmin(admin.ModelAdmin):
         js = ('admin/js/education_admin.js',)
 
 
+class ProjectImageInline(admin.TabularInline):
+    model = ProjectImage
+    extra = 1
+    fields = ['image', 'caption', 'alt_text', 'order']
+    ordering = ['order']
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['title', 'is_featured', 'is_active', 'order', 'created_at']
+    list_display = ['title', 'is_featured', 'is_active', 'order', 'gallery_count', 'created_at']
     list_filter = ['is_featured', 'is_active']
     list_editable = ['is_featured', 'is_active', 'order']
     prepopulated_fields = {'slug': ('title',)}
     ordering = ['order']
     search_fields = ['title', 'short_description']
+    inlines = [ProjectImageInline]
 
     fieldsets = (
         ('Project Details', {
@@ -291,6 +299,10 @@ class ProjectAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ['created_at']
+
+    def gallery_count(self, obj):
+        return obj.gallery_images.count()
+    gallery_count.short_description = 'Gallery Images'
 
 
 @admin.register(Certificate)

@@ -2,7 +2,7 @@
 
 // Theme Toggle - runs immediately to prevent flash
 (function() {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
 })();
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const themes = showNormalTheme ? ['dark', 'normal', 'light'] : ['dark', 'light'];
 
     function getCurrentTheme() {
-        return document.documentElement.getAttribute('data-theme') || 'dark';
+        return document.documentElement.getAttribute('data-theme') || 'light';
     }
 
     function setTheme(theme) {

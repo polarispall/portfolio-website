@@ -59,6 +59,7 @@
         </div>
     </nav>
 
+    {% if profile.show_theme_picker %}
     <!-- Theme Picker Modal -->
     <div class="theme-modal" id="theme-modal">
         <div class="theme-modal-content">
@@ -86,6 +87,7 @@
             <p class="theme-modal-hint">You can always change this later</p>
         </div>
     </div>
+    {% endif %}
 
     <!-- Main Content -->
     <main>
@@ -119,6 +121,7 @@
     <!-- JavaScript -->
     <script>
         window.siteConfig = {
+            showThemePicker: {% if profile.show_theme_picker %}true{% else %}false{% endif %},
             showNormalTheme: {% if profile.show_normal_theme %}true{% else %}false{% endif %}
         };
     </script>

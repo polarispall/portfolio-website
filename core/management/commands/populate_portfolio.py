@@ -334,732 +334,811 @@ class Command(BaseCommand):
             self.stdout.write(f'  {action} education: {display_name}')
 
     def create_projects(self):
-        """Create project entries"""
+        """Create project entries based on resume"""
         skills = {s.name: s for s in Skill.objects.all()}
 
         projects = [
             {
-                'title': 'Portfolio Website',
-                'slug': 'portfolio-website',
-                'short_description': 'Full-stack portfolio with Django admin and Docker deployment',
+                'title': 'My Linux Journey',
+                'slug': 'my-linux-journey',
+                'short_description': 'Custom Arch Linux development environment built from scratch with Hyprland compositor, extensive Neovim IDE configuration, and comprehensive dotfiles management',
                 'description': (
-                    "## Project Overview\n\n"
-                    "This portfolio website represents the culmination of my full-stack development journey, "
-                    "built from the ground up using Django as the backend framework. The project showcases "
-                    "not just my work, but demonstrates practical implementation of modern web development "
-                    "practices, from database design to production deployment.\n\n"
+                    "## The Breaking Point\n\n"
+                    "About two years ago, Windows finally pushed me over the edge. It wasn't one thing—it was "
+                    "everything. Bluescreens once a week. System Explorer freezing my entire computer. The "
+                    "moment I wanted keybinds to open specific applications and realized Windows couldn't do "
+                    "it natively. The moment I wanted more than pressing the Windows key and picking from that "
+                    "terrible start menu search.\n\n"
 
-                    "## Architecture & Design Philosophy\n\n"
-                    "The core philosophy behind this project was to create a completely content-driven "
-                    "architecture where every piece of content - from skills and projects to experience "
-                    "entries - lives in the database rather than being hardcoded in templates. This means "
-                    "I can update my entire portfolio through Django's admin interface without touching "
-                    "a single line of code.\n\n"
+                    "![The Windows experience](/media/projects/gallery/windows-bsod.png)\n\n"
 
-                    "I designed the data models with flexibility in mind. The Skill model, for example, "
-                    "supports custom SVG icons, Font Awesome classes, glow colors for visual effects, "
-                    "and even links to external documentation. Projects can reference skills through "
-                    "many-to-many relationships, automatically displaying the appropriate icons and "
-                    "creating a cohesive visual language across the site.\n\n"
+                    "I'd already spent countless hours making Windows work through sheer force of configuration—"
+                    "PowerToys, AltDrag, AutoHotkey scripts for global keybindings. I even implemented my own "
+                    "emacs-style movement bindings system-wide before I'd ever touched Emacs or Vim. But these "
+                    "were all hacks fighting against the OS.\n\n"
 
-                    "## Technical Implementation\n\n"
-                    "### Backend Development\n"
-                    "The Django application follows a modular structure with a single 'core' app handling "
-                    "all portfolio-related models: Profile, Skill, SkillCategory, Experience, Education, "
-                    "Project, Section, SocialLink, and SiteSettings. Each model is carefully designed with "
-                    "appropriate field types, validators, and help text for the admin interface.\n\n"
+                    "I wanted the real thing. I wanted to understand how an OS actually works. And honestly, "
+                    "I was tired of the telemetry, the bloat, the feeling that my computer wasn't really mine.\n\n"
 
-                    "I implemented custom model methods for computed properties, such as generating "
-                    "technology displays that combine linked skills with custom technologies. The ordering "
-                    "system uses django-ordered-model for drag-and-drop reordering in the admin.\n\n"
+                    "## Going Straight to Arch\n\n"
+                    "I skipped the beginner distros entirely. Manual Arch installation from the wiki, minimal "
+                    "base system, build everything from there. People said it was crazy for a first Linux "
+                    "install, but my Windows configuration experience taught me I learn best by understanding "
+                    "every layer—if I was going to do this, I wanted to actually understand what was happening "
+                    "underneath.\n\n"
 
-                    "### Frontend Development\n"
-                    "The frontend uses semantic HTML5 with a custom CSS architecture. I built a comprehensive "
-                    "design system with CSS custom properties for theming, supporting both dark and light "
-                    "modes with smooth transitions. The responsive design handles everything from mobile "
-                    "(375px) to large desktop displays without breakpoint issues.\n\n"
+                    "The installation itself was a learning experience. Partitioning with `fdisk`, formatting "
+                    "filesystems, installing the base system with `pacstrap`, generating fstab, chrooting into "
+                    "the new system. Each step required understanding rather than clicking 'Next'.\n\n"
 
-                    "JavaScript handles interactive elements: the typing animation on the hero section, "
-                    "smooth scrolling navigation, theme toggling with localStorage persistence, and the "
-                    "mobile hamburger menu. I kept dependencies minimal - no jQuery, no CSS frameworks.\n\n"
+                    "## The Pentaboot Nightmare (Worth It)\n\n"
+                    "My first month was chaos. I set up a pentaboot system: Arch as my main, a second Arch "
+                    "partition for testing and breaking things safely, Ubuntu to understand the Debian ecosystem, "
+                    "Debian for comparison, Linux Mint XFCE to see what a \"beginner\" distro felt like, and "
+                    "Windows for Office when absolutely necessary.\n\n"
 
-                    "### Containerization & DevOps\n"
-                    "Docker plays a central role in both development and production. The multi-stage "
-                    "Dockerfile creates optimized production images, while docker-compose.yml defines "
-                    "the complete application stack. I use volume mounts for persistent data (SQLite "
-                    "database, media uploads) and environment variables for configuration.\n\n"
+                    "Getting this working meant reinstalling GRUB probably 20+ times per partition. Not an "
+                    "exaggeration. Each distro wanted to overwrite the bootloader, partitions needed specific "
+                    "flags, UUIDs had to be correct in every config. By the end I had a nice GRUB theme and "
+                    "actually understood how bootloaders work. Worth the pain.\n\n"
+
+                    "![My GRUB bootloader with all five operating systems](/media/projects/gallery/grub-pentaboot.png)\n\n"
+
+                    "Same hardware, different philosophies. It became obvious quickly that Arch's approach—"
+                    "explicit configuration, rolling releases, the wiki as documentation—matched how I think "
+                    "about systems. The \"beginner\" distros felt like they were hiding things from me.\n\n"
+
+                    "## Hyprland: My First Tiling WM\n\n"
+                    "Hyprland wasn't a migration from i3 or bspwm—it was my first tiling window manager. But "
+                    "the concept wasn't new. All those AutoHotkey scripts on Windows? They were building toward "
+                    "keyboard-driven workflows. FancyZones for pseudo-tiling, custom hotkeys for everything. "
+                    "I didn't want a \"normal\" window manager. Hyprland was just doing it properly.\n\n"
+
+                    "Going straight to Wayland meant learning the modern stack from day one. Screen sharing "
+                    "needed portal configs, clipboard worked differently, some apps needed workarounds. But "
+                    "I was building from scratch anyway—no X11 habits to unlearn later.\n\n"
+
+                    "The config grew to hundreds of lines: window rules for floating specific applications, "
+                    "workspace assignments, animations tuned for responsiveness over flash, keybindings designed "
+                    "around muscle memory from my Windows days. The entire system controllable without a mouse.\n\n"
+
+                    "![My actual Hyprland workflow](/media/projects/gallery/hyprland-workflow.png)\n\n"
+
+                    "## VS Code to Neovim\n\n"
+                    "On Windows, I used VS Code for a long time. It worked, but I couldn't get into flow. I "
+                    "kept implementing global hotkeys through AutoHotkey—emacs-style bindings mixed with custom "
+                    "shortcuts for everything. `Ctrl+F` for forward, `Ctrl+B` for back, working across Discord, "
+                    "Slack, Office, VS Code itself. This was before I'd ever used Emacs or Vim. I just kind of "
+                    "landed on those movement patterns naturally from programming.\n\n"
+
+                    "When I moved to Linux, I tried Neovim and something clicked. The workflow between terminal, "
+                    "Yazi, and Neovim just made sense. Everything scriptable with Lua instead of fighting JSON "
+                    "settings. VS Code works out of the box—I'll give it that—but it's not scriptable with "
+                    "LuaJIT, not as powerful, not as integrated with the terminal workflow.\n\n"
+
+                    "**My keybinding philosophy:** everything reachable without leaving home row. Leader key "
+                    "combinations that make sense mnemonically. `<leader>ff` for find files, `<leader>fg` for "
+                    "find grep, `<leader>gg` for git. Neogit handles Git operations without leaving the editor—"
+                    "visual staging, interactive rebase that doesn't feel like editing a TODO file. Combined "
+                    "with Diffview for side-by-side diffs, the entire Git workflow lives in Neovim.\n\n"
+
+                    "![Neogit staging and committing](/media/projects/gallery/neovim-neogit.png)\n\n"
+
+                    "## Practical Workflow Over Ricing\n\n"
+                    "I've spent countless hours on this setup, but more on building a practical workflow than "
+                    "pure ricing. The goal was never screenshots for r/unixporn—it was a development environment "
+                    "where everything flows together.\n\n"
+
+                    "- **Walker** for launching anything without touching the mouse\n"
+                    "- **Telescope** for fuzzy finding files and grepping across projects\n"
+                    "- **Yazi** for visual file browsing when I need to explore (miss Directory Opus sometimes)\n"
+                    "- **tmux** for persistent sessions and splits\n"
+                    "- **Zsh** as my main shell with custom config (Bash on some partitions)\n"
+                    "- **Waybar** showing only what matters\n\n"
+
+                    "The dotfiles repo is the single source of truth. Shell configs, Neovim, Hyprland, systemd "
+                    "user services—everything version controlled and portable.\n\n"
+
+                    "![My dotfiles repository structure](/media/projects/gallery/dotfiles-repo.png)\n\n"
+
+                    "## What I Actually Learned\n\n"
+                    "The biggest gain wasn't the desktop environment—it was understanding how computers actually "
+                    "work. Linux runs on basically every server. Learning it meant learning devops, cloud "
+                    "infrastructure, networking, deployment. Docker works so much better natively than through "
+                    "WSL. No more pretending I'm on Linux through a compatibility layer.\n\n"
+
+                    "I learned how the OS is actually built and used. Package management with pacman and the AUR. "
+                    "Systemd for services and timers. How the graphics stack works. Filesystem permissions that "
+                    "make sense. The stuff that actually matters when you're deploying real applications.\n\n"
+
+                    "## What Transferred\n\n"
+                    "All that time configuring Windows wasn't wasted. The skills transferred directly—understanding "
+                    "systems deeply, scripting automation, building keyboard-driven workflows. Linux just lets me "
+                    "do it properly instead of fighting the OS at every step.\n\n"
+
+                    "Do I miss anything? Directory Opus was incredible for file management—nothing on Linux quite "
+                    "matches it. Some proprietary tools don't have good alternatives. But the tradeoffs are worth "
+                    "it. Two years of breaking things and fixing them taught me more than tutorials ever could. "
+                    "When something breaks now, I know where to look. This environment is exactly what I want it "
+                    "to be."
+                ),
+                'skills': ['Linux', 'Bash', 'Neovim', 'Git'],
+                'custom_technologies': 'Arch Linux, Hyprland, Wayland, systemd, Lua, Zsh, tmux',
+                'github_url': 'https://github.com/polarispall/dotfiles',
+                'is_featured': True,
+                'order': 1,
+            },
+            {
+                'title': 'About This Website',
+                'slug': 'this-website',
+                'short_description': 'Full-stack Django portfolio with modular content-driven architecture, Docker containerization, and production deployment on AWS EC2',
+                'description': (
+                    "## Project Philosophy\n\n"
+                    "This portfolio website demonstrates practical full-stack development—from database design "
+                    "to production deployment. The core architecture is content-driven: every piece of content "
+                    "lives in the database rather than hardcoded templates. I can update the entire site through "
+                    "Django's admin interface without touching a single line of code.\n\n"
+
+                    "![Portfolio Homepage](/media/projects/gallery/portfolio-home.png)\n\n"
+
+                    "The site you're looking at right now is the result of this project. Every section, skill, "
+                    "project description, and piece of content is managed through a custom Django admin interface. "
+                    "This means I can add new projects, update my skills, or modify any text without deploying "
+                    "new code—the database is the single source of truth.\n\n"
+
+                    "## Modular Django Architecture\n\n"
+                    "The backend follows Django best practices with models designed for maximum flexibility. "
+                    "Rather than hardcoding content into templates, I built a comprehensive data model that "
+                    "represents every aspect of the portfolio.\n\n"
+
+                    "![Django Admin Interface](/media/projects/gallery/django-admin.png)\n\n"
+
+                    "**Data Models Include:**\n"
+                    "- **Profile** for personal information, bio, and site-wide settings\n"
+                    "- **SkillCategory** and **Skill** for organized technology display with custom icons\n"
+                    "- **Experience** for work history with linked skills and technologies\n"
+                    "- **Education** for academic background\n"
+                    "- **Project** with rich markdown descriptions and image galleries\n"
+                    "- **SocialLink** for profile connections with custom or Font Awesome icons\n"
+                    "- **SiteSettings** for global configuration like theme options\n\n"
+
+                    "The Skill model is particularly flexible—it supports custom SVG icons, Font Awesome classes, "
+                    "configurable glow colors for hover effects, and links to external documentation. Projects "
+                    "reference skills through many-to-many relationships, automatically displaying appropriate "
+                    "icons and creating a cohesive visual language across the site.\n\n"
+
+                    "Custom model methods handle computed properties like combining linked skills with custom "
+                    "technologies. Django admin customization includes inline editors, drag-and-drop ordering, "
+                    "and custom widgets that make content editing intuitive.\n\n"
+
+                    "## Frontend Development\n\n"
+                    "The frontend uses semantic HTML5 with a custom CSS architecture built entirely on CSS "
+                    "custom properties (variables). No CSS framework—everything is hand-crafted for this specific "
+                    "design.\n\n"
+
+                    "![Theme Switching Demo](/media/projects/gallery/theme-demo.png)\n\n"
+
+                    "The theming system supports three modes: dark, light, and normal. Each theme defines its "
+                    "own set of CSS variables, and switching themes is as simple as changing a data attribute "
+                    "on the root element. Transitions are smooth, and the user's preference persists in "
+                    "localStorage.\n\n"
+
+                    "Responsive design handles everything from 375px mobile screens to ultrawide desktop displays. "
+                    "The layout adapts using CSS Grid and Flexbox, with media queries at carefully chosen "
+                    "breakpoints that correspond to actual content needs rather than arbitrary device sizes.\n\n"
+
+                    "**Interactive Elements:**\n"
+                    "- Typing animation on the hero section with cursor that fades after completion\n"
+                    "- Smooth scrolling navigation with active section highlighting\n"
+                    "- Theme toggling with visual feedback tooltip\n"
+                    "- Mobile hamburger menu with slide-out animation\n"
+                    "- Scroll-triggered animations for content sections\n"
+                    "- Skill tags with hover effects showing brand colors\n\n"
+
+                    "Dependencies are minimal—no jQuery, no CSS frameworks like Bootstrap or Tailwind, just "
+                    "vanilla JavaScript and carefully architected CSS. The entire frontend weighs in at a "
+                    "fraction of what a framework-heavy site would require.\n\n"
+
+                    "## Docker Containerization\n\n"
+                    "Docker provides consistency between development and production environments. The setup "
+                    "ensures that what works on my laptop works identically in production.\n\n"
+
+                    "![Docker Architecture](/media/projects/gallery/docker-setup.png)\n\n"
+
+                    "The multi-stage Dockerfile creates optimized production images:\n"
+                    "1. Build stage installs dependencies and collects static files\n"
+                    "2. Production stage copies only what's needed for a minimal footprint\n"
+                    "3. Non-root user for security\n"
+                    "4. Health checks for container orchestration\n\n"
+
+                    "Docker Compose defines the complete application stack with volume mounts for persistent "
+                    "data (SQLite database, media uploads) and environment variables for configuration. "
+                    "Development and production compose files share a base configuration with environment-specific "
+                    "overrides.\n\n"
 
                     "## Production Deployment\n\n"
-                    "The production environment runs on an AWS EC2 instance with Debian. I chose Caddy "
-                    "as the reverse proxy for its automatic HTTPS capabilities - it handles Let's Encrypt "
-                    "certificate issuance and renewal without any manual intervention.\n\n"
+                    "The production stack runs on AWS EC2 with Debian as the base OS:\n\n"
+                    "- **Cloudflare** handles DNS, provides CDN caching, and adds a security layer\n"
+                    "- **Caddy** reverse proxy manages automatic HTTPS with Let's Encrypt\n"
+                    "- **Gunicorn** serves the Django application with multiple workers\n"
+                    "- **SQLite** provides file-based persistence perfect for portfolio scale\n"
+                    "- **WhiteNoise** serves static files efficiently without a separate server\n\n"
 
-                    "The deployment architecture:\n"
-                    "- Cloudflare handles DNS and provides an additional security/caching layer\n"
-                    "- Caddy reverse proxy manages SSL termination and routes requests\n"
-                    "- Gunicorn serves the Django application with multiple workers\n"
-                    "- Docker containers ensure consistent environments\n"
-                    "- SQLite provides simple, file-based persistence perfect for a portfolio site\n\n"
+                    "![Deployment Architecture](/media/projects/gallery/deployment-arch.png)\n\n"
 
-                    "## Challenges & Solutions\n\n"
-                    "One interesting challenge was implementing the theme system. I needed colors to "
-                    "work across both themes while maintaining accessibility. The solution involved "
-                    "CSS custom properties that change based on a data-theme attribute, with JavaScript "
-                    "handling the toggle and persistence.\n\n"
+                    "Caddy was chosen specifically for its automatic certificate management—it handles Let's "
+                    "Encrypt issuance and renewal without any manual intervention, cron jobs, or certbot "
+                    "configuration. The Caddyfile is remarkably simple compared to equivalent Nginx configs.\n\n"
 
-                    "Another challenge was the navigation responsiveness. With seven navigation items "
-                    "plus a theme toggle, the horizontal nav overflowed on tablet-sized screens. I solved "
-                    "this by implementing a hamburger menu that activates at 1100px, with careful attention "
-                    "to the slide-out animation and proper z-index stacking.\n\n"
+                    "## Technical Challenges Solved\n\n"
+                    "**Theme System:** CSS custom properties change based on a data-theme attribute, with "
+                    "JavaScript handling toggle and localStorage persistence. Colors needed to work across "
+                    "all themes while maintaining WCAG accessibility contrast ratios. The skill icons show "
+                    "their brand colors on hover, requiring careful CSS filter calculations.\n\n"
+
+                    "**Navigation Responsiveness:** With seven navigation items plus a theme toggle, the "
+                    "horizontal nav overflowed on tablet-sized screens. The hamburger menu activates at 1100px "
+                    "with careful attention to slide-out animation, proper z-index stacking, and body scroll "
+                    "locking when the menu is open.\n\n"
+
+                    "**Markdown Rendering:** Project descriptions support full markdown with syntax highlighting "
+                    "for code blocks. This required a custom template filter using Python-Markdown with "
+                    "extensions for fenced code blocks, tables, and table of contents. Comprehensive CSS "
+                    "ensures markdown content looks consistent with the site's design.\n\n"
+
+                    "**Section Ordering:** The admin interface allows drag-and-drop reordering of homepage "
+                    "sections. This required a custom Django widget with JavaScript for the sortable interface "
+                    "and JSON field storage for the order configuration.\n\n"
 
                     "## Lessons Learned\n\n"
-                    "Building this portfolio reinforced the value of planning data models before writing "
-                    "any frontend code. The time invested in designing flexible models paid dividends when "
-                    "I could add new sections or modify content without template changes.\n\n"
+                    "Planning data models before writing frontend code paid dividends throughout the project. "
+                    "The time invested in designing flexible models meant adding new sections or modifying "
+                    "content required no template changes—just database updates through the admin.\n\n"
 
-                    "I also gained deeper appreciation for CSS architecture. Starting with a solid foundation "
-                    "of custom properties and consistent naming conventions made the responsive design work "
-                    "much smoother than previous projects where I'd added styles ad-hoc."
+                    "CSS architecture matters enormously. Starting with solid custom properties and consistent "
+                    "naming conventions made the responsive design and theming work much smoother than previous "
+                    "projects where I added styles ad-hoc. The BEM-ish naming pattern kept specificity manageable.\n\n"
+
+                    "Choosing SQLite over PostgreSQL was the right call for this scale. No separate database "
+                    "server to manage, backups are just file copies, and performance is more than adequate "
+                    "for a portfolio site with low traffic."
                 ),
                 'skills': ['Django', 'Docker', 'AWS', 'SQLite', 'Python', 'HTML', 'CSS', 'Caddy', 'Gunicorn', 'Cloudflare'],
                 'custom_technologies': '',
                 'live_url': 'https://polarispall.com',
                 'github_url': 'https://github.com/polarispall/portfolio',
                 'is_featured': True,
-                'order': 1,
+                'order': 2,
             },
             {
                 'title': 'Game Development',
                 'slug': 'game-development',
-                'short_description': '2D platformer games with procedural generation',
+                'short_description': '2D and 3D games in Unity with custom art, procedural generation, and component-based architecture',
                 'description': (
-                    "## Introduction to Game Development\n\n"
-                    "My journey into game development began with a simple question: how do games actually "
-                    "work under the hood? This curiosity led me down a fascinating path of learning Unity, "
-                    "C#, and the fundamental principles that make interactive entertainment possible. What "
-                    "started as experimentation evolved into building complete 2D platformer games with "
-                    "procedurally generated levels.\n\n"
+                    "## The Game Development Journey\n\n"
+                    "Multiple 2D and 3D games built in Unity, exploring everything from hand-crafted level "
+                    "design to procedural generation. What started as curiosity about how games work under "
+                    "the hood became a deep dive into game feel, systems design, and the intersection of "
+                    "code and creativity.\n\n"
 
-                    "## Why Unity and C#?\n\n"
-                    "I chose Unity for several reasons. Its component-based architecture teaches good "
-                    "software design patterns that transfer to other domains. The visual editor provides "
-                    "immediate feedback while still requiring real programming for anything beyond basic "
-                    "prototypes. C# is a mature, statically-typed language that enforces discipline while "
-                    "offering modern features like LINQ, async/await, and powerful generics.\n\n"
+                    "![2D RPG in Unity](/media/projects/gallery/game-unity.png)\n\n"
 
-                    "The Unity ecosystem also offers extensive documentation and a massive community. When "
-                    "I encountered challenges - and there were many - I could usually find solutions through "
-                    "official docs, forum posts, or tutorial videos.\n\n"
+                    "The main project is a 2D top-down RPG—tile-based world, NPC interactions, dialogue, "
+                    "exploration between areas. But I've also built platformers, experimented with 3D, and "
+                    "explored procedural content generation.\n\n"
 
-                    "## Core Game Systems\n\n"
-                    "### Physics and Movement\n"
-                    "The foundation of any platformer is responsive movement. I implemented a custom "
-                    "character controller that provides tight, predictable controls. This involved:\n\n"
-                    "- Ground detection using raycasts to determine when the player can jump\n"
-                    "- Variable jump height based on button hold duration\n"
-                    "- Coyote time (brief window to jump after leaving a platform)\n"
-                    "- Jump buffering (registering jump input slightly before landing)\n"
-                    "- Smooth acceleration and deceleration curves\n\n"
+                    "## Procedural Generation\n\n"
+                    "One of the more interesting areas: creating content algorithmically rather than by hand. "
+                    "The foundation is noise generation—Perlin noise, simplex noise—functions that produce "
+                    "smooth, natural-looking randomness. Sample the noise at each point in a grid, and you "
+                    "get terrain that looks organic rather than chaotic.\n\n"
 
-                    "Getting movement to feel right required extensive iteration. Small changes to values "
-                    "like gravity scale, jump force, or acceleration rates dramatically affect how the "
-                    "game feels to play.\n\n"
+                    "The challenge isn't generating random content—it's generating *playable* content. Pure "
+                    "noise creates unusable garbage. The real work is constraining the randomness: ensuring "
+                    "paths exist, difficulty ramps appropriately, and the result is actually fun. This meant "
+                    "building validation systems, playtesting parameters, and iterating until procedural "
+                    "levels felt designed rather than random.\n\n"
 
-                    "### Collision Detection\n"
-                    "Unity's built-in physics handles basic collision, but platformers need precise control. "
-                    "I implemented custom collision resolution for specific scenarios:\n\n"
-                    "- One-way platforms the player can jump through from below\n"
-                    "- Slope handling to prevent sliding and maintain consistent speed\n"
-                    "- Corner correction to prevent frustrating near-misses on jumps\n"
-                    "- Trigger zones for hazards, collectibles, and level transitions\n\n"
+                    "## Game Architecture\n\n"
+                    "Games are built using component-based architecture—Unity's core pattern. Rather than "
+                    "monolithic scripts, functionality separates into discrete components: player controller, "
+                    "enemy AI, collision handler, dialogue system, inventory. Compose them together to create "
+                    "complex behaviors. Learning when to use composition vs. inheritance was key—inheritance "
+                    "hierarchies become rigid, composition stays flexible.\n\n"
 
-                    "### State Management\n"
-                    "Player behavior is managed through a finite state machine. States include Idle, "
-                    "Running, Jumping, Falling, WallSliding, and Dashing. Each state defines allowed "
-                    "transitions and handles input differently. This architecture prevents impossible "
-                    "states (like jumping while already jumping) and makes adding new abilities straightforward.\n\n"
+                    "![Dialogue and NPC interaction](/media/projects/gallery/game-dialogue.png)\n\n"
 
-                    "## Procedural Level Generation\n\n"
-                    "The most technically challenging aspect was procedural generation. Rather than "
-                    "hand-designing every level, the game creates unique layouts each playthrough.\n\n"
+                    "State machines manage game states (menu, playing, paused) and entity states (idle, "
+                    "moving, attacking, interacting). Each state defines allowed transitions, input handling, "
+                    "and update logic. This prevents impossible states and makes adding new behaviors "
+                    "straightforward—just add a new state and define its transitions.\n\n"
 
-                    "### The Algorithm\n"
-                    "I implemented a chunk-based system where levels are composed of pre-designed room "
-                    "templates connected procedurally. The algorithm:\n\n"
-                    "1. Starts with an entrance chunk\n"
-                    "2. Selects compatible chunks based on exit/entrance points\n"
-                    "3. Validates that the path remains completable\n"
-                    "4. Places enemies and collectibles based on difficulty curves\n"
-                    "5. Ensures the exit is reachable through pathfinding validation\n\n"
+                    "## Art & Animation\n\n"
+                    "Custom art created in Aseprite for pixel art and Moho for more complex animation. "
+                    "Tiles for terrain, sprites for characters and objects, animations frame by frame.\n\n"
 
-                    "### Balancing Randomness\n"
-                    "Pure randomness creates frustrating or boring levels. I implemented constraints:\n"
-                    "- Difficulty ramping (easier chunks early, harder chunks later)\n"
-                    "- Guaranteed safe zones after challenging sections\n"
-                    "- Minimum and maximum distances between checkpoints\n"
-                    "- Seed-based generation for reproducible levels\n\n"
+                    "![Creating assets in Aseprite](/media/projects/gallery/game-aseprite.png)\n\n"
 
-                    "## Animation and Visual Polish\n\n"
-                    "### Sprite Animation\n"
-                    "I created sprite sheets for all character states and implemented Unity's Animator "
-                    "system with blend trees for smooth transitions. Animation events trigger sound "
-                    "effects and particle systems at precise moments (footstep sounds, dust clouds on "
-                    "landing, etc.).\n\n"
+                    "The workflow: design, block in colors, refine, export as sprite sheet. Unity imports "
+                    "and slices into individual sprites. Animations are sequences played in order—walk "
+                    "cycles, idle states, reactions. Unity's Animator state machine connects animations "
+                    "to game states.\n\n"
 
-                    "### Juice and Game Feel\n"
-                    "Making a game feel satisfying requires attention to small details:\n"
-                    "- Screen shake on impacts (with configurable intensity and duration)\n"
-                    "- Hit pause (brief freeze frames on significant events)\n"
-                    "- Particle effects for movement, damage, and collectibles\n"
-                    "- Squash and stretch on the player sprite\n"
-                    "- Camera smoothing with look-ahead in the movement direction\n\n"
+                    "Understanding the relationship between art and gameplay matters:\n"
+                    "- Sprite size affects hitbox design\n"
+                    "- Animation frames communicate state to players\n"
+                    "- Visual clarity impacts playability\n"
+                    "- Color palettes establish mood and readability\n\n"
 
-                    "## Audio Implementation\n\n"
-                    "Sound design significantly impacts game feel. I implemented an audio manager that "
-                    "handles:\n"
-                    "- Spatial audio for environmental sounds\n"
-                    "- Music layers that change based on game state\n"
-                    "- Sound pooling to prevent audio source exhaustion\n"
-                    "- Volume mixing and audio ducking during important events\n\n"
+                    "## 2D vs 3D\n\n"
+                    "**2D games** taught foundational concepts: tile-based worlds, camera systems, sprite "
+                    "layering and sorting, simple physics. Problems are easier to visualize and debug.\n\n"
 
-                    "## Performance Optimization\n\n"
-                    "Games require consistent frame rates. I learned to profile and optimize:\n"
-                    "- Object pooling for frequently spawned objects (bullets, particles, enemies)\n"
-                    "- Hybrid culling strategies for off-screen entities\n"
-                    "- Texture atlasing to reduce draw calls\n"
-                    "- Efficient collision layers to minimize physics calculations\n"
-                    "- Coroutines and async patterns to spread heavy operations across frames\n\n"
+                    "**3D games** introduced spatial complexity that 2D never touches. Blender for modeling—"
+                    "vertices, faces, UV unwrapping, rigging. In Unity: 3D camera control (third-person "
+                    "cameras are harder than they look), perspective rendering, Z-fighting issues, more "
+                    "expensive physics, lighting affecting gameplay readability. Learning to think in three "
+                    "dimensions required a mental shift.\n\n"
 
-                    "## What I Learned\n\n"
-                    "Game development taught me skills that extend beyond games:\n\n"
-                    "- **State machines** are useful anywhere you have complex object behavior\n"
-                    "- **Component architecture** promotes reusable, testable code\n"
-                    "- **Performance profiling** is essential for any application\n"
-                    "- **User experience** details matter enormously (the 'feel' of interactions)\n"
-                    "- **Iteration** is key - the first implementation is rarely the best\n\n"
+                    "## Physics & Game Feel\n\n"
+                    "Unity's physics provides the foundation, but good game feel requires custom tuning. "
+                    "Player movement needs to feel responsive—not floaty, not sluggish. This means tweaking "
+                    "gravity, acceleration curves, input buffering. Small changes dramatically affect how "
+                    "the game feels.\n\n"
 
-                    "Most importantly, I learned that making something fun requires constant playtesting "
-                    "and willingness to throw away code that isn't working, no matter how clever it seemed."
+                    "Going beyond \"does it work\" to \"does it feel good\": screen shake on impacts, particle "
+                    "effects on actions, camera smoothing, sound design for feedback. These polish elements "
+                    "transform functional games into enjoyable ones.\n\n"
+
+                    "Game development is different from web development. Everything runs in a loop, every "
+                    "frame. Performance matters constantly—60fps means 16ms for everything. The intersection "
+                    "of code and creativity is what makes it interesting."
                 ),
-                'skills': ['C#', 'Unity'],
-                'custom_technologies': 'Game Physics, Procedural Generation',
-                'is_featured': True,
-                'order': 2,
-            },
-            {
-                'title': 'Homelab Infrastructure',
-                'slug': 'homelab-infrastructure',
-                'short_description': 'Personal server infrastructure with containerized applications',
-                'description': (
-                    "## The Homelab Journey\n\n"
-                    "What started as a spare computer running a Minecraft server has evolved into a "
-                    "comprehensive home infrastructure project. My homelab serves as both a learning "
-                    "environment and a practical solution for self-hosting services I use daily. This "
-                    "project encompasses hardware selection, operating system configuration, networking, "
-                    "containerization, and ongoing maintenance.\n\n"
-
-                    "## Hardware Evolution\n\n"
-                    "The current setup runs on repurposed enterprise hardware - specifically a Dell "
-                    "OptiPlex that offers excellent performance-per-dollar. Key specifications:\n"
-                    "- Intel Core i5 processor (enough for my workloads)\n"
-                    "- 32GB RAM (containers are memory-hungry)\n"
-                    "- 500GB NVMe SSD for the OS and containers\n"
-                    "- 4TB HDD for media and backups\n"
-                    "- Gigabit ethernet connection\n\n"
-
-                    "I chose this approach over cloud hosting for several reasons: no recurring costs "
-                    "beyond electricity, complete control over the hardware, no bandwidth limitations, "
-                    "and the educational value of managing physical infrastructure.\n\n"
-
-                    "## Operating System: Debian Linux\n\n"
-                    "After experimenting with Ubuntu Server, Proxmox, and even TrueNAS, I settled on "
-                    "Debian Stable for its rock-solid reliability. The system runs headless (no GUI) "
-                    "with SSH as the primary management interface.\n\n"
-
-                    "Key system configurations:\n"
-                    "- Unattended security updates via unattended-upgrades\n"
-                    "- SSH hardened with key-only authentication\n"
-                    "- fail2ban protecting against brute force attempts\n"
-                    "- Custom MOTD showing system status on login\n"
-                    "- Zsh with Oh My Zsh for a better shell experience\n\n"
-
-                    "## Container Architecture\n\n"
-                    "Everything runs in Docker containers orchestrated by Docker Compose. This approach "
-                    "provides isolation, reproducibility, and easy updates. My compose file defines "
-                    "the entire application stack declaratively.\n\n"
-
-                    "### Current Services\n\n"
-                    "**Media & Entertainment:**\n"
-                    "- Jellyfin for media streaming (self-hosted Netflix alternative)\n"
-                    "- Navidrome for music streaming\n"
-                    "- Calibre-web for ebook management\n\n"
-
-                    "**Productivity:**\n"
-                    "- Nextcloud for file sync and sharing\n"
-                    "- Vaultwarden (Bitwarden-compatible password manager)\n"
-                    "- Bookstack for documentation and notes\n\n"
-
-                    "**Infrastructure:**\n"
-                    "- Nginx Proxy Manager for reverse proxy and SSL\n"
-                    "- Portainer for container management GUI\n"
-                    "- Watchtower for automatic container updates\n"
-                    "- Uptime Kuma for service monitoring\n\n"
-
-                    "**Development:**\n"
-                    "- Gitea for self-hosted Git repositories\n"
-                    "- Code-server (VS Code in the browser)\n\n"
-
-                    "## Networking Configuration\n\n"
-                    "### Internal Network\n"
-                    "The homelab exists on a dedicated VLAN, isolated from IoT devices and guest "
-                    "networks. This provides security boundaries while allowing controlled access.\n\n"
-
-                    "### Reverse Proxy Setup\n"
-                    "Nginx Proxy Manager handles all incoming requests:\n"
-                    "- Routes requests to appropriate containers based on subdomain\n"
-                    "- Terminates SSL/TLS with Let's Encrypt certificates\n"
-                    "- Provides access control for sensitive services\n"
-                    "- Enables WebSocket proxying for real-time applications\n\n"
-
-                    "### DNS Configuration\n"
-                    "I use a combination of:\n"
-                    "- Public DNS (Cloudflare) for externally-accessible services\n"
-                    "- Pi-hole for internal DNS and ad-blocking\n"
-                    "- Local DNS entries for .local domain resolution\n\n"
-
-                    "## Security Measures\n\n"
-                    "Running services accessible from the internet requires security consciousness:\n\n"
-                    "**Network Security:**\n"
-                    "- UFW firewall allowing only necessary ports\n"
-                    "- Cloudflare proxy hiding the actual IP\n"
-                    "- VPN (WireGuard) for accessing internal-only services remotely\n"
-                    "- Fail2ban monitoring logs for suspicious activity\n\n"
-
-                    "**Application Security:**\n"
-                    "- Strong, unique passwords via Vaultwarden\n"
-                    "- Two-factor authentication where supported\n"
-                    "- Regular security updates via Watchtower\n"
-                    "- Principle of least privilege for container permissions\n\n"
-
-                    "## Backup Strategy\n\n"
-                    "Data loss would be catastrophic, so I implemented a 3-2-1 backup strategy:\n"
-                    "- 3 copies of important data\n"
-                    "- 2 different storage media\n"
-                    "- 1 offsite backup\n\n"
-
-                    "Implementation:\n"
-                    "- Automated daily backups via cron scripts\n"
-                    "- Restic for encrypted, deduplicated backups\n"
-                    "- Local backup to the secondary HDD\n"
-                    "- Remote backup to Backblaze B2 (cheap cloud storage)\n"
-                    "- Database dumps before container backups\n\n"
-
-                    "## Monitoring and Maintenance\n\n"
-                    "### Monitoring Stack\n"
-                    "- Uptime Kuma checks all services every minute\n"
-                    "- Notifications via Discord webhook on failures\n"
-                    "- Grafana dashboards for system metrics (CPU, RAM, disk, network)\n"
-                    "- Prometheus collecting metrics from node_exporter\n\n"
-
-                    "### Regular Maintenance\n"
-                    "- Weekly review of logs and alerts\n"
-                    "- Monthly security audit of exposed services\n"
-                    "- Quarterly hardware inspection and cleaning\n"
-                    "- Annual review of backup restoration procedures\n\n"
-
-                    "## Lessons Learned\n\n"
-                    "Running a homelab has taught me invaluable lessons:\n\n"
-                    "**Technical Skills:**\n"
-                    "- Linux system administration at a deeper level\n"
-                    "- Networking concepts (DNS, SSL, reverse proxies, VLANs)\n"
-                    "- Docker and container orchestration\n"
-                    "- Backup strategies and disaster recovery\n\n"
-
-                    "**Soft Skills:**\n"
-                    "- Documentation is essential (future me forgets everything)\n"
-                    "- Start simple, add complexity gradually\n"
-                    "- Automation saves time in the long run\n"
-                    "- Security is not optional\n\n"
-
-                    "The homelab continues to evolve as I discover new services to self-host and "
-                    "better ways to manage the infrastructure. It's become an essential part of both "
-                    "my learning journey and daily digital life."
-                ),
-                'skills': ['Linux', 'Docker', 'Nginx', 'Bash', 'SQLite'],
-                'custom_technologies': 'systemd, ufw, cron',
+                'skills': ['C#', 'Unity', 'Blender'],
+                'custom_technologies': 'Aseprite, Moho, Procedural Generation, State Machines',
                 'is_featured': True,
                 'order': 3,
             },
             {
-                'title': 'My Linux Journey',
-                'slug': 'linux-journey',
-                'short_description': 'From Windows power user to Linux enthusiast - a complete transition story',
+                'title': 'Windows Configuration for Powerusers',
+                'slug': 'windows-configuration',
+                'short_description': 'Custom keybind system and automation layer built with AutoHotkey, featuring Capslock modifier strategy and global mark mode for keyboard-driven workflows',
                 'description': (
-                    "## The Beginning: Why Linux?\n\n"
-                    "My journey to Linux began not with ideology, but with frustration. Windows updates "
-                    "interrupting work, telemetry concerns, and the inability to truly customize my "
-                    "computing environment pushed me to explore alternatives. What I found was far more "
-                    "than an operating system - it was a philosophy of computing that aligned with how "
-                    "I wanted to interact with technology.\n\n"
+                    "## The Problem: Default Windows Friction\n\n"
+                    "Before fully transitioning to Linux, I spent years as a Windows poweruser hitting constant "
+                    "friction with the default OS experience. The default tools are functional but mediocre. "
+                    "Window management is clunky, file exploration is limited, and keyboard-driven workflows "
+                    "are an afterthought.\n\n"
 
-                    "## First Steps: Ubuntu and the Learning Curve\n\n"
-                    "Like many newcomers, I started with Ubuntu. The initial experience was humbling. "
-                    "Simple tasks I'd done for years on Windows suddenly required research. Installing "
-                    "software, managing files, configuring hardware - everything had a learning curve.\n\n"
+                    "![Windows Desktop Setup](/media/projects/gallery/windows-desktop.png)\n\n"
 
-                    "The terminal intimidated me at first. Coming from a GUI-centric Windows experience, "
-                    "typing commands felt archaic. But gradually, I began to appreciate the power and "
-                    "precision of the command line. Tasks that required multiple clicks and window "
-                    "navigations in Windows became single commands.\n\n"
+                    "Discovered that productivity gains come not from fighting the system, but from building a "
+                    "custom layer on top of it. Windows becomes a different operating system when you replace "
+                    "the defaults with best-in-class tools and tie everything together with automation.\n\n"
 
-                    "### Early Challenges\n"
-                    "- Graphics drivers were a constant battle (Nvidia on Linux was notoriously painful)\n"
-                    "- Gaming seemed impossible (this was before Proton matured)\n"
-                    "- Some hardware simply didn't work (webcams, specific printers)\n"
-                    "- Professional software I relied on had no Linux versions\n\n"
+                    "## The Tools Stack\n\n"
+                    "Every default Windows tool can be replaced with something better. Here's the stack I "
+                    "assembled over years of experimentation:\n\n"
 
-                    "## Distribution Hopping: Finding My Fit\n\n"
-                    "The Linux world offers hundreds of distributions, each with different philosophies. "
-                    "I tried many:\n\n"
+                    "![PowerToys FancyZones](/media/projects/gallery/windows-powertoys.png)\n\n"
 
-                    "**Ubuntu/Linux Mint:** Great for beginners, but felt bloated. Snap packages caused "
-                    "frustrations with startup times and theming issues.\n\n"
+                    "**PowerToys** provided system-level utilities that Microsoft should have shipped:\n"
+                    "- FancyZones for window snapping (far more flexible than built-in Snap)\n"
+                    "- Text Extractor for OCR—select any region and extract text\n"
+                    "- PowerRename for batch renaming with regex support\n"
+                    "- Color Picker accessible anywhere with a hotkey\n"
+                    "- File Locksmith to find what's locking a file\n"
+                    "- Always On Top to pin windows above others\n\n"
 
-                    "**Fedora:** Cutting-edge software, excellent defaults. Taught me about SELinux and "
-                    "introduced me to GNOME in its pure form.\n\n"
+                    "**Alt-Drag** enabled moving and resizing windows from anywhere by holding Alt—a tiny tweak "
+                    "with massive impact. No more hunting for title bars or resize handles. Just Alt+drag to "
+                    "move, Alt+right-drag to resize. This alone saves hundreds of mouse movements daily.\n\n"
 
-                    "**Manjaro/Arch:** Rolling release model appealed to me. Access to the AUR (Arch User "
-                    "Repository) was game-changing. Eventually moved to pure Arch for the learning experience.\n\n"
+                    "**Flow Launcher** became the application launcher and command runner, replacing Windows "
+                    "Search and the Run dialog with something actually fast and extensible. Similar to Alfred "
+                    "on macOS or rofi on Linux. Launch apps, search files, run calculations, convert units, "
+                    "search the web—all from one hotkey.\n\n"
 
-                    "**Debian:** Rock-solid stability. Became my choice for servers after experiencing "
-                    "the chaos of running bleeding-edge software on production systems.\n\n"
+                    "![Flow Launcher](/media/projects/gallery/windows-flow.png)\n\n"
 
-                    "Currently, I run Arch Linux on my desktop (I use Arch btw) and Debian on servers. "
-                    "This combination gives me the latest software for daily use and stability where "
-                    "it matters most.\n\n"
+                    "**Directory Opus** replaced Windows Explorer entirely. A professional file manager with:\n"
+                    "- Dual-pane view for easy file operations between locations\n"
+                    "- Customizable columns and views per folder\n"
+                    "- Saved search queries and folder presets\n"
+                    "- Inline preview for images, documents, code\n"
+                    "- Scripting support for custom commands\n"
+                    "- Tabbed interface for multiple locations\n\n"
 
-                    "## The Desktop Environment Quest\n\n"
-                    "Linux offers unprecedented desktop customization. I've extensively used:\n\n"
+                    "**Windows Terminal** replaced the ancient cmd.exe and basic PowerShell window. Proper "
+                    "tabs, GPU-accelerated rendering, customizable themes, and support for multiple shells "
+                    "(PowerShell, WSL, Git Bash) in one interface.\n\n"
 
-                    "**GNOME:** Clean, modern, opinionated. Works great out of the box but fights you "
-                    "on customization. The workflow is unique but efficient once learned.\n\n"
+                    "## The AutoHotkey Revelation\n\n"
+                    "These tools were good, but AutoHotkey was transformative. It's a scripting language that "
+                    "remaps keys and creates custom hotkeys at the OS level—no privileged access required, "
+                    "running entirely in userspace.\n\n"
 
-                    "**KDE Plasma:** The most customizable full desktop. Sometimes overwhelming in options. "
-                    "Resource usage has improved dramatically in recent versions.\n\n"
+                    "![AutoHotkey Script](/media/projects/gallery/windows-ahk.png)\n\n"
 
-                    "**i3/Sway (Tiling WMs):** Completely changed how I use computers. Mouse becomes "
-                    "optional. Keyboard-driven workflows are incredibly efficient for development.\n\n"
+                    "Started with simple remaps:\n"
+                    "- Capslock to Escape (essential for Vim users)\n"
+                    "- Capslock held becomes Control\n"
+                    "- Right Alt to Backspace for easier reach\n\n"
 
-                    "**Hyprland:** My current choice. A modern Wayland compositor with beautiful animations "
-                    "and powerful tiling. Configuring it taught me about display protocols, GPU rendering, "
-                    "and the Wayland ecosystem.\n\n"
+                    "Then realized the real power: Capslock as a completely custom modifier layer.\n\n"
 
-                    "## Terminal Mastery\n\n"
-                    "The terminal went from intimidating to indispensable. Key developments:\n\n"
+                    "## The Capslock Modifier Strategy\n\n"
+                    "Capslock is a prime piece of keyboard real estate—right where your pinky rests—but its "
+                    "default function (toggle caps lock) is nearly useless. Made the strategic decision to "
+                    "repurpose it entirely.\n\n"
 
-                    "**Shell Evolution:**\n"
-                    "Started with Bash, moved to Zsh with Oh My Zsh for plugins and themes. Now use "
-                    "Fish for its intelligent autosuggestions and user-friendly defaults. Each transition "
-                    "taught me more about how shells work.\n\n"
+                    "Disabled the native Capslock function completely and remapped it as a custom modifier key. "
+                    "This essentially created a new tier of keybinds with zero conflicts—nothing in any "
+                    "application uses Capslock as a modifier.\n\n"
 
-                    "**Essential Tools I Use Daily:**\n"
-                    "- `ripgrep` (rg) - faster grep, respects .gitignore\n"
-                    "- `fd` - user-friendly find alternative\n"
-                    "- `bat` - cat with syntax highlighting\n"
-                    "- `exa`/`eza` - modern ls replacement\n"
-                    "- `fzf` - fuzzy finder for everything\n"
-                    "- `tmux` - terminal multiplexer for session management\n"
-                    "- `neovim` - my text editor of choice after the Vim learning curve\n\n"
+                    "**Navigation Layer (Emacs-inspired):**\n"
+                    "- `Capslock+F` → Forward (Right arrow)\n"
+                    "- `Capslock+B` → Backward (Left arrow)\n"
+                    "- `Capslock+N` → Next line (Down arrow)\n"
+                    "- `Capslock+P` → Previous line (Up arrow)\n"
+                    "- `Capslock+A` → Beginning of line (Home)\n"
+                    "- `Capslock+E` → End of line (End)\n"
+                    "- `Capslock+Alt+F` → Forward word (Ctrl+Right)\n"
+                    "- `Capslock+Alt+B` → Backward word (Ctrl+Left)\n\n"
 
-                    "**Scripting:**\n"
-                    "Bash scripting became second nature. Automating repetitive tasks, creating custom "
-                    "tools, and gluing programs together. The Unix philosophy of small, composable tools "
-                    "clicked into place.\n\n"
+                    "**Editing Layer:**\n"
+                    "- `Capslock+D` → Delete forward (Delete key)\n"
+                    "- `Capslock+H` → Delete backward (Backspace)\n"
+                    "- `Capslock+K` → Kill to end of line\n"
+                    "- `Capslock+U` → Kill to beginning of line\n"
+                    "- `Capslock+W` → Kill word backward\n\n"
 
-                    "## System Administration Skills\n\n"
-                    "Running Linux as a daily driver forced me to learn administration:\n\n"
+                    "This created navigation semantics that feel like being inside a text editor everywhere—"
+                    "browsers, Slack, GitHub forms, email, terminals. The hands never leave the home row.\n\n"
 
-                    "**Package Management:**\n"
-                    "Understanding apt, dnf, pacman, and the AUR. Learning to resolve dependency conflicts, "
-                    "manage repositories, and even build packages from source.\n\n"
+                    "## Mark Mode: Selection Without the Mouse\n\n"
+                    "Implemented a global mark mode inspired by Emacs. In Emacs, you set a mark, move the "
+                    "cursor, and the region between mark and cursor becomes selected. Replicated this system-wide.\n\n"
 
-                    "**Service Management:**\n"
-                    "Systemd became familiar territory. Writing unit files, managing services, analyzing "
-                    "boot times, and debugging service failures.\n\n"
+                    "![Mark Mode Demo](/media/projects/gallery/windows-mark.png)\n\n"
 
-                    "**Filesystem Knowledge:**\n"
-                    "Understanding the Linux filesystem hierarchy, mount points, permissions (including "
-                    "the intricacies of user/group/other and special bits like setuid).\n\n"
+                    "`Capslock+Space` toggles mark mode with visual feedback (a small notification). Once "
+                    "activated, any movement command extends the selection instead of moving the cursor.\n\n"
 
-                    "**Networking:**\n"
-                    "Configuring network interfaces, understanding NetworkManager vs systemd-networkd, "
-                    "setting up firewalls, SSH configuration and key management.\n\n"
+                    "**Example workflow - select three words:**\n"
+                    "1. `Capslock+Space` (enable mark mode)\n"
+                    "2. `Capslock+Alt+F` (forward one word, now selected)\n"
+                    "3. `Capslock+Alt+F` (forward another word, selection extends)\n"
+                    "4. `Capslock+Alt+F` (forward third word, selection extends)\n"
+                    "5. `Ctrl+C` (copy) or `Capslock+W` (cut)\n\n"
 
-                    "## Gaming on Linux\n\n"
-                    "This deserves special mention because it was my biggest concern. The situation has "
-                    "transformed dramatically:\n\n"
+                    "Works in every text field on the system—browsers, editors, chat apps, everywhere. "
+                    "This alone eliminated a massive source of context-switching cost. No more reaching for "
+                    "the mouse to select text.\n\n"
 
-                    "**Steam and Proton:**\n"
-                    "Valve's Proton compatibility layer runs most Windows games flawlessly. The Steam Deck "
-                    "accelerated Linux gaming development. Games that seemed impossible to run now work "
-                    "out of the box.\n\n"
+                    "## Application-Specific Hotkeys\n\n"
+                    "AutoHotkey can detect which application is focused and apply different keybinds. Created "
+                    "per-application customizations:\n\n"
+                    "- Browser: hotkeys for tab management, history navigation\n"
+                    "- VS Code: additional keybinds that don't conflict with built-in ones\n"
+                    "- Discord/Slack: quick navigation between servers/channels\n"
+                    "- File manager: custom commands for common operations\n\n"
 
-                    "**Native Games:**\n"
-                    "More developers release Linux versions. The indie scene especially embraces Linux.\n\n"
+                    "## The Workflow Payoff\n\n"
+                    "The cumulative effect was profound. Context-switching costs dropped dramatically:\n"
+                    "- No switching between keyboard and mouse for navigation/selection\n"
+                    "- No hunting for windows—Flow Launcher brings anything up instantly\n"
+                    "- No fumbling with window management—FancyZones + Alt-Drag handle it\n"
+                    "- No leaving the home row for arrow keys or navigation\n\n"
 
-                    "**Wine and Lutris:**\n"
-                    "For games outside Steam, Wine (and its gaming-focused derivatives) handle most cases. "
-                    "Lutris provides easy installation scripts for popular titles.\n\n"
+                    "The muscle memory built up across tools created a coherent system where the entire OS "
+                    "feels like a unified text editor. `Capslock+F` always means forward, whether in Chrome, "
+                    "VS Code, Slack, or Notepad. Same language everywhere.\n\n"
 
-                    "I now game exclusively on Linux with minimal friction.\n\n"
-
-                    "## The Philosophy Shift\n\n"
-                    "Beyond technical skills, Linux changed how I think about computing:\n\n"
-
-                    "**Ownership:** I control my computer, not the operating system vendor. No forced "
-                    "updates, no telemetry I can't disable, no artificial limitations.\n\n"
-
-                    "**Transparency:** Open source means I can inspect how things work. When something "
-                    "breaks, I can often understand why and fix it myself.\n\n"
-
-                    "**Community:** The Linux community, despite stereotypes, is incredibly helpful. "
-                    "Forums, wikis (especially the Arch Wiki), and IRC/Matrix channels provide support "
-                    "that commercial software can't match.\n\n"
-
-                    "**Efficiency:** My workflow is faster and more keyboard-driven. Tiling window "
-                    "managers, terminal-based tools, and scripting automation save significant time.\n\n"
-
-                    "## Current Setup\n\n"
-                    "My daily driver configuration:\n"
-                    "- **OS:** Arch Linux (btw)\n"
-                    "- **WM:** Hyprland (Wayland compositor)\n"
-                    "- **Terminal:** Kitty with Fish shell\n"
-                    "- **Editor:** Neovim with extensive configuration\n"
-                    "- **Browser:** Firefox (Librewolf for privacy)\n"
-                    "- **File Manager:** ranger (terminal) + Thunar (GUI when needed)\n\n"
-
-                    "## Advice for Beginners\n\n"
-                    "If you're considering the switch:\n\n"
-                    "1. **Start with a user-friendly distro** - Linux Mint or Fedora are excellent choices\n"
-                    "2. **Dual boot first** - Keep Windows as a safety net\n"
-                    "3. **Learn the terminal gradually** - Don't force it, let curiosity guide you\n"
-                    "4. **Embrace the learning process** - Frustration is part of growth\n"
-                    "5. **Join communities** - Reddit, Discord, forums are incredibly helpful\n"
-                    "6. **Document your setup** - Future you will thank present you\n\n"
-
-                    "The Linux journey never really ends. There's always more to learn, configure, and "
-                    "optimize. And that's exactly what makes it rewarding."
+                    "This project demonstrated the value of systems thinking—seeing the computer as a toolkit "
+                    "where individual tools can be unified into a coherent whole. The willingness to invest "
+                    "in automation pays dividends daily."
                 ),
-                'skills': ['Linux', 'Bash', 'Docker', 'Nginx'],
-                'custom_technologies': 'Arch Linux, Hyprland, Neovim, systemd',
+                'skills': ['Bash'],
+                'custom_technologies': 'AutoHotkey, PowerToys, Flow Launcher, Directory Opus',
                 'is_featured': True,
                 'order': 4,
             },
             {
-                'title': 'Configuring Windows',
-                'slug': 'configuring-windows',
-                'short_description': 'Optimizing Windows for development and power users',
+                'title': 'My Neovim Workflow - Git & IDE',
+                'slug': 'neovim-workflow',
+                'short_description': 'Full development workflow in Neovim—Git with Neogit/Diffview/Gitsigns, file navigation with Telescope/Yazi, and LSP-powered editing',
                 'description': (
-                    "## Why This Guide Exists\n\n"
-                    "Despite my preference for Linux, Windows remains necessary for certain tasks - "
-                    "specific software requirements, gaming compatibility, or professional environments "
-                    "that mandate it. Over years of use, I've developed a comprehensive approach to "
-                    "configuring Windows that minimizes frustrations while maximizing productivity.\n\n"
+                    "## The Approach\n\n"
+                    "I don't believe everything must live in one tool. If a dedicated app does something "
+                    "better, I'll use it. But bringing Git and navigation into Neovim isn't about purity—"
+                    "it's practical efficiency. The linkage between editing, version control, and file "
+                    "navigation should be immediate. Context-switching costs time.\n\n"
 
-                    "This isn't about making Windows into Linux (though WSL helps). It's about working "
-                    "with Windows effectively while addressing its common pain points.\n\n"
+                    "## Git: The Core of the Workflow\n\n"
+                    "Git integration is where this setup really shines.\n\n"
 
-                    "## Initial Setup: The First Hour\n\n"
-                    "A fresh Windows installation requires immediate attention to several areas:\n\n"
+                    "**Gitsigns** runs constantly, showing changes in the gutter. But the real power: "
+                    "stage and unstage individual *lines*. Not files, not hunks—lines. Changed three things "
+                    "but only one belongs in this commit? Stage just that line. Inline git blame shows who "
+                    "wrote what and when. Navigate between changes with `]c` and `[c`.\n\n"
 
-                    "### Privacy and Telemetry\n"
-                    "Windows 10/11 collects extensive telemetry by default. During OOBE (Out-of-Box "
-                    "Experience), decline all optional data collection. Post-installation:\n\n"
-                    "- Settings → Privacy & Security: Review every category\n"
-                    "- Disable advertising ID, activity history, and tailored experiences\n"
-                    "- Limit diagnostic data to 'Required' only\n"
-                    "- Disable 'Improve inking and typing'\n"
-                    "- Review app permissions (camera, microphone, location)\n\n"
+                    "![Neogit staging interface](/media/projects/gallery/neovim-neogit.png)\n\n"
 
-                    "For thorough debloating, tools like O&O ShutUp10++ provide granular control over "
-                    "hundreds of telemetry settings. Document changes for reproducibility.\n\n"
+                    "**Neogit** provides the full staging interface—Magit-inspired. Status view with staged, "
+                    "unstaged, untracked files. Expand to see hunks. Stage/unstage with single keystrokes. "
+                    "Commit, push, pull, branch management, stash—all visual.\n\n"
 
-                    "### Removing Bloatware\n"
-                    "Fresh Windows installations include unwanted apps. PowerShell removes them:\n\n"
-                    "```powershell\n"
-                    "Get-AppxPackage *Xbox* | Remove-AppxPackage\n"
-                    "Get-AppxPackage *Zune* | Remove-AppxPackage\n"
-                    "Get-AppxPackage *bing* | Remove-AppxPackage\n"
-                    "# Continue for other unwanted packages\n"
-                    "```\n\n"
+                    "**Diffview** handles deep comparison:\n\n"
 
-                    "Be cautious - some packages have dependencies. Research before removing.\n\n"
+                    "![Diffview side-by-side](/media/projects/gallery/neovim-diffview.png)\n\n"
 
-                    "## Package Management: WinGet and Beyond\n\n"
-                    "Windows finally has a decent package manager. WinGet (built into Windows 11, "
-                    "available for Windows 10) enables command-line software installation:\n\n"
+                    "- Compare any two commits, branches, or working tree state\n"
+                    "- Side-by-side diff with syntax highlighting\n"
+                    "- File tree showing all changed files\n"
+                    "- Navigate between changes with keybinds\n\n"
 
-                    "```powershell\n"
-                    "# Install essential development tools\n"
-                    "winget install Microsoft.VisualStudioCode\n"
-                    "winget install Git.Git\n"
-                    "winget install Python.Python.3.11\n"
-                    "winget install Microsoft.WindowsTerminal\n"
-                    "```\n\n"
+                    "Reviewing a PR? Open Diffview against main and see exactly what changed across every "
+                    "file. Need to understand what a coworker's branch does before merging? Same thing. "
+                    "The merge conflict resolution view is particularly useful—three-way diff showing "
+                    "base, ours, and theirs.\n\n"
 
-                    "Export your installed packages for easy restoration:\n"
-                    "```powershell\n"
-                    "winget export -o packages.json\n"
-                    "winget import -i packages.json  # On new installation\n"
-                    "```\n\n"
+                    "## The Case for Rebase\n\n"
+                    "Most people learn one Git workflow: branch, commit, commit, commit, merge. It works. "
+                    "But it creates messy history. Every merge commit. Every \"fix typo\" and \"actually fix "
+                    "it this time\" commit preserved forever. The log becomes noise.\n\n"
 
-                    "For applications not in WinGet, Chocolatey provides broader coverage. I maintain "
-                    "a script that installs my complete software stack on fresh installations.\n\n"
+                    "**Rebase is underrated.** Interactive rebase lets you rewrite history before sharing it. "
+                    "Clean up your commits. Squash the five \"WIP\" commits into one meaningful commit. "
+                    "Reorder so the logical changes are in logical order. Edit commit messages to actually "
+                    "describe what happened.\n\n"
 
-                    "## Development Environment Setup\n\n"
-                    "### Windows Terminal\n"
-                    "The default command prompt is painful. Windows Terminal is essential:\n"
-                    "- Multiple tabs and panes\n"
-                    "- GPU-accelerated rendering\n"
-                    "- Customizable themes and fonts\n"
-                    "- Profiles for different shells (PowerShell, CMD, WSL, Git Bash)\n\n"
+                    "Why don't more people use it? The CLI interface is intimidating. `git rebase -i HEAD~5` "
+                    "opens a TODO file where you edit words like `pick` and `squash`. Easy to mess up. "
+                    "People learn to avoid it.\n\n"
 
-                    "My configuration uses a Nerd Font for icon support and a custom color scheme "
-                    "matching my Linux setup. Settings sync via JSON export.\n\n"
+                    "Neogit makes rebase visual:\n\n"
 
-                    "### WSL 2 (Windows Subsystem for Linux)\n"
-                    "WSL 2 transforms Windows development. It runs a real Linux kernel, enabling:\n"
-                    "- Native Linux tools and workflows\n"
-                    "- Docker with Linux containers\n"
-                    "- Proper filesystem performance for Linux-native projects\n"
-                    "- Access to Windows files from Linux and vice versa\n\n"
+                    "![Interactive rebase in Neogit](/media/projects/gallery/neovim-rebase.png)\n\n"
 
-                    "Setup:\n"
-                    "```powershell\n"
-                    "wsl --install -d Ubuntu\n"
-                    "# Or for Arch enthusiasts:\n"
-                    "# wsl --import Arch C:\\WSL\\Arch archlinux.tar\n"
-                    "```\n\n"
+                    "See your commits in a list. Move them up/down to reorder. Mark one as `squash` to fold "
+                    "it into the previous. Mark as `edit` to stop and amend. Mark as `drop` to remove it "
+                    "entirely. Edit messages inline. Execute with a keypress.\n\n"
 
-                    "I configure WSL with the same dotfiles as my Linux systems, maintaining consistent "
-                    "tooling across environments.\n\n"
+                    "**Rebase before merging.** Before opening a PR, rebase and clean up. Squash the debug "
+                    "commits. Make each commit a logical unit of change. Reviewers see a clear story: this "
+                    "commit adds the feature, this commit adds tests, this commit updates docs. Not twenty "
+                    "commits of stream-of-consciousness coding.\n\n"
 
-                    "### Git Configuration\n"
-                    "Git on Windows has quirks. Essential configuration:\n"
-                    "```bash\n"
-                    "git config --global core.autocrlf true  # Handle line endings\n"
-                    "git config --global credential.helper manager  # Windows credential manager\n"
-                    "git config --global init.defaultBranch main\n"
-                    "```\n\n"
+                    "**Rebase onto main.** Instead of merging main into your branch (creating a merge commit), "
+                    "rebase your branch onto main. Your commits replay on top of the latest main. Linear "
+                    "history. No merge commits cluttering the log.\n\n"
 
-                    "For WSL integration, configure Git to use Windows credentials:\n"
-                    "```bash\n"
-                    "git config --global credential.helper '/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe'\n"
-                    "```\n\n"
+                    "This isn't about dogma. Merge commits have their place. But rebase is a tool too many "
+                    "people never learn because the interface is hostile. Making it visual and integrated "
+                    "removes that barrier.\n\n"
 
-                    "## System Optimization\n\n"
-                    "### Startup Programs\n"
-                    "Windows accumulates startup programs that slow boot times. Task Manager's Startup "
-                    "tab shows impact ratings. Disable unnecessary entries. For stubborn programs, "
-                    "check Task Scheduler and Registry run keys.\n\n"
+                    "## The Full Workflow\n\n"
+                    "Here's how all these pieces actually connect in a real development session.\n\n"
 
-                    "### Virtual Memory\n"
-                    "For systems with ample RAM (32GB+), I configure a fixed pagefile size rather than "
-                    "system-managed. This prevents fragmentation and provides predictable behavior.\n\n"
+                    "### Starting Work\n\n"
+                    "I open Neovim in the project root. First thing: `<leader>ff` to Telescope into the file "
+                    "I need. Fuzzy matching means I type a few characters and it finds the file. If I don't "
+                    "remember the exact name, `<leader>fg` lets me grep for content—search for a function "
+                    "name, a string, anything. Results show in Telescope with preview. Enter to open.\n\n"
 
-                    "### Power Settings\n"
-                    "Default power plans throttle performance. For desktops:\n"
-                    "- Use 'High Performance' or create a custom plan\n"
-                    "- Disable USB selective suspend (prevents peripheral issues)\n"
-                    "- Set 'Turn off hard disk' to Never for SSDs\n\n"
+                    "If I need to explore the directory structure—maybe I'm new to the codebase or looking "
+                    "for something I can't name—`<leader>e` opens Yazi in a floating window. Full directory "
+                    "tree, preview pane showing file contents, vi-style navigation. I can browse, preview "
+                    "files without opening them, then Enter to open what I need. Yazi also handles bulk "
+                    "operations: rename, move, copy, delete. Sometimes that's faster than shell commands.\n\n"
 
-                    "### Storage Optimization\n"
-                    "- Disable hibernation if not needed (`powercfg /h off`) - reclaims RAM-sized space\n"
-                    "- Configure Storage Sense for automatic cleanup\n"
-                    "- Move default user folders to secondary drive if applicable\n"
-                    "- Disable Search indexing for development directories (massive I/O reduction)\n\n"
+                    "### Editing with LSP\n\n"
+                    "Once I'm in a file, the LSP is always running. Completions appear as I type—nvim-cmp "
+                    "pulls from multiple sources: the language server, buffer words, file paths, snippets. "
+                    "Tab to accept, Ctrl-n/Ctrl-p to navigate options. Signature help shows function "
+                    "parameters as I type them.\n\n"
 
-                    "## Keyboard and Navigation\n\n"
-                    "### Essential Shortcuts\n"
-                    "Windows has powerful built-in shortcuts often overlooked:\n"
-                    "- `Win + V`: Clipboard history (must enable in settings)\n"
-                    "- `Win + Shift + S`: Screenshot tool\n"
-                    "- `Win + .`: Emoji picker\n"
-                    "- `Ctrl + Shift + Esc`: Direct to Task Manager\n"
-                    "- `Win + Number`: Launch/switch to taskbar programs\n\n"
+                    "Errors and warnings appear inline as virtual text—I see the problem without opening "
+                    "a separate panel. `]d` jumps to the next diagnostic, `[d` to previous. Hover over "
+                    "something with `K` to see its type and documentation. `gd` goes to definition. `gr` "
+                    "shows all references across the project. `<leader>rn` renames a symbol everywhere.\n\n"
 
-                    "### PowerToys\n"
-                    "Microsoft's PowerToys fills functionality gaps:\n"
-                    "- **FancyZones**: Window management with custom layouts\n"
-                    "- **PowerToys Run**: Superior application launcher (Alt+Space)\n"
-                    "- **Keyboard Manager**: Remap keys (I swap Caps Lock to Escape)\n"
-                    "- **File Locksmith**: Find what's locking a file\n"
-                    "- **Always On Top**: Pin windows above others\n\n"
+                    "Code actions with `<leader>ca`—the LSP suggests fixes. Missing import? One keypress "
+                    "adds it. Unused variable? Remove it. The language server knows the semantics; I just "
+                    "approve the action.\n\n"
 
-                    "### AutoHotkey Scripts\n"
-                    "For custom shortcuts and text expansion, AutoHotkey is invaluable. Example scripts:\n"
-                    "- Text expansion for common phrases and code snippets\n"
-                    "- Custom window management hotkeys\n"
-                    "- Application-specific shortcuts\n\n"
+                    "Treesitter handles the syntax layer. Highlighting that understands code structure, not "
+                    "just regex patterns. Incremental selection with `<C-space>`—select the inner node, "
+                    "press again to expand to the outer node. Select a function body, then the whole "
+                    "function, then the whole class. Text objects like `af` (around function) and `if` "
+                    "(inside function) work because Treesitter understands the AST.\n\n"
 
-                    "## Security Configuration\n\n"
-                    "### Windows Security\n"
-                    "Built-in Windows Defender is sufficient for most users. Ensure:\n"
-                    "- Real-time protection enabled\n"
-                    "- Cloud-delivered protection enabled\n"
-                    "- Controlled folder access for ransomware protection\n"
-                    "- Regular definition updates\n\n"
+                    "### Tracking Changes with Git\n\n"
+                    "While I'm editing, Gitsigns shows what's changed in the gutter. Added lines get a "
+                    "green bar. Modified lines yellow. Deleted lines a red triangle. I always know what "
+                    "I've touched.\n\n"
 
-                    "### Firewall Rules\n"
-                    "Windows Firewall is capable but has a terrible interface. Use Windows Firewall "
-                    "Control (free) for easier rule management. Block unnecessary outbound connections "
-                    "for telemetry-heavy applications.\n\n"
+                    "When I finish a logical piece of work—not the whole feature, just a coherent change—"
+                    "I stage it. With Gitsigns, I can stage individual lines. `<leader>hs` stages the hunk "
+                    "under cursor. But if I changed multiple things in one hunk and only want to commit "
+                    "part of it, I visually select the lines and stage just those. This granularity matters "
+                    "for clean commits.\n\n"
 
-                    "### BitLocker\n"
-                    "Enable BitLocker for drive encryption, especially on laptops. Backup recovery "
-                    "keys to multiple locations.\n\n"
+                    "I keep working. Stage more changes as I go. The staged changes accumulate while I "
+                    "continue editing.\n\n"
 
-                    "## Maintenance Automation\n\n"
-                    "### Scheduled Tasks\n"
-                    "Automate maintenance with Task Scheduler:\n"
-                    "- Weekly disk cleanup\n"
-                    "- Monthly Windows Update check (if updates are paused)\n"
-                    "- Regular backup scripts\n\n"
+                    "### Committing\n\n"
+                    "When I'm ready to commit, `<leader>gg` opens Neogit. The status buffer shows everything: "
+                    "staged changes at the top, unstaged below, untracked files at the bottom. I can expand "
+                    "any file to see the diff. If I staged something I shouldn't have, `u` unstages it. If "
+                    "I missed something, `s` stages it.\n\n"
 
-                    "### Backup Strategy\n"
-                    "- File History for document versioning\n"
-                    "- System Image for full recovery capability\n"
-                    "- Cloud sync for critical files (OneDrive, Syncthing)\n"
-                    "- Regular export of application settings\n\n"
+                    "Press `c` to start a commit. A buffer opens for the commit message. Write the message, "
+                    "`<C-c><C-c>` to confirm. The commit happens. I can immediately `p` to push, or keep "
+                    "working.\n\n"
 
-                    "## Quality of Life Improvements\n\n"
-                    "### File Explorer Tweaks\n"
-                    "- Show file extensions (critical for security and development)\n"
-                    "- Show hidden files\n"
-                    "- Disable 'Quick Access' if preferred\n"
-                    "- Add 'Open in Terminal' context menu\n\n"
+                    "If I've made several messy commits and want to clean up before pushing, I rebase. In "
+                    "Neogit, `r` then `i` starts interactive rebase. I see my commits in a list. Move them "
+                    "around, mark some to squash, edit messages. Execute the rebase. What would be scary "
+                    "on the command line is visual and safe here.\n\n"
 
-                    "### Fonts\n"
-                    "Install a proper programming font. I use JetBrains Mono Nerd Font for terminal "
-                    "and editor consistency with Linux systems.\n\n"
+                    "### Comparing and Reviewing\n\n"
+                    "Need to see what changed between branches? `<leader>dv` opens Diffview. Pick the "
+                    "branches to compare. Side-by-side diff with full syntax highlighting. File tree on "
+                    "the left shows all changed files—click through them to see each diff.\n\n"
 
-                    "### Dark Mode\n"
-                    "Enable system-wide dark mode in Personalization settings. Most modern applications "
-                    "respect this setting.\n\n"
+                    "Reviewing a PR before merging? Diff against main. I see exactly what the branch "
+                    "introduces. During merge conflicts, Diffview shows the three-way diff: base, ours, "
+                    "theirs. Pick which changes to keep. Resolve conflicts visually instead of editing "
+                    "conflict markers by hand.\n\n"
 
-                    "## Conclusion\n\n"
-                    "A well-configured Windows installation can be a productive environment. The key "
-                    "is taking control during initial setup, automating maintenance, and using tools "
-                    "that bridge functionality gaps. While I prefer Linux, these configurations make "
-                    "Windows bearable - and sometimes even pleasant - when it's required.\n\n"
+                    "### The Loop\n\n"
+                    "This is the loop: Telescope/Yazi to navigate. LSP for intelligent editing. Gitsigns "
+                    "for awareness and line-level staging. Neogit for commits and rebasing. Diffview for "
+                    "comparison. Each tool does one thing well. They connect through keybinds and shared "
+                    "context.\n\n"
 
-                    "Document your configuration. Future you, reinstalling after a drive failure, will "
-                    "be grateful for a setup script and settings export."
+                    "No alt-tabbing. No context switches. The version control, file navigation, and code "
+                    "intelligence are all right there, connected to what I'm writing. That's the efficiency "
+                    "gain—not doing everything in Neovim for purity, but reducing friction where friction "
+                    "exists.\n\n"
+
+                    "## Practical, Not Pure\n\n"
+                    "I'll use `git log` in a terminal when that's easier. GitHub's web UI for some PR "
+                    "reviews. The goal isn't Neovim for everything—it's removing friction where it exists. "
+                    "Git's friction is mostly interface. The operations are powerful; the CLI makes them "
+                    "awkward. Making them visual and integrated means actually using them."
                 ),
-                'skills': ['Bash', 'Docker'],
-                'custom_technologies': 'PowerShell, WSL 2, WinGet, PowerToys',
+                'skills': ['Neovim', 'Git', 'Linux'],
+                'custom_technologies': 'Neogit, Diffview, Gitsigns, Telescope, Yazi, Treesitter, LSP',
                 'is_featured': True,
                 'order': 5,
+            },
+            {
+                'title': 'My Homelab',
+                'slug': 'homelab',
+                'short_description': 'Self-hosted infrastructure running 24/7 on Debian with Docker, Cloudflare tunnels, and proper security hardening',
+                'description': (
+                    "## The Setup\n\n"
+                    "A self-hosted server running 24/7 on Debian Stable. Old hardware—Core 2 Duo E8500, "
+                    "4GB RAM, a couple hundred gigs of storage—but it handles everything I throw at it.\n\n"
+
+                    "The server runs headless. No monitor, no desktop environment, just SSH access and "
+                    "web interfaces. All management happens remotely.\n\n"
+
+                    "![Server resource usage](/media/projects/gallery/homelab-btop.png)\n\n"
+
+                    "## Design Choices\n\n"
+                    "**Why Debian Stable?** When something runs 24/7, you want boring. Debian Stable's "
+                    "packages are old but tested. Updates don't break things at 3am. Arch is great on my "
+                    "desktop where I want the latest everything—on a server, I want reliability. Debian's "
+                    "release cycle means I upgrade once every few years, not constantly.\n\n"
+
+                    "**Why Docker?** Isolation and reproducibility. Each service runs in its own container "
+                    "with explicit dependencies. No conflicts between services wanting different versions "
+                    "of the same library. If something breaks, nuke the container and rebuild from the "
+                    "image. The compose file *is* the documentation—it defines exactly what's running and "
+                    "how it's configured.\n\n"
+
+                    "**Why not bare metal services?** Tried it. Package management becomes a nightmare "
+                    "when you have 10+ services with conflicting dependencies. Containers let me run "
+                    "whatever versions each service needs without polluting the host system. Upgrades are "
+                    "trivial—pull new image, recreate container, done.\n\n"
+
+                    "**Why old hardware?** It's what I had. But also: constraints force efficiency. When "
+                    "you only have 4GB RAM, you learn to pick lightweight alternatives, avoid bloated "
+                    "images, and actually think about resource usage. Most services idle at near-zero CPU. "
+                    "Memory stays under 50%. The E8500 handles it fine.\n\n"
+
+                    "## The Two Stacks\n\n"
+                    "Services split into two access patterns: public and private. Different security "
+                    "models, different routing, same Docker infrastructure underneath.\n\n"
+
+                    "### Public Stack (Cloudflare Tunnel)\n\n"
+                    "For services that need internet access—like this portfolio website.\n\n"
+
+                    "**Why Cloudflare Tunnel over port forwarding?** Traditional setup: open ports on "
+                    "router, set up dynamic DNS, manage SSL certificates, hope your ISP doesn't block "
+                    "ports or change your IP. Cloudflare Tunnel: outbound connection only, no ports open, "
+                    "home IP hidden, SSL handled automatically, DDoS protection included. The tunnel "
+                    "daemon connects *out* to Cloudflare—nothing needs to be open inbound.\n\n"
+
+                    "The request flow:\n"
+                    "1. DNS query hits Cloudflare (records managed in their dashboard)\n"
+                    "2. Cloudflare routes through their network to my `cloudflared` daemon\n"
+                    "3. `cloudflared` forwards to Nginx reverse proxy inside Docker\n"
+                    "4. Nginx routes to the appropriate container based on hostname\n"
+                    "5. Response flows back through the same chain\n\n"
+
+                    "**Why Nginx between Cloudflare and containers?** Could skip it—cloudflared can route "
+                    "directly to containers. But Nginx gives me one place to manage routing rules, add "
+                    "headers, handle caching, configure rate limiting. If I add a new service, I update "
+                    "Nginx config, not Cloudflare tunnel config. Separation of concerns.\n\n"
+
+                    "Nginx and public containers share a Docker bridge network. Containers expose ports "
+                    "only to that network, never to the host. A container compromise can't directly reach "
+                    "the host or other networks.\n\n"
+
+                    "### Private Stack (Tailscale)\n\n"
+                    "For services that should never touch the public internet.\n\n"
+
+                    "**Why Tailscale over traditional VPN?** OpenVPN or WireGuard manually configured "
+                    "means managing keys, dealing with NAT, setting up a VPN server, opening ports. "
+                    "Tailscale is WireGuard underneath but handles all the coordination. NAT traversal "
+                    "just works. My laptop, phone, and server join the same mesh network. From anywhere, "
+                    "I access internal services like I'm on the home network.\n\n"
+
+                    "The server gets a stable Tailscale IP (100.x.x.x range). MagicDNS gives hostnames. "
+                    "I access Syncthing, Filebrowser, SSH—all through the tailnet. No port forwarding, "
+                    "no dynamic DNS, no exposed services.\n\n"
+
+                    "Private services run on a separate Docker network, completely isolated from the "
+                    "public stack. Not connected to Nginx. Not reachable except through Tailscale.\n\n"
+
+                    "## Docker Architecture\n\n"
+                    "Docker Compose orchestrates everything. The compose file defines:\n"
+                    "- Named volumes for persistent data (database files, configs survive rebuilds)\n"
+                    "- Custom bridge networks (public and private isolated from each other)\n"
+                    "- Environment variables from `.env` files (secrets stay out of version control)\n"
+                    "- Restart policies (`unless-stopped`—survives reboots, respects manual stops)\n"
+                    "- Resource limits where needed (prevents runaway containers eating all RAM)\n\n"
+
+                    "Network segmentation is key. A container can only reach what it's explicitly "
+                    "networked with. Public containers can't see private containers. Private containers "
+                    "can't reach the internet. The compose file defines these boundaries.\n\n"
+
+                    "## Services\n\n"
+                    "A few highlights—this is the tip of the iceberg:\n\n"
+                    "**Forgejo** — Self-hosted Git. Lightweight Gitea fork. Some projects don't belong "
+                    "on GitHub.\n\n"
+                    "**Syncthing** — File sync across devices. Decentralized, encrypted, no cloud.\n\n"
+                    "**Filebrowser** — Web file manager for quick access without SSH.\n\n"
+                    "**Actual Budget** — Financial tracking. FOSS alternative to YNAB.\n\n"
+                    "**Samba** — Local network file shares.\n\n"
+                    "There's more running—various tools, experiments, automation. The infrastructure "
+                    "supports spinning up new services quickly when I need them.\n\n"
+
+                    "## Security\n\n"
+                    "- **UFW firewall** — minimal ports open (SSH only, and even that's optional via Tailscale)\n"
+                    "- **fail2ban** — monitors logs, auto-bans IPs after failed auth attempts\n"
+                    "- **SSH key-only** — password auth disabled entirely\n"
+                    "- **Non-root user** for daily operations\n"
+                    "- **Containers with minimal privileges** — no unnecessary capabilities\n"
+                    "- **Automatic security updates** via unattended-upgrades\n\n"
+
+                    "## Running It\n\n"
+                    "Systemd manages the Docker daemon and host-level services. Timer units handle "
+                    "scheduled tasks. Journal logging centralizes everything for debugging.\n\n"
+
+                    "29 days uptime at last check. Running infrastructure teaches things documentation "
+                    "doesn't—Docker networking debugging, container startup failures, storage management, "
+                    "recovering from failed updates. The homelab is where theory meets practice."
+                ),
+                'skills': ['Linux', 'Docker', 'Nginx', 'Bash', 'Cloudflare'],
+                'custom_technologies': 'Debian, Docker Compose, Tailscale, Syncthing, Forgejo, fail2ban',
+                'is_featured': True,
+                'order': 6,
             },
         ]
 
