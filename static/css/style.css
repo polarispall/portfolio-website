@@ -3348,26 +3348,26 @@ a.tech-tag:hover {
     --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
 }
 
-/* Hero Section - Light */
+/* Hero Section - Light - Green gradient flowing into About */
 [data-theme="light"] .hero {
-    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    background: linear-gradient(180deg, #bbf7d0 0%, #d1fae5 100%) !important;
 }
 
 [data-theme="light"] .hero-gradient {
     background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37, 99, 235, 0.12), transparent),
-        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(16, 185, 129, 0.1), transparent),
-        radial-gradient(ellipse 50% 30% at 80% 60%, rgba(139, 92, 246, 0.08), transparent);
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(16, 185, 129, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(5, 150, 105, 0.12), transparent),
+        radial-gradient(ellipse 50% 30% at 80% 60%, rgba(52, 211, 153, 0.1), transparent);
 }
 
 [data-theme="light"] .hero-grid {
     background-image:
-        linear-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(16, 185, 129, 0.06) 1px, transparent 1px);
+        linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5, 150, 105, 0.08) 1px, transparent 1px);
 }
 
 [data-theme="light"] .hero::after {
-    background: linear-gradient(to bottom, transparent, #f8fafc);
+    background: linear-gradient(to bottom, transparent, #d1fae5);
 }
 
 [data-theme="light"] .hero-greeting {
@@ -3486,17 +3486,43 @@ a.tech-tag:hover {
     color: white;
 }
 
-/* Section Backgrounds - Light - subtle alternating */
-[data-theme="light"] .section {
-    background: var(--bg-primary);
+/* Section Backgrounds - Light - soft rainbow flow */
+/* Section gradients by position (not by section type) */
+/* This ensures gradients flow correctly regardless of section order */
+
+/* 1st section: soft green to cream */
+[data-theme="light"] main > section:nth-of-type(2) {
+    background: linear-gradient(180deg, #d1fae5 0%, #fef9c3 100%) !important;
 }
 
-[data-theme="light"] main > section:nth-of-type(even) {
-    background: var(--bg-secondary);
+/* 2nd section: cream to soft pink */
+[data-theme="light"] main > section:nth-of-type(3) {
+    background: linear-gradient(180deg, #fef9c3 0%, #fce7f3 100%) !important;
 }
 
-[data-theme="light"] main > section:last-of-type {
-    background: linear-gradient(180deg, var(--bg-primary) 0%, #e0f2fe 100%);
+/* 3rd section: soft pink to lavender */
+[data-theme="light"] main > section:nth-of-type(4) {
+    background: linear-gradient(180deg, #fce7f3 0%, #ede9fe 100%) !important;
+}
+
+/* 4th section: lavender to light cyan */
+[data-theme="light"] main > section:nth-of-type(5) {
+    background: linear-gradient(180deg, #ede9fe 0%, #cffafe 100%) !important;
+}
+
+/* 5th section: light cyan to soft green */
+[data-theme="light"] main > section:nth-of-type(6) {
+    background: linear-gradient(180deg, #cffafe 0%, #d1fae5 100%) !important;
+}
+
+/* 6th section: soft green to cream */
+[data-theme="light"] main > section:nth-of-type(7) {
+    background: linear-gradient(180deg, #d1fae5 0%, #fef9c3 100%) !important;
+}
+
+/* 7th section: cream to light blue */
+[data-theme="light"] main > section:nth-of-type(8) {
+    background: linear-gradient(180deg, #fef9c3 0%, #dbeafe 100%) !important;
 }
 
 /* Section Titles - Light - with color accent */
