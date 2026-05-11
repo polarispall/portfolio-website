@@ -3598,33 +3598,28 @@ a.tech-tag:hover {
     line-height: 1.7;
 }
 
-/* Tech tags - styled with glow colors like skill tags */
+/* Tech tags - styled like dark mode (blue/indigo theme) */
 [data-theme="light"] .tech-tag {
-    background: #374151;
-    border: 1px solid var(--glow-color, #6b7280);
-    color: white;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: var(--accent-primary);
     font-weight: 500;
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.15),
-        0 0 12px color-mix(in srgb, var(--glow-color, #6b7280) 40%, transparent);
 }
 
 [data-theme="light"] .tech-tag:hover {
-    background: #1f2937;
+    background: rgba(99, 102, 241, 0.15);
     transform: translateY(-2px);
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        0 0 20px color-mix(in srgb, var(--glow-color, #6b7280) 60%, transparent);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
 [data-theme="light"] .tech-tag i {
     filter: none;
     opacity: 1;
-    color: var(--glow-color, #6b7280);
+    color: var(--glow-color, var(--accent-primary));
 }
 
 [data-theme="light"] a.tech-tag {
-    color: white !important;
+    color: var(--accent-primary) !important;
 }
 
 /* Education - Light */
