@@ -2205,7 +2205,14 @@ a.tech-tag:hover {
     }
 
     .hero-image {
-        display: none;
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 24px;
+        order: -1; /* Show image above text */
+    }
+
+    .hero-image .image-wrapper {
+        border-radius: 50%; /* Circular on tablet/mobile */
     }
 
     .hero-schedule {
@@ -2273,14 +2280,20 @@ a.tech-tag:hover {
     }
 
     .hero {
-        padding: 100px 20px 60px;
+        padding: 100px 20px 40px;
         min-height: auto;
         display: flex;
         flex-direction: column;
     }
 
     .hero-content {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
+    }
+
+    .hero-image {
+        width: 140px;
+        height: 140px;
+        margin: 0 auto 20px;
     }
 
     .hero-name {
@@ -2298,9 +2311,41 @@ a.tech-tag:hover {
         right: auto;
         max-width: 100%;
         width: 100%;
-        padding: 0 20px;
+        padding: 0 16px;
         margin: 0;
         z-index: 1;
+    }
+
+    .hero-schedule .calendly-preview {
+        border-radius: 16px;
+    }
+
+    .hero-schedule .meeting-option {
+        flex-direction: row;
+        text-align: left;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+
+    .hero-schedule .meeting-info {
+        flex: 1;
+        text-align: left;
+    }
+
+    .hero-schedule .meeting-book {
+        width: auto;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    .hero-schedule .meeting-icon {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+
+    .hero-schedule .meeting-desc {
+        display: none; /* Hide description on small screens to save space */
     }
 
     .timeline {
@@ -2372,11 +2417,17 @@ a.tech-tag:hover {
     }
 
     .hero {
-        padding: 90px 16px 40px;
+        padding: 90px 16px 32px;
     }
 
     .hero-content {
-        margin-bottom: 40px;
+        margin-bottom: 24px;
+    }
+
+    .hero-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 16px;
     }
 
     .container {
@@ -2397,6 +2448,46 @@ a.tech-tag:hover {
 
     .hero-subtitle {
         font-size: 1rem;
+    }
+
+    .hero-schedule {
+        padding: 0 12px;
+    }
+
+    .hero-schedule .calendly-preview {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .hero-schedule .calendly-preview-header {
+        margin-bottom: 10px;
+    }
+
+    .hero-schedule .calendly-preview-header h3 {
+        font-size: 0.95rem;
+    }
+
+    .hero-schedule .calendly-preview-header p {
+        font-size: 0.75rem;
+    }
+
+    .hero-schedule .meeting-option {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .hero-schedule .meeting-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .hero-schedule .meeting-name {
+        font-size: 0.85rem;
+    }
+
+    .hero-schedule .meeting-book {
+        padding: 8px 14px;
+        font-size: 0.8rem;
     }
 
     .skill-category {
