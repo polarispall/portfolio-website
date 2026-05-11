@@ -536,7 +536,7 @@ main > section:last-of-type {
     border-radius: 50%;
     font-size: 14px;
     color: var(--accent-primary);
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
 }
 
 .book-cta-btn:hover .book-cta-arrow {
@@ -866,7 +866,7 @@ main > section:last-of-type {
 }
 
 .skill-tag:hover {
-    border-color: var(--accent-primary);
+    border-color: var(--glow-color);
     color: var(--text-primary);
 }
 
@@ -3522,23 +3522,19 @@ a.tech-tag:hover {
     font-weight: 600;
 }
 
-/* Skill tags - styled with glow colors */
+/* Skill tags - semi-transparent indigo background with black text */
 [data-theme="light"] .skill-tag {
-    background: #374151;
+    background: rgba(99, 102, 241, 0.18);
     border: 1px solid var(--glow-color);
-    color: white;
+    color: #1f2937;
     font-weight: 500;
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.15),
-        0 0 12px color-mix(in srgb, var(--glow-color) 40%, transparent);
+    transition: all 0.15s ease;
 }
 
 [data-theme="light"] .skill-tag:hover {
-    background: #1f2937;
+    background: rgba(99, 102, 241, 0.25);
     transform: translateY(-2px);
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        0 0 20px color-mix(in srgb, var(--glow-color) 60%, transparent);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--glow-color) 30%, transparent);
 }
 
 [data-theme="light"] .skill-tag i {
@@ -3604,6 +3600,7 @@ a.tech-tag:hover {
     border: 1px solid rgba(99, 102, 241, 0.2);
     color: var(--accent-primary);
     font-weight: 500;
+    transition: all 0.15s ease;
 }
 
 [data-theme="light"] .tech-tag:hover {
