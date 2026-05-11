@@ -2,13 +2,13 @@
     'use strict';
 
     const DEFAULT_SECTIONS = [
-        {id: 'about', name: 'About Me', visible: true, numbered: true},
-        {id: 'skills', name: 'Skills & Technologies', visible: true, numbered: true},
-        {id: 'experience', name: 'Experience', visible: true, numbered: true},
-        {id: 'education', name: 'Education', visible: true, numbered: true},
-        {id: 'projects', name: 'Featured Projects', visible: true, numbered: true},
-        {id: 'schedule', name: 'Book Time With Me', visible: true, numbered: true},
-        {id: 'contact', name: 'Get In Touch', visible: true, numbered: true},
+        {id: 'about', name: 'About Me', nav_label: 'About', visible: true, numbered: true},
+        {id: 'skills', name: 'Skills & Technologies', nav_label: 'Skills', visible: true, numbered: true},
+        {id: 'experience', name: 'Experience', nav_label: 'Experience', visible: true, numbered: true},
+        {id: 'education', name: 'Education', nav_label: 'Education', visible: true, numbered: true},
+        {id: 'projects', name: 'Featured Projects', nav_label: 'Projects', visible: true, numbered: true},
+        {id: 'schedule', name: 'Book Time With Me', nav_label: 'Schedule', visible: true, numbered: true},
+        {id: 'contact', name: 'Get In Touch', nav_label: 'Contact', visible: true, numbered: true},
     ];
 
     function initSectionOrder() {
@@ -60,6 +60,7 @@
                 sections.push({
                     id: item.dataset.id,
                     name: item.querySelector('.section-name-input').value,
+                    nav_label: item.querySelector('.section-nav-input').value,
                     visible: item.dataset.visible === 'true',
                     numbered: item.dataset.numbered === 'true'
                 });
@@ -100,9 +101,9 @@
             saveState();
         });
 
-        // Update name on input change
+        // Update name/nav_label on input change
         list.addEventListener('input', function(e) {
-            if (e.target.classList.contains('section-name-input')) {
+            if (e.target.classList.contains('section-name-input') || e.target.classList.contains('section-nav-input')) {
                 saveState();
             }
         });
@@ -135,7 +136,10 @@
                                 </svg>
                             </span>
                             <span class="section-number"></span>
-                            <input type="text" class="section-name-input" value="${section.name}" data-original="${section.name}">
+                            <div class="section-inputs">
+                                <input type="text" class="section-name-input" value="${section.name}" data-original="${section.name}" placeholder="Section Title">
+                                <input type="text" class="section-nav-input" value="${section.nav_label}" data-original="${section.nav_label}" placeholder="Nav Label">
+                            </div>
                             <button type="button" class="visibility-toggle" title="Toggle visibility">
                                 <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>

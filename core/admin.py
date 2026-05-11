@@ -37,7 +37,7 @@ class SectionOrderWidget(forms.Widget):
         <div class="section-order-widget">
             <input type="hidden" name="{name}" id="id_{name}" value='{json.dumps(sections)}'>
             <div class="section-order-help">
-                <p>Drag sections to reorder. Toggle visibility with the eye icon. Numbers update automatically.</p>
+                <p>Drag sections to reorder. Edit section titles and navbar labels. Toggle visibility with the eye icon.</p>
             </div>
             <ul class="section-order-list" id="section-order-list">
         '''
@@ -46,6 +46,7 @@ class SectionOrderWidget(forms.Widget):
             visible = section.get('visible', True)
             numbered = section.get('numbered', True)
             section_name = section.get('name', section['id'].title())
+            nav_label = section.get('nav_label', section['id'].title())
 
             html += f'''
                 <li class="section-item {'visible' if visible else 'hidden'}"
@@ -63,7 +64,10 @@ class SectionOrderWidget(forms.Widget):
                         </svg>
                     </span>
                     <span class="section-number"></span>
-                    <input type="text" class="section-name-input" value="{section_name}" data-original="{section_name}">
+                    <div class="section-inputs">
+                        <input type="text" class="section-name-input" value="{section_name}" data-original="{section_name}" placeholder="Section Title">
+                        <input type="text" class="section-nav-input" value="{nav_label}" data-original="{nav_label}" placeholder="Nav Label">
+                    </div>
                     <button type="button" class="visibility-toggle" title="Toggle visibility">
                         <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>

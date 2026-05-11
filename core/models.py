@@ -15,13 +15,13 @@ class OrderedModel(models.Model):
 class Profile(models.Model):
     # Default section order and configuration
     DEFAULT_SECTIONS = [
-        {'id': 'about', 'name': 'About Me', 'visible': True, 'numbered': True},
-        {'id': 'skills', 'name': 'Skills & Technologies', 'visible': True, 'numbered': True},
-        {'id': 'experience', 'name': 'Experience', 'visible': True, 'numbered': True},
-        {'id': 'education', 'name': 'Education', 'visible': True, 'numbered': True},
-        {'id': 'projects', 'name': 'Featured Projects', 'visible': True, 'numbered': True},
-        {'id': 'schedule', 'name': 'Book Time With Me', 'visible': True, 'numbered': True},
-        {'id': 'contact', 'name': 'Get In Touch', 'visible': True, 'numbered': True},
+        {'id': 'about', 'name': 'About Me', 'nav_label': 'About', 'visible': True, 'numbered': True},
+        {'id': 'skills', 'name': 'Skills & Technologies', 'nav_label': 'Skills', 'visible': True, 'numbered': True},
+        {'id': 'experience', 'name': 'Experience', 'nav_label': 'Experience', 'visible': True, 'numbered': True},
+        {'id': 'education', 'name': 'Education', 'nav_label': 'Education', 'visible': True, 'numbered': True},
+        {'id': 'projects', 'name': 'Featured Projects', 'nav_label': 'Projects', 'visible': True, 'numbered': True},
+        {'id': 'schedule', 'name': 'Book Time With Me', 'nav_label': 'Schedule', 'visible': True, 'numbered': True},
+        {'id': 'contact', 'name': 'Get In Touch', 'nav_label': 'Contact', 'visible': True, 'numbered': True},
     ]
 
     name = models.CharField(max_length=100)
@@ -75,6 +75,9 @@ class Profile(models.Model):
             if section.get('visible', True):
                 section_data = copy.deepcopy(section)
                 section_data['number'] = f"{number:02d}" if section.get('numbered', True) else None
+                # Ensure nav_label exists (fallback to title-cased id for backwards compatibility)
+                if 'nav_label' not in section_data:
+                    section_data['nav_label'] = section_data['id'].title()
                 result.append(section_data)
                 if section.get('numbered', True):
                     number += 1

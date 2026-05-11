@@ -49,7 +49,8 @@
 }
 
 .section-item.hidden .section-number,
-.section-item.hidden .section-name-input {
+.section-item.hidden .section-name-input,
+.section-item.hidden .section-nav-input {
     text-decoration: line-through;
     color: #999;
 }
@@ -89,8 +90,14 @@
     font-size: 14px;
 }
 
-.section-name-input {
+.section-inputs {
     flex: 1;
+    display: flex;
+    gap: 8px;
+}
+
+.section-name-input {
+    flex: 2;
     border: 1px solid transparent;
     padding: 6px 10px;
     border-radius: 4px;
@@ -99,12 +106,25 @@
     transition: all 0.2s;
 }
 
-.section-name-input:hover {
+.section-nav-input {
+    flex: 1;
+    border: 1px solid transparent;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    background: transparent;
+    transition: all 0.2s;
+    max-width: 120px;
+}
+
+.section-name-input:hover,
+.section-nav-input:hover {
     border-color: #ddd;
     background: #fff;
 }
 
-.section-name-input:focus {
+.section-name-input:focus,
+.section-nav-input:focus {
     border-color: #417690;
     background: #fff;
     outline: none;
@@ -192,12 +212,15 @@
         background: #171923;
     }
 
-    .section-name-input {
+    .section-name-input,
+    .section-nav-input {
         color: #e2e8f0;
     }
 
     .section-name-input:hover,
-    .section-name-input:focus {
+    .section-name-input:focus,
+    .section-nav-input:hover,
+    .section-nav-input:focus {
         background: #2d3748;
         border-color: #4299e1;
     }
