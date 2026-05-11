@@ -26,7 +26,7 @@
                     <div class="project-tech">
                         {% for skill in project.skills.all %}
                         {% if skill.url %}
-                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag">
+                        <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag" style="--glow-color: {{ skill.glow_color }}">
                             {% if skill.use_font_awesome and skill.icon_class %}
                             <i class="{{ skill.icon_class }}"></i>
                             {% elif skill.custom_icon %}
@@ -35,7 +35,7 @@
                             {{ skill.name }}
                         </a>
                         {% else %}
-                        <span class="tech-tag">
+                        <span class="tech-tag" style="--glow-color: {{ skill.glow_color }}">
                             {% if skill.use_font_awesome and skill.icon_class %}
                             <i class="{{ skill.icon_class }}"></i>
                             {% elif skill.custom_icon %}
@@ -46,7 +46,7 @@
                         {% endif %}
                         {% endfor %}
                         {% for tech in project.custom_tech_list %}
-                        <span class="tech-tag">{{ tech }}</span>
+                        <span class="tech-tag" style="--glow-color: #6b7280">{{ tech }}</span>
                         {% endfor %}
                     </div>
                     <div class="project-links">

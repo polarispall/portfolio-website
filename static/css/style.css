@@ -1055,6 +1055,8 @@ main > section:last-of-type {
     gap: 6px;
     transition: all var(--transition-fast);
     text-decoration: none;
+    /* Clip the offset black SVG icon during light mode color trick */
+    overflow: hidden;
 }
 
 a.tech-tag {
@@ -3512,7 +3514,7 @@ a.tech-tag:hover {
 
 /* Skill tags - styled with glow colors */
 [data-theme="light"] .skill-tag {
-    background: #1f2937;
+    background: #374151;
     border: 1px solid var(--glow-color);
     color: white;
     font-weight: 500;
@@ -3522,7 +3524,7 @@ a.tech-tag:hover {
 }
 
 [data-theme="light"] .skill-tag:hover {
-    background: #111827;
+    background: #1f2937;
     transform: translateY(-2px);
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.2),
@@ -3544,8 +3546,11 @@ a.tech-tag:hover {
 }
 
 [data-theme="light"] .tech-skill-icon {
-    filter: none;
-    opacity: 0.9;
+    filter:
+        brightness(0) saturate(100%)
+        drop-shadow(99px 0 0 var(--glow-color, #6b7280));
+    transform: translateX(-99px);
+    opacity: 1;
 }
 
 /* Timeline - Light - colorful accent */
@@ -3583,24 +3588,29 @@ a.tech-tag:hover {
     line-height: 1.7;
 }
 
-/* Tech tags - colorful like skill tags */
+/* Tech tags - styled with glow colors like skill tags */
 [data-theme="light"] .tech-tag {
-    background: linear-gradient(135deg, #dbeafe, #e0f2fe);
-    border: 1px solid #93c5fd;
-    color: #1e40af;
+    background: #374151;
+    border: 1px solid var(--glow-color, #6b7280);
+    color: white;
     font-weight: 500;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15),
+        0 0 12px color-mix(in srgb, var(--glow-color, #6b7280) 40%, transparent);
 }
 
-[data-theme="light"] .tech-tag:nth-child(3n+2) {
-    background: linear-gradient(135deg, #d1fae5, #dcfce7);
-    border-color: #6ee7b7;
-    color: #065f46;
+[data-theme="light"] .tech-tag:hover {
+    background: #1f2937;
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 20px color-mix(in srgb, var(--glow-color, #6b7280) 60%, transparent);
 }
 
-[data-theme="light"] .tech-tag:nth-child(3n) {
-    background: linear-gradient(135deg, #ede9fe, #f3e8ff);
-    border-color: #c4b5fd;
-    color: #5b21b6;
+[data-theme="light"] .tech-tag i {
+    filter: none;
+    opacity: 1;
+    color: var(--glow-color, #6b7280);
 }
 
 /* Education - Light */

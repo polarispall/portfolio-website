@@ -39,34 +39,34 @@
                         {% for skill in exp.skills.all %}
                         {% if skill.use_font_awesome and skill.icon_class %}
                             {% if skill.url %}
-                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link">
+                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link" style="--glow-color: {{ skill.glow_color }}">
                                 <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
                             </a>
                             {% else %}
-                            <span class="tech-tag">
+                            <span class="tech-tag" style="--glow-color: {{ skill.glow_color }}">
                                 <i class="{{ skill.icon_class }}"></i>{{ skill.name }}
                             </span>
                             {% endif %}
                         {% elif skill.custom_icon %}
                             {% if skill.url %}
-                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link">
+                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link" style="--glow-color: {{ skill.glow_color }}">
                                 <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">{{ skill.name }}
                             </a>
                             {% else %}
-                            <span class="tech-tag">
+                            <span class="tech-tag" style="--glow-color: {{ skill.glow_color }}">
                                 <img src="{{ skill.custom_icon.url }}" alt="{{ skill.name }}" class="tech-skill-icon">{{ skill.name }}
                             </span>
                             {% endif %}
                         {% else %}
                             {% if skill.url %}
-                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link">{{ skill.name }}</a>
+                            <a href="{{ skill.url }}" target="_blank" rel="noopener noreferrer" class="tech-tag tech-skill-link" style="--glow-color: {{ skill.glow_color }}">{{ skill.name }}</a>
                             {% else %}
-                            <span class="tech-tag">{{ skill.name }}</span>
+                            <span class="tech-tag" style="--glow-color: {{ skill.glow_color }}">{{ skill.name }}</span>
                             {% endif %}
                         {% endif %}
                         {% endfor %}
                         {% for tech in exp.custom_tech_list %}
-                        <span class="tech-tag">{{ tech }}</span>
+                        <span class="tech-tag" style="--glow-color: #6b7280">{{ tech }}</span>
                         {% endfor %}
                     </div>
                     {% endif %}
