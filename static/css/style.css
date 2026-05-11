@@ -1265,11 +1265,21 @@ a.tech-tag:hover {
     overflow: hidden;
     border: 1px solid var(--border-color);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    cursor: pointer;
 }
 
-.project-card-link {
-    text-decoration: none;
-    display: block;
+.project-card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.project-card .project-tech a,
+.project-card .project-tech span,
+.project-card .project-links a {
+    position: relative;
+    z-index: 2;
 }
 
 .project-card:hover {
