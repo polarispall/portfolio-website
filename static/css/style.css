@@ -1713,7 +1713,7 @@ a.tech-tag:hover {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--accent-gradient);
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
     flex-shrink: 0;
 }
 
