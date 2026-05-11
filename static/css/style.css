@@ -3623,6 +3623,10 @@ a.tech-tag:hover {
     color: var(--glow-color, #6b7280);
 }
 
+[data-theme="light"] a.tech-tag {
+    color: white !important;
+}
+
 /* Education - Light */
 [data-theme="light"] .education-degree {
     color: var(--text-primary);
